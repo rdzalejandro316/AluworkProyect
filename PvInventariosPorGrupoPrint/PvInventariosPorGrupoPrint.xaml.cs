@@ -366,7 +366,7 @@ namespace SiasoftAppExt
                 Ejecutar.IsEnabled = false;
                 source.CancelAfter(TimeSpan.FromSeconds(1));
                 
-                var slowTask = Task<DataSet>.Factory.StartNew(() => SlowDude(tiporep, fi, bod, tip, gru, source.Token), source.Token);
+                var slowTask = Task<DataSet>.Factory.StartNew(() => LoadData(tiporep, fi, bod, tip, gru));
                 await slowTask;
                 TextTotalEntradas.Text = "0";                
                 //MessageBox.Show(slowTask.Result.ToString());
@@ -391,44 +391,27 @@ namespace SiasoftAppExt
                 MessageBox.Show(ex.Message);
             }
         }
-        private DataSet SlowDude(int tiporep,string fi, string bod, string tip,string gru,  CancellationToken cancellationToken)
-        {
-            try
-            {
-                DataSet jj = LoadData(tiporep, fi,bod,tip,gru, cancellationToken);
-                return jj;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-            return null;
-        }
-        private DataSet LoadData(int tiporep,string fi, string bod, string tip,string gru,CancellationToken cancellationToken)
+    
+        private DataSet LoadData(int tiporep,string fi, string bod, string tip,string gru)
         {
             try
             {
                
                 string SpTipoRep = string.Empty;
                 string subtit = "";
-                if (tiporep == 0) subtit = "R";
-                if (tiporep == 0) SpTipoRep = "_EmpSaldosInventariosPorBodegaLineaPOS";
-                if (tiporep == 1) SpTipoRep = "_EmpSaldosInventariosPorBodegaLinea";
-                //MessageBox.Show(tip);
+
+
                 SqlConnection con = new SqlConnection(SiaWin._cn);
                 SqlCommand cmd = new SqlCommand();
                 SqlDataAdapter da = new SqlDataAdapter();
                 DataSet ds = new DataSet();
-                cmd = new SqlCommand(SpTipoRep, con);
+                cmd = new SqlCommand("_EmpSaldosInventariosPorBodegaLinea", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Fecha" + subtit, fi);
                 cmd.Parameters.AddWithValue("@Bod" + subtit, bod);
                 cmd.Parameters.AddWithValue("@Tip" + subtit, tip);
                 cmd.Parameters.AddWithValue("@codemp" + subtit, codemp);
-                //cmd.Parameters.AddWithValue("@Gru" + subtit, gru);
-                //cmd.Parameters.AddWithValue("@Prv" + subtit, imp);
-                //if (tiporep==1) cmd.Parameters.AddWithValue("@TipoReporte" + subtit, 1);//if you have parameters.
-                //cmd.Parameters.AddWithValue("@Sexo" + subtit, sex);//if you have parameters.
+
                 da = new SqlDataAdapter(cmd);
                 da.SelectCommand.CommandTimeout = 0;
                 da.Fill(ds);

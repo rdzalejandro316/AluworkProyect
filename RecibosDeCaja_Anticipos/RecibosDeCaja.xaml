@@ -27,7 +27,7 @@
                     <RowDefinition Height="45"/>
 
                 </Grid.RowDefinitions>
-                
+
                 <Grid Grid.Row="0" Grid.ColumnSpan="3" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="380"/>
@@ -58,11 +58,11 @@
 
                         <TextBlock Foreground="Gray" Grid.Row="5" Margin="0,5,5,2"  Grid.Column="0" Text="Recibo Prov:" HorizontalAlignment="Right"/>
                         <TextBlock Foreground="Gray" Grid.Row="6" Margin="0,5,5,2"  Grid.Column="0" Text="Vendedor Comision:" HorizontalAlignment="Right"/>
-                        
-                        
+
+
                         <DatePicker  Grid.Row="0" Margin="0,1,0,1" Grid.Column="1" x:Name="TextFecha" Focusable="False" FontSize="12" x:FieldModifier="public"/>
-                        
-                        
+
+
                         <TextBox Grid.Row="1" Width="100" Margin="0,1,0,1" Grid.Column="1" MaxLength="15" x:Name="TextCodeCliente"  FontSize="12" HorizontalAlignment="Left"  LostFocus="TextCodeCliente_LostFocus" PreviewKeyDown="TextCodeCliente_PreviewKeyDown"/>
                         <TextBox Grid.Row="1" Width="155" Margin="105,1,0,1" Grid.Column="1" x:Name="TextNomCliente" Focusable="False" FontSize="12" HorizontalAlignment="Left"/>
                         <TextBox Grid.Row ="2" Grid.RowSpan="2" Grid.Column="1" Margin="0,1,0,1" x:Name="TextNota" MaxLength="60" FontSize="12" PreviewKeyDown="Grid_PreviewKeyDown"/>
@@ -73,65 +73,47 @@
                         <TextBlock Text=" F6= Cancelar cruces / F8=Cruzar Reg. actual / F5=Grabar" Grid.Row="7" Grid.Column="1" Margin="1,0,1,1" x:Name="TextKey1"  FontSize="10" Foreground="Orange"/>
                     </Grid>
 
-                    <Grid Grid.Row="0" Grid.Column="1">
+
+                    <Grid Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="0.6*"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
 
+                        <TextBlock Text="Valor Recibido:" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Foreground="Gray"/>
+                        <syncfusion:CurrencyTextBox CurrencySymbol="" x:Name="TextVlrRecibido" CurrencyDecimalDigits="2" HorizontalContentAlignment="Right" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"  VerticalAlignment="Top" Grid.RowSpan="2" Height="20" />
 
-                        <Grid Grid.Row="0" Grid.Column="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="50"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
+                        <TextBlock Text="ReteFte:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" Foreground="Gray"/>
+                        <TextBlock Text="Ica:" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" Foreground="Gray"/>
+                        <TextBlock Text="ReteIva:" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" Foreground="Gray"/>
 
-                            <TextBlock Text="Valor Recibido:" Grid.Column="1" HorizontalAlignment="Right" Grid.ColumnSpan="2" Margin="0,16,35.6,9.2" Grid.RowSpan="2" Width="143" Foreground="Gray"/>
-                            <syncfusion:CurrencyTextBox CurrencySymbol="" x:Name="TextVlrRecibido" CurrencyDecimalDigits="2" HorizontalContentAlignment="Right" Grid.Column="2" Grid.ColumnSpan="2" Margin="16.4,0,10.2,11.2" VerticalAlignment="Bottom" Grid.RowSpan="2" Height="20" />
+                        <TextBlock Text="Imp val asumido:" Grid.Column="2"  Grid.Row="5" HorizontalAlignment="Right" Foreground="Gray"/>
+                        <syncfusion:CurrencyTextBox CurrencySymbol="" x:Name="TextImpAsum" CurrencyDecimalDigits="2" HorizontalContentAlignment="Right" Grid.Column="3" Grid.Row="5" LostFocus="ActualizaTotal"/>
 
-                            <TextBlock Text="ReteFte:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" Foreground="Gray"/>
-                            <TextBlock Text="Ica:" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" Foreground="Gray"/>
-                            <TextBlock Text="ReteIva:" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" Foreground="Gray"/>
-                            
-                            <TextBlock Text="Imp val asumido:" Grid.Column="2"  Grid.Row="5" HorizontalAlignment="Right" Foreground="Gray"/>
-                            <syncfusion:CurrencyTextBox CurrencySymbol="" x:Name="TextImpAsum" CurrencyDecimalDigits="2" HorizontalContentAlignment="Right" Grid.Column="3" Grid.Row="5" LostFocus="ActualizaTotal"/>
-
-                            <TextBlock Text="May.Vlr.Pagado:" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" Foreground="Gray"/>
-                            <TextBlock Text="Men.Vlr.Pagado:" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Right" Foreground="Gray"/>
-                            <TextBlock Text="Anticipo:" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Right" Foreground="Gray"/>
-                            <syncfusion:CurrencyTextBox CurrencySymbol="" x:Name="TextRetefte" CurrencyDecimalDigits="2" HorizontalContentAlignment="Right" Grid.Column="1" Grid.Row="2" LostFocus="ActualizaTotal"/>
-                            <syncfusion:CurrencyTextBox CurrencySymbol="" x:Name="TextIca" CurrencyDecimalDigits="2" HorizontalContentAlignment="Right" Grid.Column="1" Grid.Row="3" LostFocus="ActualizaTotal"/>
-                            <syncfusion:CurrencyTextBox CurrencySymbol="" x:Name="TextReteIva" CurrencyDecimalDigits="2" HorizontalContentAlignment="Right" Grid.Column="1" Grid.Row="4" LostFocus="ActualizaTotal"/>
-                            <syncfusion:CurrencyTextBox CurrencySymbol="" x:Name="TextMayorVlr" CurrencyDecimalDigits="2" HorizontalContentAlignment="Right" Grid.Column="3" Grid.Row="2" LostFocus="ActualizaTotal"/>
-                            <syncfusion:CurrencyTextBox CurrencySymbol="" x:Name="TextMenorVlr" CurrencyDecimalDigits="2" HorizontalContentAlignment="Right" Grid.Column="3" Grid.Row="3" LostFocus="ActualizaTotal"/>
-                            <syncfusion:CurrencyTextBox CurrencySymbol="" x:Name="TextAnticipo" CurrencyDecimalDigits="2" HorizontalContentAlignment="Right" Grid.Column="3" Grid.Row="4" LostFocus="ActualizaTotal"/>
-                        </Grid>
-
-                        <Grid Grid.Row="1">
-                            <Grid>
-                                <syncfusion:SfDataGrid Name="dataDescu" Grid.Row="1" FrozenColumnCount="2" EnableDataVirtualization = "True" AutoGenerateColumns="False" ShowGroupDropArea="False" FontSize="10" AllowFiltering="True" SelectionMode="Single"  HeaderStyle="{StaticResource headerStyle}" Margin="0,0,0,0" Grid.ColumnSpan="3" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
-                                    <syncfusion:SfDataGrid.Columns>
-                                        <syncfusion:GridTextColumn HeaderText="Codigo" MappingName="cod_tip" Width="80" />
-                                        <syncfusion:GridTextColumn HeaderText="Linea" MappingName="nom_tip" Width="120" />
-                                        <syncfusion:GridTextColumn HeaderText="% ppag" MappingName="des_ppag" Width="80" />
-                                    </syncfusion:SfDataGrid.Columns>
-                                </syncfusion:SfDataGrid>
-                            </Grid>
-                        </Grid>
-
+                        <TextBlock Text="May.Vlr.Pagado:" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" Foreground="Gray"/>
+                        <TextBlock Text="Men.Vlr.Pagado:" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Right" Foreground="Gray"/>
+                        <TextBlock Text="Anticipo:" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Right" Foreground="Gray"/>
+                        <syncfusion:CurrencyTextBox CurrencySymbol="" x:Name="TextRetefte" CurrencyDecimalDigits="2" HorizontalContentAlignment="Right" Grid.Column="1" Grid.Row="2" LostFocus="ActualizaTotal"/>
+                        <syncfusion:CurrencyTextBox CurrencySymbol="" x:Name="TextIca" CurrencyDecimalDigits="2" HorizontalContentAlignment="Right" Grid.Column="1" Grid.Row="3" LostFocus="ActualizaTotal"/>
+                        <syncfusion:CurrencyTextBox CurrencySymbol="" x:Name="TextReteIva" CurrencyDecimalDigits="2" HorizontalContentAlignment="Right" Grid.Column="1" Grid.Row="4" LostFocus="ActualizaTotal"/>
+                        <syncfusion:CurrencyTextBox CurrencySymbol="" x:Name="TextMayorVlr" CurrencyDecimalDigits="2" HorizontalContentAlignment="Right" Grid.Column="3" Grid.Row="2" LostFocus="ActualizaTotal"/>
+                        <syncfusion:CurrencyTextBox CurrencySymbol="" x:Name="TextMenorVlr" CurrencyDecimalDigits="2" HorizontalContentAlignment="Right" Grid.Column="3" Grid.Row="3" LostFocus="ActualizaTotal"/>
+                        <syncfusion:CurrencyTextBox CurrencySymbol="" x:Name="TextAnticipo" CurrencyDecimalDigits="2" HorizontalContentAlignment="Right" Grid.Column="3" Grid.Row="4" LostFocus="ActualizaTotal"/>
                     </Grid>
+
+
 
 
 
@@ -198,17 +180,17 @@
                             </syncfusion:GridTemplateColumn.CellTemplate>
                         </syncfusion:GridTemplateColumn>
 
-                        
-                            <syncfusion:GridTemplateColumn MappingName="Abonos" Width="50"  AllowFiltering="False">
-                                <syncfusion:GridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button x:Name="BtnAbonos" Content="..."  Click="BtnAbonos_Click" Background="Orange" Cursor="Hand"/>
-                                    </DataTemplate>
-                                </syncfusion:GridTemplateColumn.CellTemplate>
-                            </syncfusion:GridTemplateColumn>
+
+                        <syncfusion:GridTemplateColumn MappingName="Abonos" Width="50"  AllowFiltering="False">
+                            <syncfusion:GridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button x:Name="BtnAbonos" Content="..."  Click="BtnAbonos_Click" Background="Orange" Cursor="Hand"/>
+                                </DataTemplate>
+                            </syncfusion:GridTemplateColumn.CellTemplate>
+                        </syncfusion:GridTemplateColumn>
 
 
-                            <syncfusion:GridTextColumn HeaderText="Trn" MappingName="cod_trn" Width="50" />
+                        <syncfusion:GridTextColumn HeaderText="Trn" MappingName="cod_trn" Width="50" />
                         <syncfusion:GridTextColumn HeaderText="Documento" MappingName="num_trn" Width="100" />
                         <syncfusion:GridDateTimeColumn HeaderText="Fecha"   MappingName="fec_trn" Width="80" />
                         <syncfusion:GridTextColumn HeaderText="Clase"   MappingName="tipo" Width="70" />
@@ -217,13 +199,6 @@
                         <syncfusion:GridNumericColumn HeaderText="Valor" MappingName="valor" Width="100" NumberDecimalSeparator="." NumberGroupSeparator="," NumberGroupSizes="3" />
                         <syncfusion:GridNumericColumn HeaderText="Saldo" MappingName="saldo" Width="100" NumberDecimalSeparator="." NumberGroupSeparator="," NumberGroupSizes="3"/>
                         <syncfusion:GridNumericColumn HeaderText="Vlr Abono" AllowEditing="True" MappingName="abono"  NumberDecimalSeparator="." NumberGroupSeparator="," NumberGroupSizes="3" Width="80"/>
-                        <syncfusion:GridNumericColumn HeaderText="Dto Imal" AllowEditing="True" MappingName="dto_imal"  NumberDecimalSeparator="." NumberGroupSeparator="," NumberGroupSizes="3" Width="80"/>
-                        <syncfusion:GridNumericColumn HeaderText="Dto Incol" AllowEditing="True" MappingName="dto_incol"  NumberDecimalSeparator="." NumberGroupSeparator="," NumberGroupSizes="3" Width="80"/>
-                        <syncfusion:GridNumericColumn HeaderText="Dto TMK" AllowEditing="True" MappingName="dto_tmk"  NumberDecimalSeparator="." NumberGroupSeparator="," NumberGroupSizes="3" Width="80"/>
-                        <syncfusion:GridNumericColumn HeaderText="Dto Gab" AllowEditing="True" MappingName="dto_gab"  NumberDecimalSeparator="." NumberGroupSeparator="," NumberGroupSizes="3" Width="80"/>
-                        <syncfusion:GridNumericColumn HeaderText="Dto VCD" AllowEditing="True" MappingName="dto_vcd"  NumberDecimalSeparator="." NumberGroupSeparator="," NumberGroupSizes="3" Width="80"/>
-                        <syncfusion:GridNumericColumn HeaderText="Dto Sic" AllowEditing="True" MappingName="dto_sic"  NumberDecimalSeparator="." NumberGroupSeparator="," NumberGroupSizes="3" Width="80" />
-                        <syncfusion:GridNumericColumn HeaderText="Dto Otros" AllowEditing="True" MappingName="dto_ot"  NumberDecimalSeparator="." NumberGroupSeparator="," NumberGroupSizes="3" Width="80"/>
 
                     </syncfusion:SfDataGrid.Columns>
                 </syncfusion:SfDataGrid>
@@ -332,7 +307,7 @@
                     <TextBlock Text="0.00" x:Name="TxtBDtoSic" Grid.Row="1" Grid.Column="3"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"/>
                     <TextBlock Text="Otros:" Grid.Row="1" Grid.Column="4"  HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="11"/>
                     <TextBlock Text="0.00" x:Name="TxtBDtoOt" Grid.Row="1" Grid.Column="5"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"/>
-                    
+
                 </Grid>
             </Grid>
         </TabItem>
@@ -365,7 +340,6 @@
                     <Button x:Name="Ejecutar" Content="Ejecutar" Grid.Column="3" Margin="5,5,5,5" Background="Orange" Click="Ejecutar_Click"/>
                     <Button x:Name="ReImprimir" Content="Re-Imprimir" Grid.Column="4" Margin="5,5,5,5" Background="Orange" Click="ReImprimir_Click"/>
                     <Button x:Name="ExportaXLS" Content="Exportar XLS" Grid.Column="5" Margin="5,5,5,5" Background="Orange" Click="ExportaXLS_Click"/>
-                    <Button x:Name="BtnAllImpri" Content="Imprimir Todos los recibos" Grid.Column="6" Margin="5,5,5,5" Background="Orange" Click="BtnAllImpri_Click"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <syncfusion:SfDataGrid  x:Name="dataGridSF"  

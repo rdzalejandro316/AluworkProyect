@@ -17,7 +17,9 @@
             </Grid.RowDefinitions>
             <TextBlock Margin="5,1,0,0" Text="Busqueda por:" Name="TxtTipoBusqueda" Grid.Row="0"  Height="20" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10"/>
             <TextBox Margin="5,1,0,0" Name="TxtShear" Grid.Row="1"  Height="25" Width="300" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" PreviewKeyDown="TxtShear_PreviewKeyDown" GotFocus="TxtShear_GotFocus"/>
-            <Button Margin="320,1,0,0" Name="BtnBuscar" Grid.Row="1" Height="25" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Buscar" Click="Button_Click_1" />
+
+            <Button Margin="320,1,0,0" Name="BtnBuscar" Grid.Row="1" Height="25" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Buscar" Click="Button_Click_1" Background="#2980b9" Foreground="White"/>
+            
             <TextBlock Text="Saldo Inventario:" Width="150" Grid.Row="1" Margin="450,3,0,0" HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" FontFamily="Arial"/>
             <TextBlock Name="SaldoInv" Width="100" Grid.Row="1" Margin="610,1,0,18" HorizontalAlignment="Left" FontSize="18" Grid.RowSpan="2" />
             <Label BorderThickness="0" BorderBrush="White" Margin="5,-1,0,0" FontSize="12" VerticalAlignment="Top" Foreground="DarkBlue" Name="TxtTotal" Grid.Row="2"  Height="25" Width="200" HorizontalAlignment="Left" />
@@ -66,7 +68,7 @@ AlternatingRowBackground="WhiteSmoke"  IsReadOnly="True" CanUserAddRows="False" 
                 </DataGrid.Columns>
             </DataGrid>
 
-            <TextBlock Grid.Row="4" Text="Activar filtro / F9" FontSize="20" VerticalAlignment="Center" Foreground="Green" FontWeight="Bold"/>
+            <TextBlock Grid.Row="4" Text="Activar filtro / F9" FontSize="20" VerticalAlignment="Center" Foreground="#2980b9" FontWeight="Bold"/>
         </Grid>
     </Grid>
 </Window>

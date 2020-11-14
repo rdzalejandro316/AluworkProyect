@@ -72,46 +72,26 @@ namespace SiasoftAppExt
                 SkinStorage.SetVisualStyle(this, "Metro");
                 if (tipo == true)
                 {
-                    //MessageBox.Show("1");
-                    //viewer.Reset();
+                    
                     string xnameReporte = carpeta;
                     string usuario = UserServer;
                     string contraseña = UserServerPass;
 
-                    #region antiguo
-                    //antiguo
-                    //viewer.ReportPath = xnameReporte;
-                    //viewer.ReportServerUrl = Server;
-                    //viewer.ProcessingMode = ProcessingMode.Remote;
-                    //viewer.ReportServerCredential = new System.Net.NetworkCredential(usuario, contraseña);  
-                    //List<DataSourceCredentials> crdentials = new List<DataSourceCredentials>();
-
-                    //foreach (var dataSource in viewer.GetDataSources())
-                    //{
-                    //    DataSourceCredentials credn = new DataSourceCredentials();
-                    //    credn.Name = dataSource.Name;
-                    //    credn.UserId = "wilmer.barrios@siasoftsas.com";
-                    //    credn.Password = "Camilo654321*";
-                    //    crdentials.Add(credn);
-                    //}
-                    //viewer.SetDataSourceCredentials(crdentials);
-                    #endregion
-
-
+                
                     viewer.ServerReport.ReportPath = xnameReporte;
                     viewer.ServerReport.ReportServerUrl = new Uri(Server);
                     viewer.SetDisplayMode(DisplayMode.Normal);
                     viewer.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Remote;
                     ReportServerCredentials rsCredentials = viewer.ServerReport.ReportServerCredentials;
-                    rsCredentials.NetworkCredentials = new System.Net.NetworkCredential(@"grupo\wilmer.barrios", "Colombia2019.*.");
+                    rsCredentials.NetworkCredentials = new System.Net.NetworkCredential(@"SQL\wilmer.barrios", "Deox.2019+");
                     List<Microsoft.Reporting.WinForms.DataSourceCredentials> crdentials = new List<Microsoft.Reporting.WinForms.DataSourceCredentials>();
                     
                     foreach (var dataSource in viewer.ServerReport.GetDataSources())
                     {
                         Microsoft.Reporting.WinForms.DataSourceCredentials credn = new Microsoft.Reporting.WinForms.DataSourceCredentials();
                         credn.Name = dataSource.Name;
-                        credn.UserId = "wilmer.barrios@siasoftsas.com";
-                        credn.Password = "Camilo654321*";
+                        credn.UserId = "sa";
+                        credn.Password = "Q!w2e3r4*/*";
                         crdentials.Add(credn);
                     }
                     viewer.ServerReport.SetDataSourceCredentials(crdentials);                                        

@@ -131,7 +131,7 @@ namespace SiasoftAppExt
 
                 if (bodcons.Trim() != "") bodega = "'" + bodega.Trim() + "," + bodcons.Trim() + "'";
                 //MessageBox.Show(bodega);
-                var slowTask = Task<DataSet>.Factory.StartNew(() => SlowDude(FecIni, FecFin, bodega, codtrn, numtrn, source.Token), source.Token);
+                var slowTask = Task<DataSet>.Factory.StartNew(() => LoadData(FecIni, FecFin, bodega, codtrn, numtrn));
                 await slowTask;
 
                 if (((DataSet)slowTask.Result).Tables[0].Rows.Count > 0)
@@ -152,33 +152,26 @@ namespace SiasoftAppExt
 
             }
         }
-        private DataSet SlowDude(string FecIni, string FecFin, string bodega, string cod_trn, string numtrn, CancellationToken cancellationToken)
+   
+        private DataSet LoadData(string FI, string FF, string bodega, string cod_trn, string numtrn)
         {
             try
             {
-                DataSet jj = LoadData(FecIni, FecFin, bodega, cod_trn, numtrn, cancellationToken);
-                return jj;
-
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-            return null;
-        }
-        private DataSet LoadData(string FI, string FF, string bodega, string cod_trn, string numtrn, CancellationToken cancellationToken)
-        {
-            try
-            {
-                string query = "select cab.idreg,cab.cod_trn,cab.num_trn,cab.fec_trn,cab.cod_cli,ter.cod_ven,vend.nom_mer,rtrim(ter.nom_ter) as nom_cli,cue.cod_bod,sum(cue.cantidad) as cantidad,sum(isnull(cue.subtotal+cue.val_iva-cue.val_des-cue.val_ret-cue.val_ica-cue.val_riva,0)) as tot_tot,max(trn.tip_trn) as tip_trn,cab.fa_cufe,cab.fa_fecharesp,cab.fa_codigo,cab.fa_msg,cab.fa_docelect,cab.trn_anu,cab.num_anu,0 as imprimir from incue_doc as cue ";
+                string query = " declare @Bod varchar(max) = '"+bodega+"'; ";
+                query += "declare @tmpbod table (cod_bod char(3) INDEX ix1 NONCLUSTERED); ";
+                query += "if @Bod='' BEGIN INSERT INTO @tmpbod SELECT COD_bod FROM inmae_bod  END; ";
+                query += "if @Bod<>'' BEGIN insert into @tmpbod SELECT value FROM STRING_SPLIT(@Bod,',')  END;  ";
+                
+                query += " select cab.idreg,cab.cod_trn,cab.num_trn,cab.fec_trn,cab.cod_cli,ter.cod_ven,vend.nom_mer,rtrim(ter.nom_ter) as nom_cli,cue.cod_bod,sum(cue.cantidad) as cantidad,sum(isnull(cue.subtotal+cue.val_iva-cue.val_des-cue.val_ret-cue.val_ica-cue.val_riva,0)) as tot_tot,max(trn.tip_trn) as tip_trn,cab.fa_cufe,cab.fa_fecharesp,cab.fa_codigo,cab.fa_msg,cab.fa_docelect,cab.trn_anu,cab.num_anu,0 as imprimir from incue_doc as cue ";
                 query += " inner join incab_doc as cab on cab.idreg = cue.idregcab and cab.cod_trn='" + cod_trn + "'  inner join inmae_bod as bod on bod.cod_bod = cue.cod_bod ";
                 query += " inner join comae_ter as ter on cab.cod_cli = ter.cod_ter ";
                 query += " left join InMae_mer as vend on  ter.cod_ven = vend.cod_mer ";
                 query += " inner join inmae_trn as trn on trn.cod_trn=cab.cod_trn   ";
                 if (numtrn.Trim() == "") query += " where convert(date,cab.fec_trn,103) between '" + FI + "' and '" + FF + "' ";
                 if (numtrn.Trim() != "") query += " where cab.num_trn like '%" + numtrn.Trim() + "%' ";
-                query += " and cue.cod_bod in (select value from string_split(" + bodega + ",','))" + " group by cab.idreg,cab.cod_trn,cab.num_trn,cab.fec_trn,cab.cod_cli,ter.nom_ter,cue.cod_bod,fa_cufe,cab.fa_fecharesp,cab.fa_codigo,cab.fa_msg ,fa_docelect,cab.trn_anu,cab.num_anu,ter.cod_ven,vend.nom_mer order by cab.cod_trn,cab.fec_trn";
-                //                MessageBox.Show(query);
+                query += " and cue.cod_bod in (select cod_bod from @tmpbod)" + " ";
+                query += " group by cab.idreg,cab.cod_trn,cab.num_trn,cab.fec_trn,cab.cod_cli,ter.nom_ter,cue.cod_bod,fa_cufe,cab.fa_fecharesp,cab.fa_codigo,cab.fa_msg ,fa_docelect,cab.trn_anu,cab.num_anu,ter.cod_ven,vend.nom_mer order by cab.cod_trn,cab.fec_trn";
+                
                 DataSet ds = new DataSet();
                 if (string.IsNullOrEmpty(cod_trn)) return null;
                 dt.Clear();
@@ -261,7 +254,7 @@ namespace SiasoftAppExt
                     }
                     string numtrn = row["idreg"].ToString();
                     string cod_trn = row["cod_trn"].ToString().Trim();
-                    codtrn = cod_trn;
+                    codtrn = cod_trn;                   
                     idrowcab = Convert.ToInt32(numtrn);
                     cufe = row["fa_cufe"].ToString();
                     codigo = row["fa_codigo"].ToString();
@@ -286,6 +279,8 @@ namespace SiasoftAppExt
                         );
 
                     totalFactura = row["tot_tot"] == null ? 0 : Convert.ToDouble(row["tot_tot"].ToString());
+
+                    
                     this.Close();
                 }
                 else

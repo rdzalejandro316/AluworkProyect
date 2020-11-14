@@ -47,7 +47,6 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="Reporte:"  Grid.Row="0" Grid.Column="0" Foreground="Indigo" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" />
                 <ComboBox  x:Name="CmbTipoRep" Margin="2,8,2,8" Grid.Row="0"  Grid.Column="1"  SelectionChanged="CmbTipoRep_SelectionChanged" IsEnabled="False">
-                    <ComboBoxItem  Content="Resumido Linea" />
                     <ComboBoxItem Content="Detallado Linea" IsSelected="True"/>
                 </ComboBox>
 

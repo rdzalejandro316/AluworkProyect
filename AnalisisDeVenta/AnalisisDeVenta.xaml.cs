@@ -198,7 +198,7 @@ namespace SiasoftAppExt
                 //tabitem.Progreso(true);
                 string ffi = FecIni.Text.ToString();
                 string fff = FecFin.Text.ToString();
-                var slowTask = Task<DataSet>.Factory.StartNew(() => SlowDude(ffi, fff, where, cod_empresa, source.Token), source.Token);
+                var slowTask = Task<DataSet>.Factory.StartNew(() => LoadData(ffi, fff, where, cod_empresa));
                 await slowTask;
                 //MessageBox.Show(slowTask.Result.ToString());
                 BtnEjecutar.IsEnabled = true;
@@ -336,31 +336,14 @@ namespace SiasoftAppExt
             TextTotal10.Text = p4.ToString("C");
         }
 
-        private DataSet SlowDude(string ffi, string fff, string where, string cod_empresa, CancellationToken cancellationToken)
-        {
-            try
-            {
-
-                DataSet jj = LoadData(ffi, fff, where, cod_empresa, cancellationToken);
-                return jj;
-
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-            return null;
-        }
-        private DataSet LoadData(string Fi, string Ff, string where, string cod_empresa, CancellationToken cancellationToken)
+       
+        private DataSet LoadData(string Fi, string Ff, string where, string cod_empresa)
         {
 
             try
             {
 
-                //MessageBox.Show(cnEmp.ToString());
-                //string cn_emp = cnEmp.Substring(0, 65) + "_SiaApp"+cnEmp.Substring(72,86);
-                //MessageBox.Show(cn_emp.ToString());
-
+                
                 SqlConnection con1 = new SqlConnection(SiaWin._cn);
                 SqlCommand cmd = new SqlCommand();
                 SqlDataAdapter da = new SqlDataAdapter();
@@ -376,24 +359,9 @@ namespace SiasoftAppExt
                 da.SelectCommand.CommandTimeout = 0;
                 da.Fill(ds);
                 con1.Close();
-                //foreach (DataTable table in ds.Tables)
-                //{
-                //    //            newColumn.DefaultValue = "Your DropDownList value";
-                //    System.Data.DataColumn newColumn = new System.Data.DataColumn("ven_net", typeof(System.Double));
-                //    System.Data.DataColumn newColumn1 = new System.Data.DataColumn("util", typeof(System.Double));
-                //    System.Data.DataColumn newColumn2 = new System.Data.DataColumn("por_util", typeof(System.Double));
-                //    System.Data.DataColumn newColumn3 = new System.Data.DataColumn("por_parti", typeof(System.Double));
-                //    System.Data.DataColumn newColumn4 = new System.Data.DataColumn("can_net", typeof(System.Double));
-                //    ds.Tables[table.TableName].Columns.Add(newColumn);
-                //    ds.Tables[table.TableName].Columns.Add(newColumn1);
-                //    ds.Tables[table.TableName].Columns.Add(newColumn2);
-                //    ds.Tables[table.TableName].Columns.Add(newColumn3);
-                //    ds.Tables[table.TableName].Columns.Add(newColumn4);
-                //}
+
                 return ds;
-                //VentasPorProducto.ItemsSource = ds.Tables[0];
-                //VentaPorBodega.ItemsSource = ds.Tables[1];
-                //VentasPorCliente.ItemsSource = ds.Tables[2];
+
             }
             catch (Exception e)
             {

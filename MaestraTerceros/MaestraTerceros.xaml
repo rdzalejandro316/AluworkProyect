@@ -47,12 +47,12 @@
             <Setter Property="CaretBrush" Value="Black"/>
             <Setter Property="BorderBrush" Value="LightGray"/>
             <Setter Property="Foreground" Value="#373737"/>
-            <Setter Property="Width" Value="200"/>
             <Setter Property="Height" Value="22"/>
         </Style>
         <Style TargetType="Label" x:Key="tit">
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
         </Style>
     </Window.Resources>
 
@@ -114,218 +114,178 @@
             </Grid.RowDefinitions>
 
             <GroupBox Style="{StaticResource Group}" Header="Informacion General">
-                <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="32"/>
+                    </Grid.RowDefinitions>
 
-                    <StackPanel Orientation="Horizontal" Margin="5">
-                        <Label Content="Representante : " Style="{StaticResource tit}"/>
-                        <TextBox Text="{Binding repres,
-                            Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}" 
-                                 Width="400" Style="{StaticResource Tx}"/>
-                    </StackPanel>
+                    <Label Content="Representante : " Style="{StaticResource tit}"/>
+                    <TextBox Text="{Binding repres,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}" 
+                                Grid.Column="1" Grid.ColumnSpan="3" Width="450" Style="{StaticResource Tx}" HorizontalAlignment="Left"/>
 
-                    <control:GridDoble>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Direccion 1: " Style="{StaticResource tit}"/>
-                            <TextBox Text="{Binding dir1,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"                                 
-                                Style="{StaticResource Tx}"/>
-                        </StackPanel>
+                    <Label Grid.Row="1" Content="Direccion 1: " Style="{StaticResource tit}"/>
+                    <TextBox Text="{Binding dir1,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"  
+                                Grid.Row="1" Grid.Column="1" Style="{StaticResource Tx}"/>
 
-                        <StackPanel Grid.Column="1" Orientation="Horizontal">
-                            <Label Content="Direccion 2: " Style="{StaticResource tit}"/>
-                            <TextBox Text="{Binding dir2,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Style="{StaticResource Tx}"/>
-                        </StackPanel>
-                    </control:GridDoble>
+                    <Label Grid.Row="1" Grid.Column="2" Content="Direccion 2: " Style="{StaticResource tit}"/>
+                    <TextBox Text="{Binding dir2,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}" 
+                             Grid.Row="1" Grid.Column="3" Style="{StaticResource Tx}"/>
 
-                    <control:GridDoble>
-                        <StackPanel Grid.Column="0" Orientation="Horizontal">
-                            <Label Content="Email " Style="{StaticResource tit}"/>
-                            <TextBox Text="{Binding email,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                                Style="{StaticResource Tx}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="1" Orientation="Horizontal">
-                            <Label Content="Email Fac Elec:" Style="{StaticResource tit}"/>
-                            <TextBox Text="{Binding email_fe,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                                 Width="180" Style="{StaticResource Tx}"/>
-                        </StackPanel>
-                    </control:GridDoble>
+                    <Label Grid.Row="2" Grid.Column="0" Content="Email " Style="{StaticResource tit}"/>
+                    <TextBox Text="{Binding email,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                Grid.Row="2" Grid.Column="1" Style="{StaticResource Tx}"/>
 
-                    <control:GridDoble>
-                        <StackPanel Grid.Column="0" Orientation="Horizontal">
-                            <Label Content="Telefono :" Style="{StaticResource tit}"/>
-                            <TextBox Text="{Binding tel1,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                                Width="190" Style="{StaticResource Tx}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="1" Orientation="Horizontal">
-                            <Label Content="Celular:" Style="{StaticResource tit}"/>
-                            <TextBox Text="{Binding cel,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                                Width="190" Style="{StaticResource Tx}"/>
-                        </StackPanel>
-                    </control:GridDoble>
+                    <Label Grid.Row="2" Grid.Column="2" Content="Email Fac Elec:" Style="{StaticResource tit}"/>
+                    <TextBox Text="{Binding email_fe,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                 Grid.Row="2" Grid.Column="3" Style="{StaticResource Tx}"/>
 
-                    <StackPanel Orientation="Horizontal" Margin="5">
-                        <StackPanel Grid.Column="0" Orientation="Horizontal">
-                            <Label Content="Pais:" Style="{StaticResource tit}"/>
-                            <TextBox Text="{Binding pais,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                                Width="120" Style="{StaticResource Tx}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="1" Orientation="Horizontal">
-                            <Label Content="Departamento:" Style="{StaticResource tit}"/>
-                            <TextBox Text="{Binding depa,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                                Width="120" Style="{StaticResource Tx}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="2" Orientation="Horizontal">
-                            <Label Content="Ciudad:" Style="{StaticResource tit}"/>
-                            <TextBox Text="{Binding ciudad,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                                Width="120" Style="{StaticResource Tx}"/>
-                        </StackPanel>
-                    </StackPanel>
+                    <Label Grid.Row="3" Grid.Column="0" Content="Telefono :" Style="{StaticResource tit}"/>
+                    <TextBox Text="{Binding tel1,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                Grid.Row="3" Grid.Column="1" Style="{StaticResource Tx}"/>
 
-                    <control:GridDoble>
-                        <StackPanel Grid.Column="0" Orientation="Horizontal">
-                            <Label Content="Contac/Secret :" Style="{StaticResource tit}"/>
-                            <TextBox Text="{Binding conta,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                                Width="180" Style="{StaticResource Tx}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="2" Orientation="Horizontal">
-                            <Label Content="Contacto Cobro:" Style="{StaticResource tit}"/>
-                            <TextBox Text="{Binding cont_cxc,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                                Width="170" Style="{StaticResource Tx}"/>
-                        </StackPanel>
-                    </control:GridDoble>
+                    <Label Grid.Row="3" Grid.Column="2" Content="Celular:" Style="{StaticResource tit}"/>
+                    <TextBox Text="{Binding cel,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                Grid.Row="3" Grid.Column="3"  Style="{StaticResource Tx}"/>
 
-                    <control:GridDoble columnas="3">
 
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="F Actualiza:" Style="{StaticResource tit}"/>
-                            <DatePicker  Text="{Binding fec_act,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                                Width="100" Margin="5 0 5 0" Foreground="Black" IsEnabled="False"/>
-                        </StackPanel>
+                    <Label Grid.Row="4" Grid.Column="0" Content="Pais:" Style="{StaticResource tit}"/>
+                    <TextBox Text="{Binding pais,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                Grid.Row="4" Grid.Column="1" Style="{StaticResource Tx}"/>
 
-                        <StackPanel Grid.Column="1" Orientation="Horizontal">
-                            <Label Content="F Ingreso:" Style="{StaticResource tit}"/>
-                            <DatePicker  Text="{Binding fec_ing,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                                Width="100" Margin="5 0 5 0" Foreground="Black" />
-                        </StackPanel>
+                    <Label Grid.Row="4" Grid.Column="2" Content="Departamento:" Style="{StaticResource tit}"/>
+                    <TextBox Text="{Binding depa,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                Grid.Row="4" Grid.Column="3" Style="{StaticResource Tx}"/>
 
-                        <StackPanel Grid.Column="2" Orientation="Horizontal">
-                            <Label Content="F Cumple:" Style="{StaticResource tit}"/>
-                            <DatePicker Text="{Binding fec_cump,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                                Width="100" Margin="5 0 5 0" Foreground="Black" />
-                        </StackPanel>
-                    </control:GridDoble>
+                    <Label Grid.Row="5" Grid.Column="0" Content="Ciudad:" Style="{StaticResource tit}"/>
+                    <TextBox Text="{Binding ciudad,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                Grid.Row="5" Grid.Column="1" Style="{StaticResource Tx}"/>
 
-                    <StackPanel Orientation="Horizontal" Margin="5">
-                        <Label Content="Estado :" Style="{StaticResource tit}"/>
-                        <ComboBox SelectedIndex="{Binding estado,
-                            Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                            Width="100" Foreground="Black" Margin="5 2 2 2" syncfusionskin:SfSkinManager.VisualStyle="Metro">
-                            <ComboBoxItem>Inactivo</ComboBoxItem>
-                            <ComboBoxItem>Activo</ComboBoxItem>
-                        </ComboBox>
+                    <Label Grid.Row="5" Grid.Column="2" Content="Contac/Secret :" Style="{StaticResource tit}"/>
+                    <TextBox Text="{Binding conta,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                Grid.Row="5" Grid.Column="3" Style="{StaticResource Tx}"/>
 
-                        <Label Content="Documentacion Completa:" Style="{StaticResource tit}"/>
-                        <ComboBox SelectedIndex="{Binding ind_doc,
-                            Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                            Width="100" Foreground="Black" Margin="5 2 2 2" syncfusionskin:SfSkinManager.VisualStyle="Metro">
-                            <ComboBoxItem>NO</ComboBoxItem>
-                            <ComboBoxItem>SI</ComboBoxItem>
-                        </ComboBox>
-                        <!--<CheckBox  IsChecked="{Binding exo_bloq}" Content="Exonerar en bloqueo de cartera" Margin="10 0 0 0" VerticalAlignment="Center" FontWeight="Bold"/>-->
-                    </StackPanel>
+                    <Label Grid.Row="6" Grid.Column="0" Content="Contacto Cobro:" Style="{StaticResource tit}"/>
+                    <TextBox Text="{Binding cont_cxc,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                Grid.Row="6" Grid.Column="1" Style="{StaticResource Tx}"/>
 
-                </StackPanel>
+                    <Label Grid.Row="6" Grid.Column="2" Content="F Actualiza:" Style="{StaticResource tit}"/>
+                    <DatePicker  Text="{Binding fec_act,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                Grid.Row="6" Grid.Column="3" Width="100" Foreground="Black" IsEnabled="False" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                    <Label Grid.Row="7" Grid.Column="0" Content="F Ingreso:" Style="{StaticResource tit}"/>
+                    <DatePicker  Text="{Binding fec_ing,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                Grid.Row="7" Grid.Column="1" Width="100" Foreground="Black"  VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                    <Label Grid.Row="7" Grid.Column="2" Content="F Cumple:" Style="{StaticResource tit}"/>
+                    <DatePicker Text="{Binding fec_cump,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                Grid.Row="7" Grid.Column="3" Width="100" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                    <Label  Grid.Row="8" Grid.Column="0" Content="Estado :" Style="{StaticResource tit}"/>
+                    <ComboBox SelectedIndex="{Binding estado,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                            Grid.Row="8" Grid.Column="1" Width="100" Foreground="Black" syncfusionskin:SfSkinManager.VisualStyle="Metro" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <ComboBoxItem>Inactivo</ComboBoxItem>
+                        <ComboBoxItem>Activo</ComboBoxItem>
+                    </ComboBox>
+
+                    <Label Grid.Row="8" Grid.Column="2" Content="Documentacion Completa:" Style="{StaticResource tit}"/>
+                    <ComboBox SelectedIndex="{Binding ind_doc,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                            Grid.Row="8" Grid.Column="3" Width="100" Foreground="Black" syncfusionskin:SfSkinManager.VisualStyle="Metro" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <ComboBoxItem>NO</ComboBoxItem>
+                        <ComboBoxItem>SI</ComboBoxItem>
+                    </ComboBox>
+
+                </Grid>
             </GroupBox>
 
             <GroupBox  Name="GBimpuesto" Grid.Row="1" Style="{StaticResource Group}" Header="Informacion Impuestos Cliente">
-                <control:GridDoble columnas="2">
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <Label Content="R fuente cliente:" Style="{StaticResource tit}"/>
-                            <ComboBox SelectedIndex="{Binding ind_ret}" Margin="5 0 5 0" Width="160" syncfusionskin:SfSkinManager.VisualStyle="Metro">
-                                <ComboBoxItem IsSelected="True">No retencion</ComboBoxItem>
-                                <ComboBoxItem>Retener si cumple la base</ComboBoxItem>
-                                <ComboBoxItem>Retener</ComboBoxItem>
-                            </ComboBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <Label Content="R ica cliente:" Style="{StaticResource tit}"/>
-                            <ComboBox SelectedIndex="{Binding ret_ica}" Margin="5 0 5 0" Width="160" syncfusionskin:SfSkinManager.VisualStyle="Metro">
-                                <ComboBoxItem IsSelected="True">No retencion</ComboBoxItem>
-                                <ComboBoxItem>Retener si cumple la base</ComboBoxItem>
-                                <ComboBoxItem>Retener</ComboBoxItem>
-                            </ComboBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <Label Content="R tiva cliente:" Style="{StaticResource tit}"/>
-                            <ComboBox SelectedIndex="{Binding ret_iva}" Margin="5 0 5 0" Width="160" syncfusionskin:SfSkinManager.VisualStyle="Metro">
-                                <ComboBoxItem IsSelected="True">No retencion</ComboBoxItem>
-                                <ComboBoxItem>Retener si cumple la base</ComboBoxItem>
-                                <ComboBoxItem>Retener</ComboBoxItem>
-                            </ComboBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <Label Content="Maneja Iva:" Style="{StaticResource tit}"/>
-                            <ComboBox SelectedIndex="{Binding ind_iva}" Margin="5 0 5 0" Width="60" syncfusionskin:SfSkinManager.VisualStyle="Metro">
-                                <ComboBoxItem IsSelected="True">No</ComboBoxItem>
-                                <ComboBoxItem>Si</ComboBoxItem>
-                            </ComboBox>
-                        </StackPanel>
-                    </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                    </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Column="1">
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <Label Content="R fuente prv:" Style="{StaticResource tit}"/>
-                            <ComboBox SelectedIndex="{Binding ind_rete}" Margin="5 0 5 0" Width="160" syncfusionskin:SfSkinManager.VisualStyle="Metro">
-                                <ComboBoxItem IsSelected="True">No retencion</ComboBoxItem>
-                                <ComboBoxItem>Retener si cumple la base</ComboBoxItem>
-                                <ComboBoxItem>Retener</ComboBoxItem>
-                            </ComboBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <Label Content="R ica prv:" Style="{StaticResource tit}"/>
-                            <ComboBox SelectedIndex="{Binding rtica}" Margin="5 0 5 0" Width="160" syncfusionskin:SfSkinManager.VisualStyle="Metro">
-                                <ComboBoxItem IsSelected="True">No retencion</ComboBoxItem>
-                                <ComboBoxItem>Retener si cumple la base</ComboBoxItem>
-                                <ComboBoxItem>Retener</ComboBoxItem>
-                            </ComboBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <Label Content="R tiva prv:" Style="{StaticResource tit}"/>
-                            <ComboBox SelectedIndex="{Binding rtiva}"  Margin="5 0 5 0" Width="160" syncfusionskin:SfSkinManager.VisualStyle="Metro">
-                                <ComboBoxItem IsSelected="True">No retencion</ComboBoxItem>
-                                <ComboBoxItem>Retener si cumple la base</ComboBoxItem>
-                                <ComboBoxItem>Retener</ComboBoxItem>
-                            </ComboBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <Label Content="Tipo de regimen:" Style="{StaticResource tit}"/>
-                            <ComboBox SelectedIndex="{Binding tip_prv}" Margin="5 0 5 0" Width="140" syncfusionskin:SfSkinManager.VisualStyle="Metro">
-                                <ComboBoxItem IsSelected="True">Común</ComboBoxItem>
-                                <ComboBoxItem>Simplificado</ComboBoxItem>
-                                <ComboBoxItem>Gran contribuyente</ComboBoxItem>
-                                <ComboBoxItem>Entidad Oficial</ComboBoxItem>
-                                <ComboBoxItem>Otro</ComboBoxItem>
-                            </ComboBox>
-                        </StackPanel>
-                    </StackPanel>
+                    <Label Grid.Row="1" Grid.Column="0" Content="R fuente cliente:" Style="{StaticResource tit}"/>
+                    <ComboBox  Grid.Row="1" Grid.Column="1" SelectedIndex="{Binding ind_ret}" Margin="5 0 5 0" Width="160" syncfusionskin:SfSkinManager.VisualStyle="Metro" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <ComboBoxItem IsSelected="True">No retencion</ComboBoxItem>
+                        <ComboBoxItem>Retener si cumple la base</ComboBoxItem>
+                        <ComboBoxItem>Retener</ComboBoxItem>
+                    </ComboBox>
+
+                    <Label Grid.Row="2" Grid.Column="0" Content="R ica cliente:" Style="{StaticResource tit}"/>
+                    <ComboBox Grid.Row="2" Grid.Column="1" SelectedIndex="{Binding ret_ica}" Margin="5 0 5 0" Width="160" syncfusionskin:SfSkinManager.VisualStyle="Metro" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <ComboBoxItem IsSelected="True">No retencion</ComboBoxItem>
+                        <ComboBoxItem>Retener si cumple la base</ComboBoxItem>
+                        <ComboBoxItem>Retener</ComboBoxItem>
+                    </ComboBox>
 
 
+                    <Label Grid.Row="3" Grid.Column="0" Content="R tiva cliente:" Style="{StaticResource tit}"/>
+                    <ComboBox Grid.Row="3" Grid.Column="1" SelectedIndex="{Binding ret_iva}" Margin="5 0 5 0" Width="160" syncfusionskin:SfSkinManager.VisualStyle="Metro" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <ComboBoxItem IsSelected="True">No retencion</ComboBoxItem>
+                        <ComboBoxItem>Retener si cumple la base</ComboBoxItem>
+                        <ComboBoxItem>Retener</ComboBoxItem>
+                    </ComboBox>
 
-                </control:GridDoble>
+                    <Label Grid.Row="4" Grid.Column="0" Content="Maneja Iva:" Style="{StaticResource tit}"/>
+                    <ComboBox Grid.Row="4" Grid.Column="1" SelectedIndex="{Binding ind_iva}" Margin="5 0 5 0" Width="60" syncfusionskin:SfSkinManager.VisualStyle="Metro" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <ComboBoxItem IsSelected="True">No</ComboBoxItem>
+                        <ComboBoxItem>Si</ComboBoxItem>
+                    </ComboBox>
+
+
+                    <Label Grid.Row="1" Grid.Column="2" Content="R fuente prv:" Style="{StaticResource tit}"/>
+                    <ComboBox Grid.Row="1" Grid.Column="3" SelectedIndex="{Binding ind_rete}" Margin="5 0 5 0" Width="160" syncfusionskin:SfSkinManager.VisualStyle="Metro" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <ComboBoxItem IsSelected="True">No retencion</ComboBoxItem>
+                        <ComboBoxItem>Retener si cumple la base</ComboBoxItem>
+                        <ComboBoxItem>Retener</ComboBoxItem>
+                    </ComboBox>
+
+                    <Label Grid.Row="2" Grid.Column="2" Content="R ica prv:" Style="{StaticResource tit}"/>
+                    <ComboBox Grid.Row="2" Grid.Column="3" SelectedIndex="{Binding rtica}" Margin="5 0 5 0" Width="160" syncfusionskin:SfSkinManager.VisualStyle="Metro" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <ComboBoxItem IsSelected="True">No retencion</ComboBoxItem>
+                        <ComboBoxItem>Retener si cumple la base</ComboBoxItem>
+                        <ComboBoxItem>Retener</ComboBoxItem>
+                    </ComboBox>
+
+                    <Label Grid.Row="3" Grid.Column="2" Content="R tiva prv:" Style="{StaticResource tit}"/>
+                    <ComboBox Grid.Row="3" Grid.Column="3" SelectedIndex="{Binding rtiva}"  Margin="5 0 5 0" Width="160" syncfusionskin:SfSkinManager.VisualStyle="Metro" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <ComboBoxItem IsSelected="True">No retencion</ComboBoxItem>
+                        <ComboBoxItem>Retener si cumple la base</ComboBoxItem>
+                        <ComboBoxItem>Retener</ComboBoxItem>
+                    </ComboBox>
+
+                    <Label Grid.Row="4" Grid.Column="2" Content="Tipo de regimen:" Style="{StaticResource tit}"/>
+                    <ComboBox Grid.Row="4" Grid.Column="3" SelectedIndex="{Binding tip_prv}" Margin="5 0 5 0" Width="140" syncfusionskin:SfSkinManager.VisualStyle="Metro" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <ComboBoxItem IsSelected="True">Común</ComboBoxItem>
+                        <ComboBoxItem>Simplificado</ComboBoxItem>
+                        <ComboBoxItem>Gran contribuyente</ComboBoxItem>
+                        <ComboBoxItem>Entidad Oficial</ComboBoxItem>
+                        <ComboBoxItem>Otro</ComboBoxItem>
+                    </ComboBox>
+                </Grid>
             </GroupBox>
 
         </Grid>
@@ -340,84 +300,78 @@
 
 
             <GroupBox Name="GBinfcom" Style="{StaticResource Group}" Header="Informacion Comercial">
-                <control:GridDoble>
-                    <control:GridDoble.ColumnDefinitions>
-                        <ColumnDefinition Width="150"/>
-                        <ColumnDefinition Width="220"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="65"/>
                         <ColumnDefinition Width="200"/>
-                    </control:GridDoble.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="160"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
 
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <Label Content="Ind Mayor:" Style="{StaticResource tit}"/>
-                            <ComboBox SelectedIndex="{Binding ind_mayor}" Foreground="Black" Margin="2 0 10 0" Width="40" Cursor="Hand">
-                                <ComboBoxItem>1</ComboBoxItem>
-                                <ComboBoxItem>2</ComboBoxItem>
-                                <ComboBoxItem>3</ComboBoxItem>
-                                <ComboBoxItem>4</ComboBoxItem>
-                                <ComboBoxItem>5</ComboBoxItem>
-                            </ComboBox>
-                        </StackPanel>
+                    <Label Content="Ind Mayor:" Style="{StaticResource tit}"/>
+                    <ComboBox Grid.Row="0" Grid.Column="1" SelectedIndex="{Binding ind_mayor}" Foreground="Black" Margin="2 0 10 0" Width="40" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <ComboBoxItem>1</ComboBoxItem>
+                        <ComboBoxItem>2</ComboBoxItem>
+                        <ComboBoxItem>3</ComboBoxItem>
+                        <ComboBoxItem>4</ComboBoxItem>
+                        <ComboBoxItem>5</ComboBoxItem>
+                    </ComboBox>
 
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <Label Content="Lista de Prec:" Style="{StaticResource tit}"/>
-                            <ComboBox SelectedIndex="{Binding lista_prec}" Foreground="Black" Margin="2 0 10 0" Width="50">
-                                <ComboBoxItem>Si</ComboBoxItem>
-                                <ComboBoxItem>No</ComboBoxItem>
-                            </ComboBox>
-                        </StackPanel>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Lista de Prec:" Style="{StaticResource tit}"/>
+                    <ComboBox Grid.Row="1" Grid.Column="1" SelectedIndex="{Binding lista_prec}" Foreground="Black" Margin="2 0 10 0" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <ComboBoxItem>Si</ComboBoxItem>
+                        <ComboBoxItem>No</ComboBoxItem>
+                    </ComboBox>
 
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <Label Content="Bloq en CXC:" Style="{StaticResource tit}"/>
-                            <ComboBox SelectedIndex="{Binding bloqueo}" Foreground="Black" Margin="2 0 10 0" Width="50">
-                                <ComboBoxItem>No</ComboBoxItem>
-                                <ComboBoxItem>Si</ComboBoxItem>
-                            </ComboBox>
-                        </StackPanel>
+                    <Label Grid.Row="2" Grid.Column="0" Content="Bloq en CXC:" Style="{StaticResource tit}"/>
+                    <ComboBox Grid.Row="2" Grid.Column="1" SelectedIndex="{Binding bloqueo}" Foreground="Black" Margin="2 0 10 0" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <ComboBoxItem>No</ComboBoxItem>
+                        <ComboBoxItem>Si</ComboBoxItem>
+                    </ComboBox>
 
-                        <CheckBox IsChecked="{Binding ind_suc}" Content="Maneja Sucursal"  Margin="10,5,5,5" VerticalAlignment="Center" FontWeight="Bold" />
+                    <Label Grid.Row="3" Grid.Column="0" Content="Dias Plazo:" Style="{StaticResource tit}"/>
+                    <syncfusion:UpDown Grid.Row="3" Grid.Column="1" Value="{Binding dia_plaz}" MinValue="0" Width="50" Height="25" NumberDecimalDigits="0"  HorizontalAlignment="Left" Margin="1,6,0,6"/>
+
+                    <CheckBox  Grid.Row="0" Grid.Column="2" IsChecked="{Binding i_cupocc}" Content="Controlar Credito del cliente" Margin="0,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
+                        <Label Content="Cupo:" Style="{StaticResource tit}"/>
+                        <syncfusion:DoubleTextBox Value="{Binding cupo_cxc,StringFormat=N2}" NumberGroupSeparator="," NumberDecimalDigits="2" NumberDecimalSeparator="." Height="25" Culture="en-US"  MaxValue="500000000" TextSelectionOnFocus="True" Width="100"/>
                     </StackPanel>
 
-                    <StackPanel Grid.Column="1">
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <Label Content="zona:" Style="{StaticResource tit}"/>
-                            <ComboBox SelectedIndex="{Binding cod_zona}" ItemsSource="{Binding zona}" DisplayMemberPath="nom_zona" SelectedValuePath="cod_zona" Foreground="Black"  Margin="10 0 10 0" Width="100"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <Label Content="Vende:" Style="{StaticResource tit}"/>
-                            <ComboBox SelectedValue="{Binding cod_ven}" ItemsSource="{Binding vendedores}" DisplayMemberPath="nom_mer" SelectedValuePath="cod_mer" Foreground="Black" Margin="5 0 10 0" Width="140"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal" Margin="5 10 5 0">
-                            <Label Content="Dias Plazo:" Style="{StaticResource tit}"/>
-                            <syncfusion:UpDown Value="{Binding dia_plaz}" MinValue="0" Width="50" Height="25" NumberDecimalDigits="0" Margin="5 0 0 0"/>
-                        </StackPanel>
-
+                    <CheckBox Grid.Row="2" Grid.Column="2" IsChecked="{Binding i_cupocp}" Content="Controlar Credito del Provedor" Margin="0,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
+                        <Label Content="Cupo:" Style="{StaticResource tit}"/>
+                        <syncfusion:DoubleTextBox Value="{Binding cupo_cxp,StringFormat=N2}" NumberGroupSeparator="," NumberDecimalDigits="2" NumberDecimalSeparator="." Height="25" Culture="en-US"  MaxValue="500000000" TextSelectionOnFocus="True" Width="100"/>
                     </StackPanel>
 
-                    <StackPanel Grid.Column="2">
-                        <CheckBox  IsChecked="{Binding i_cupocc}" Content="Controlar Credito del cliente" Margin="0,5,5,5"/>
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <Label Content="Cupo:" Style="{StaticResource tit}" Margin="0,5,5,5"/>
-                            <syncfusion:DoubleTextBox Value="{Binding cupo_cxc,StringFormat=N2}" NumberGroupSeparator="," NumberDecimalDigits="2" NumberDecimalSeparator="." Height="25" Culture="en-US"  MaxValue="500000000" TextSelectionOnFocus="True" Width="100"/>
-                        </StackPanel>
+                    <Label Grid.Row="0" Grid.Column="3" Content="zona:" Style="{StaticResource tit}"/>
+                    <ComboBox Grid.Row="0" Grid.Column="4" SelectedIndex="{Binding cod_zona}" ItemsSource="{Binding zona}" DisplayMemberPath="nom_zona" SelectedValuePath="cod_zona" Foreground="Black"  Width="100" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
-                        <CheckBox IsChecked="{Binding i_cupocp}" Content="Controlar Credito del Provedor" Margin="0,5,5,5"/>
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <Label Content="Cupo:" Style="{StaticResource tit}"/>
-                            <syncfusion:DoubleTextBox Value="{Binding cupo_cxp,StringFormat=N2}" NumberGroupSeparator="," NumberDecimalDigits="2" NumberDecimalSeparator="." Height="25" Culture="en-US"  MaxValue="500000000" TextSelectionOnFocus="True" Width="100"/>
-                        </StackPanel>
-                    </StackPanel>
-                </control:GridDoble>
+                    <Label Grid.Row="1" Grid.Column="3" Content="Vende:" Style="{StaticResource tit}"/>
+                    <ComboBox Grid.Row="1" Grid.Column="4" SelectedValue="{Binding cod_ven}" ItemsSource="{Binding vendedores}" DisplayMemberPath="nom_mer" SelectedValuePath="cod_mer" Foreground="Black" Width="140" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                    <CheckBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" IsChecked="{Binding ind_suc}" Content="Maneja Sucursal"  VerticalAlignment="Center" FontWeight="Bold" />
+
+                </Grid>
             </GroupBox>
 
             <GroupBox Grid.Row="1" Style="{StaticResource Group}" Header="Informacion medios magenticos (DIAN)">
-                <control:GridDoble>
-                    <control:GridDoble.RowDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
-                    </control:GridDoble.RowDefinitions>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Tipo de Doc:" Style="{StaticResource tit}" />
@@ -432,7 +386,13 @@
                         </ComboBox>
                     </StackPanel>
 
-                    <control:GridDoble columnas="3" Grid.Row="1" Grid.ColumnSpan="2" Margin="0">
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
                         <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="0,5,0,0">
                             <Label Content="Pais:" Style="{StaticResource tit}"/>
                             <TextBox Text="{Binding cod_pais,
@@ -455,7 +415,6 @@
                                 </Grid>
                             </Button>
                         </StackPanel>
-
                         <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,5,0,0">
                             <Label Content="Ciudad:" Style="{StaticResource tit}"/>
                             <TextBox Text="{Binding cod_ciu,
@@ -467,9 +426,9 @@
                                 </Grid>
                             </Button>
                         </StackPanel>
-                    </control:GridDoble>
+                    </Grid>
 
-                </control:GridDoble>
+                </Grid>
             </GroupBox>
 
             <GroupBox Grid.Row="2" Style="{StaticResource Group}" Header="Informacion Natural/ Personas Juridicas">
@@ -498,44 +457,39 @@
                                 </Style.Triggers>
                             </Style>
                         </Grid.Style>
-
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
                             <ColumnDefinition/>
+                            <ColumnDefinition Width="120"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0" Orientation="Horizontal">
-                            <Label Content="Primer Nombre:" Style="{StaticResource tit}"/>
-                            <TextBox  Text="{Binding nom1,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                                Width="150" Style="{StaticResource Tx}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="2" Orientation="Horizontal">
-                            <Label Content="Segundo Nombre:" Style="{StaticResource tit}"/>
-                            <TextBox  Text="{Binding nom2,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                                Width="150" Style="{StaticResource Tx}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-                            <Label Content="Primer Apellido:" Style="{StaticResource tit}"/>
-                            <TextBox Text="{Binding apl1,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                                Width="150" Style="{StaticResource Tx}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
-                            <Label Content="Segundo Apellido:" Style="{StaticResource tit}"/>
-                            <TextBox Text="{Binding apl2,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                                Width="150" Style="{StaticResource Tx}"/>
-                        </StackPanel>
+
+                        <Label Content="Primer Nombre:" Style="{StaticResource tit}"/>
+                        <TextBox  Text="{Binding nom1,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                Grid.Column="1"  Style="{StaticResource Tx}"/>
+
+                        <Label Grid.Column="2" Content="Segundo Nombre:" Style="{StaticResource tit}"/>
+                        <TextBox  Text="{Binding nom2,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                Grid.Column="3" Style="{StaticResource Tx}"/>
+
+                        <Label Grid.Row="1" Grid.Column="0" Content="Primer Apellido:" Style="{StaticResource tit}"/>
+                        <TextBox Text="{Binding apl1,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                Grid.Row="1" Grid.Column="1" Style="{StaticResource Tx}"/>
+
+                        <Label Grid.Row="1" Grid.Column="2" Content="Segundo Apellido:" Style="{StaticResource tit}"/>
+                        <TextBox Text="{Binding apl2,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                Grid.Row="1" Grid.Column="3" Style="{StaticResource Tx}"/>
                     </Grid>
 
                     <Grid Grid.Row="2" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
                             <ColumnDefinition/>
+                            <ColumnDefinition Width="120"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Grid.Style>
@@ -552,38 +506,35 @@
                             </Style>
                         </Grid.Style>
 
-                        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-                            <Label Content="Razon Social :" Style="{StaticResource tit}"/>
-                            <TextBox Text="{Binding razon_soc,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                                Width="160" Style="{StaticResource Tx}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
-                            <Label Content="Direccion :" Style="{StaticResource tit}"/>
-                            <TextBox Text="{Binding dir_comer,
-                                Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-                                Width="160" Style="{StaticResource Tx}"/>
-                        </StackPanel>
+
+                        <Label Grid.Column="0" Content="Razon Social :" Style="{StaticResource tit}"/>
+                        <TextBox Text="{Binding razon_soc,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                Grid.Column="1" Style="{StaticResource Tx}"/>
+
+                        <Label Grid.Column="2" Content="Direccion :" Style="{StaticResource tit}"/>
+                        <TextBox Text="{Binding dir_comer,Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                Grid.Column="3" Style="{StaticResource Tx}"/>
+
                     </Grid>
                 </Grid>
             </GroupBox>
 
 
             <GroupBox Grid.Row="4" Style="{StaticResource Group}" Header="Informacion Adicional">
-                <control:GridDoble>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+
                     <StackPanel>
-                        <Label Content="Observacion:" Style="{StaticResource tit}" />
+                        <Label Content="Observacion:" Style="{StaticResource tit}" HorizontalAlignment="Left"/>
                         <TextBox Text="{Binding observ}" Height="75" AcceptsReturn="True" TextWrapping="Wrap"  Margin="5 0 5 0"/>
                     </StackPanel>
 
-                    <StackPanel Grid.Column="1">
-                        <CheckBox  IsChecked="{Binding uni_fra}" Content="Tipo de Producto" Margin="10 10 5 0" FontWeight="Bold"/>
-                        <CheckBox  IsChecked="{Binding esp_gab}"  Content="Precio especial gabriel" Margin="10 10 5 0" FontWeight="Bold"/>
-                        <Button Content="Notas Multiples" Width="120" Click="BtnNotas_Click" Style="{StaticResource btn}" HorizontalAlignment="Left" Margin="10,10,0,0"/>
-                    </StackPanel>
+                    <Button Grid.Column="1" Content="Notas Multiples" Width="120" Click="BtnNotas_Click" Style="{StaticResource btn}" HorizontalAlignment="Left" Margin="10,10,0,0"/>
 
-
-                </control:GridDoble>
+                </Grid>
             </GroupBox>
 
 

@@ -6,7 +6,7 @@
              Width="1000" Height="600" Background="White">
 
     <Window.Resources>
-        <SolidColorBrush Color="#f1c40f" x:Key="ColorMain"/>
+        <SolidColorBrush Color="DodgerBlue" x:Key="ColorMain"/>
         <Style TargetType="syncfusion:GridHeaderCellControl" x:Key="headerStyle">
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontSize" Value="10"/>
@@ -275,8 +275,8 @@
                         <TextBlock  Grid.Column="3" Text="Cod Referencia" Style="{StaticResource title}"/>
                         <TextBox Name="TxCodRef" MaxLength="15" Grid.Row="1" Grid.Column="3" Style="{StaticResource value}" Background="White"/>
 
-                        <TextBlock  Grid.Column="4" Text="Cod Anterior" Style="{StaticResource title}"/>
-                        <TextBox Name="TxCodAnt" MaxLength="45" Grid.Row="1" Grid.Column="4" Style="{StaticResource value}" Background="White"/>
+                        <TextBlock  Grid.Column="4" Text="Nombre" Style="{StaticResource title}"/>
+                        <TextBox Name="TxNom" MaxLength="45" Grid.Row="1" Grid.Column="4" Style="{StaticResource value}" Background="White"/>
 
                         <TextBlock  Grid.Column="5" Text="Opciones" Style="{StaticResource title}"/>
                         <StackPanel Grid.Column="5" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
@@ -302,7 +302,7 @@
                         <syncfusion:SfDataGrid Name="dataGridReferencia" Style="{StaticResource GridStlyle}" HeaderStyle="{StaticResource headerStyle}" Panel.ZIndex="1">
                             <syncfusion:SfDataGrid.Columns>
                                 <syncfusion:GridTextColumn HeaderText="CODIGO" MappingName="cod_ref" Width="100"/>
-                                <syncfusion:GridTextColumn HeaderText="CODIGO ANTERIOR" MappingName="cod_ant" Width="240"/>
+                                <syncfusion:GridTextColumn HeaderText="NOMBRE" MappingName="nom_ref" Width="240"/>
                                 <syncfusion:GridTextColumn HeaderText="REFERENCIA" MappingName="nom_ref" Width="220"/>
                             </syncfusion:SfDataGrid.Columns>
                         </syncfusion:SfDataGrid>

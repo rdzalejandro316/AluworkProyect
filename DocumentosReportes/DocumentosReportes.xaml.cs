@@ -10,9 +10,7 @@ using Microsoft.Reporting.WinForms;
 
 namespace SiasoftAppExt
 {
-    /// <summary>
-    /// Lógica de interacción para UserControl1.xaml
-    /// </summary>
+    
     public partial class DocumentosReportes : Window
     {
         //Sia.PublicarPnt(9461,"DocumentosReportes");
@@ -40,32 +38,32 @@ namespace SiasoftAppExt
         public string Tag9 = string.Empty;
         public string Tag10 = string.Empty;
         public string titlePie = string.Empty;
-        public string usuario = string.Empty;        
+        public string usuario = string.Empty;
 
         //configuracion impresora
         public string printName = string.Empty;
         public int Copias = 3;
         public bool DirecPrinter = false;
-        public int ZoomPercent =0 ;
+        public int ZoomPercent = 0;
         public bool CreateFilePDF = false;
         public string NameFilePDF = "";
 
         List<ReportParameter> parameters = new List<ReportParameter>();
         //configuracion otros
-        public bool ShowParameterPrompts =false;
+        public bool ShowParameterPrompts = false;
         // conifguracion Parametros Parameter
 
         public DocumentosReportes()
         {
             InitializeComponent();
-            SiaWin = System.Windows.Application.Current.MainWindow;            
+            SiaWin = System.Windows.Application.Current.MainWindow;
         }
-        
-        
+
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
-            {                
+            {
                 // carga codigo de empresa
                 DataRow foundRow = SiaWin.Empresas.Rows.Find(idEmp);
 
@@ -73,21 +71,6 @@ namespace SiasoftAppExt
                 codemp = foundRow["BusinessCode"].ToString().Trim();
 
                 this.Title = "Empesa:" + codemp + "-" + nomemp.Trim();
-
-                // PERMITE PROGRAMAR BUTTON EXPORTAR 
-                //var toolStrip = (ToolStrip)viewer.Controls.Find("toolStrip1", true).First();
-                //((ToolStripDropDownButton)toolStrip.Items["export"]).ShowDropDownArrow = false;
-                //((ToolStripDropDownButton)toolStrip.Items["export"]).DropDownOpening += (obj, arg) =>
-                //{
-                //    ((ToolStripDropDownButton)obj).DropDownItems.Clear();
-                //};
-                //((ToolStripDropDownButton)toolStrip.Items["export"]).Click += (obj, arg) =>
-                //{
-                //    var pdf = viewer.LocalReport.ListRenderingExtensions()
-                //        .Where(x => x.Name == "PDF").First();
-
-                //    viewer.ExportDialog(pdf);
-                //};
 
                 if (this.DocumentoIdCab <= 0)
                 {
@@ -97,7 +80,7 @@ namespace SiasoftAppExt
                 }
                 loaddocumento();
 
-                if(CreateFilePDF && NameFilePDF.Trim()!="")
+                if (CreateFilePDF && NameFilePDF.Trim() != "")
                 {
                     GeneraPdf();
                     //AutoPrint();
@@ -109,8 +92,6 @@ namespace SiasoftAppExt
                 if (DirecPrinter == true)
                 {
                     AutoPrint();
-                    //RefreshReportTituloPie("wilmer r");
-                    //RefreshReportTituloPie("wilmer b");
 
                     this.Close();
                     return;
@@ -129,7 +110,7 @@ namespace SiasoftAppExt
         {
             try
             {
-                
+
                 ReportDirect autoprintme = new ReportDirect(viewer.ServerReport);
                 if (!string.IsNullOrEmpty(printName.Trim())) autoprintme.PrinterSettings.PrinterName = printName.Trim();
                 PrinterSettings ps1 = new PrinterSettings();
@@ -156,7 +137,7 @@ namespace SiasoftAppExt
             }
         }
 
-        private void GeneraPdf() 
+        private void GeneraPdf()
         {
             try
             {
@@ -168,7 +149,7 @@ namespace SiasoftAppExt
                 byte[] bytes = viewer.ServerReport.Render("PDF", null, out mimeType, out encoding, out filenameExtension, out streamids, out warnings);
                 //string FilePath = Server.MapPath("/data/");
                 string FilePath = DocumentoIdCab.ToString() + ".PDF";
-                if(NameFilePDF!="")  FilePath = NameFilePDF.Trim()+".PDF";
+                if (NameFilePDF != "") FilePath = NameFilePDF.Trim() + ".PDF";
                 using (FileStream fs = new FileStream(FilePath, FileMode.Create))
                 {
                     fs.Write(bytes, 0, bytes.Length);
@@ -185,42 +166,43 @@ namespace SiasoftAppExt
         {
             try
             {
+                
                 viewer.PrinterSettings.Copies = 3;
                 viewer.Reset();
-                //viewer.PaperHeight = 1056;
-                //viewer.PaperWidth = 816;
-                //ServerReport serverReport = viewer.ServerReport;
-                //string xnameReporte = @"/Otros/FrmDocumentos/pvfacturapos";
-                //        string xnameReporte=@"/Empresas/Lecollezioni/Cartera/coMaestraDeTerceros ";
                 viewer.ServerReport.ReportPath = this.ReportPath;
-                //System.Windows.Forms.MessageBox.Show(this.ReportPath);
-                //viewer.ServerReport.ReportServerUrl = new Uri("http://192.168.0.12:7333/Reportservergs");
-                //viewer.ServerReport.ReportServerUrl = new Uri("http://cop0pa5app01:80/ReportServer");
                 
 
                 DataTable dt = SiaWin.Func.SqlDT("select ServerIP,UserServer,UserServerPassword,UserSql,UserSqlPassword from ReportServer", "server", 0);
-                string user ="";
+                
+
+                string user = "";
                 string pass = "";
-                if (dt.Rows.Count>0)
+                if (dt.Rows.Count > 0)
                 {
-                    user = dt.Rows[0]["UserServer"].ToString();
-                    pass = dt.Rows[0]["UserServerPassword"].ToString();
+                    user = dt.Rows[0]["UserServer"].ToString().Trim();
+                    pass = dt.Rows[0]["UserServerPassword"].ToString().Trim();
                 }
                 else
                 {
-                    System.Windows.MessageBox.Show("No existe servidor de reportes...","Siasoft");
+                    System.Windows.MessageBox.Show("No existe servidor de reportes...", "Siasoft");
                     return;
                 }
 
-                viewer.ServerReport.ReportServerUrl = new Uri(dt.Rows[0]["ServerIP"].ToString());
+
+                viewer.ServerReport.ReportServerUrl = new Uri(dt.Rows[0]["ServerIP"].ToString().Trim());
+                
 
                 //viewer.SetDisplayMode(DisplayMode.PrintLayout);
                 ReportServerCredentials rsCredentials = viewer.ServerReport.ReportServerCredentials;
-                //rsCredentials.NetworkCredentials = new System.Net.NetworkCredential(@"grupo\wilmer.barrios", "Q1w2e3r4*/*");               
-                rsCredentials.NetworkCredentials = new System.Net.NetworkCredential(user, pass);
+                //rsCredentials.NetworkCredentials = new System.Net.NetworkCredential(@"SQL\wilmer.barrios", "Deox.2019+");
+                rsCredentials.NetworkCredentials = new System.Net.NetworkCredential(@user, pass);
 
                 List<DataSourceCredentials> crdentials = new List<DataSourceCredentials>();
-                //List<ReportParameter> parameters = new List<ReportParameter>();
+                List<ReportParameter> parameters = new List<ReportParameter>();
+
+
+                #region parametros
+
                 ReportParameter paramx = new ReportParameter();
                 paramx.Name = "idregcab";
                 paramx.Values.Add(DocumentoIdCab.ToString());
@@ -230,6 +212,7 @@ namespace SiasoftAppExt
                 paramcodemp.Values.Add(codemp);
                 paramcodemp.Name = "codemp";
                 parameters.Add(paramcodemp);
+
 
                 //tag1
                 if (!string.IsNullOrEmpty(Tag1))
@@ -288,30 +271,30 @@ namespace SiasoftAppExt
                     paramTag7.Name = "Tag7";
                     parameters.Add(paramTag7);
                 }
-                //tag8
-                if (!string.IsNullOrEmpty(Tag8))
-                {
-                    ReportParameter paramTag8 = new ReportParameter();
-                    paramTag8.Values.Add(Tag8);
-                    paramTag8.Name = "Tag8";
-                    parameters.Add(paramTag8);
-                }
-                //tag9
-                if (!string.IsNullOrEmpty(Tag9))
-                {
-                    ReportParameter paramTag9 = new ReportParameter();
-                    paramTag9.Values.Add(Tag9);
-                    paramTag9.Name = "Tag9";
-                    parameters.Add(paramTag9);
-                }
-                //tag10
-                if (!string.IsNullOrEmpty(Tag10))
-                {
-                    ReportParameter paramTag10 = new ReportParameter();
-                    paramTag10.Values.Add(Tag10);
-                    paramTag10.Name = "Tag10";
-                    parameters.Add(paramTag10);
-                }
+                ////tag8
+                ////if (!string.IsNullOrEmpty(Tag8))
+                ////{
+                ////    ReportParameter paramTag8 = new ReportParameter();
+                ////    paramTag8.Values.Add(Tag8);
+                ////    paramTag8.Name = "Tag8";
+                ////    parameters.Add(paramTag8);
+                ////}
+                ////tag9
+                ////if (!string.IsNullOrEmpty(Tag9))
+                ////{
+                ////    ReportParameter paramTag9 = new ReportParameter();
+                ////    paramTag9.Values.Add(Tag9);
+                ////    paramTag9.Name = "Tag9";
+                ////    parameters.Add(paramTag9);
+                ////}
+                ////tag10
+                ////if (!string.IsNullOrEmpty(Tag10))
+                ////{
+                ////    ReportParameter paramTag10 = new ReportParameter();
+                ////    paramTag10.Values.Add(Tag10);
+                ////    paramTag10.Name = "Tag10";
+                ////    parameters.Add(paramTag10);
+                ////}
 
                 //title pie
                 if (!string.IsNullOrEmpty(titlePie))
@@ -330,65 +313,36 @@ namespace SiasoftAppExt
                     paramUser.Name = "usuario";
                     parameters.Add(paramUser);
                 }
-                
-                //tag4
-                //ReportParameter paramTag4 = new ReportParameter();
-                //paramTag4.Values.Add("select cue.idreg,cue.cod_bod,nom_bod,ref.cod_ref,ref.cod_ant,ref.cod_tip,tip.nom_tip,ref.cod_prv,ref.nom_ref,cue.cantidad,cue.val_uni,subtotal,val_iva,cue.val_des,cue.por_des,cue.tot_tot,cue.cos_uni,cue.cos_tot from incue_doc as cue inner join incab_doc on incab_doc.idreg=cue.idregcab and incab_doc.idreg="+ DocumentoIdCab.ToString()+"  inner join inmae_ref as ref on ref.cod_ref=cue.cod_ref inner join inmae_tip as tip on tip.cod_tip=ref.cod_tip inner join inmae_bod as bod on bod.cod_bod=cue.cod_bod");
-                //paramTag4.Name = "SqlCuerpo";
-                //parameters.Add(paramTag4);
-                //tag5
-                //System.Text.StringBuilder _sqlcab = new System.Text.StringBuilder();
-                //_sqlcab.Append("SELECT cab.fec_trn, cab.fec_ven, cab.cod_trn, cab.num_trn, cab.cod_ven, cab.ord_comp, mer.nom_mer, ter.nom_ter, ter.cod_ter, ter.ciudad, ter.dir, ter.tel1, cab.for_pag, cab.val_ret, cab.val_riva, cab.val_rica, cab.fa_cufe, suc.cod_suc, nom_suc, suc.dir as dir_suc, dir_corres, suc.tel as tel_suc, fax, suc.cod_ven as cod_ven_suc, cod_rut, suc.cod_ciu as cod_ciu_suc, suc.estado as estado_suc, suc.cod_zona as cod_zona_suc, suc.ciudad as ciudad_suc ");
-                //_sqlcab.Append(" FROM InCab_doc AS cab left JOIN  InMae_mer AS mer ON mer.cod_mer = cab.cod_ven INNER JOIN InMae_trn AS trn ON trn.cod_trn = cab.cod_trn INNER JOIN Comae_ter AS ter ON ter.cod_ter = cab.cod_cli ");
-                //_sqlcab.Append(" left join inmae_suc as suc on suc.cod_ter = cab.cod_cli");
-                //_sqlcab.Append(" WHERE cab.idreg = "+DocumentoIdCab.ToString());
-                //System.Windows.Clipboard.SetText(_sqlcab.ToString());
 
-                //ReportParameter paramTag5 = new ReportParameter();
-                //paramTag5.Values.Add(_sqlcab.ToString());
-                //paramTag5.Name = "SqlCabeza";
-                //parameters.Add(paramTag5);
+                #endregion
 
-                viewer.ServerReport.SetParameters(parameters);
+
                 foreach (var dataSource in viewer.ServerReport.GetDataSources())
                 {
                     DataSourceCredentials credn = new DataSourceCredentials();
                     credn.Name = dataSource.Name;
-                    credn.UserId = dt.Rows[0]["UserSql"].ToString();
-                    credn.Password = dt.Rows[0]["UserSqlPassword"].ToString();
-                    //credn.UserId = "sa";
-                    //credn.Password = "W654321*";
+                    credn.UserId = dt.Rows[0]["UserSql"].ToString().Trim();
+                    credn.Password = dt.Rows[0]["UserSqlPassword"].ToString().Trim();
+
                     crdentials.Add(credn);
                 }
                 viewer.ServerReport.SetDataSourceCredentials(crdentials);
-                //viewer.ServerReport..PaperHeight = 1056;
-                //viewer.PaperWidth = 816;
-                //viewer.Update();
+
+                
+                viewer.ServerReport.SetParameters(parameters);
+
                 viewer.PrinterSettings.Copies = Convert.ToInt16(Copias);
-
-                //viewer.ZoomPercent = 50;
-                //if (ZoomPercent > 0)
-                //{
-                //  viewer.ZoomMode = ZoomMode.Percent;
-
-                //viewer.ZoomPercent = ZoomPercent;
-                //}
-                //viewer.PrinterSettings.PrinterName = "HP DeskJet 5820 series";
-                //            viewer.PrinterSettings.PrintRange = PrintRange..AllPages;
+            
                 viewer.ProcessingMode = ProcessingMode.Remote;
                 viewer.SetDisplayMode(DisplayMode.PrintLayout);
-                //viewer.SetDisplayMode(DisplayMode.Normal);
                 viewer.ZoomMode = ZoomMode.PageWidth;
-
-
-                //viewer.PrinterSettings.Collate = false;
-                //viewer.PrinterSettings.Copies = 3;
+                viewer.RefreshReport();
                 
-                if (CreateFilePDF==false) viewer.RefreshReport();
+                //if (CreateFilePDF == false) 
             }
             catch (Exception ex)
             {
-               System.Windows.MessageBox.Show(ex.Message.ToString(), "DocumentosReportes-loaddocumento");
+                System.Windows.MessageBox.Show(ex.Message.ToString(), "DocumentosReportes-loaddocumento");
             }
         }
         public void RefreshReportTituloPie(string titulopie)
@@ -445,12 +399,12 @@ namespace SiasoftAppExt
         }
         private void winFormsHost_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (e.Key==System.Windows.Input.Key.Escape)
+            if (e.Key == System.Windows.Input.Key.Escape)
             {
                 this.Close();
                 e.Handled = true;
             }
-            if(e.Key== System.Windows.Input.Key.F6)
+            if (e.Key == System.Windows.Input.Key.F6)
             {
                 AutoPrint();
                 PrintOk = true;

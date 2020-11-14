@@ -7,15 +7,12 @@ using System.Windows.Controls;
 using System.Windows.Input;
 namespace SiasoftAppExt
 {
-    /// <summary>
-    /// Lógica de interacción para UserControl1.xaml
-    /// </summary>
-    /// 
+
     public partial class InBuscarReferencia : Window
     {
         //Sia.PublicarPnt(9326,"InBuscarReferencia");
         dynamic SiaWin;
-        string cmptabla; string cmpcodigo; string cmpnombre; string cmporden; string cmpIdRow;bool mostrartodo; string where;
+        string cmptabla; string cmpcodigo; string cmpnombre; string cmporden; string cmpIdRow; bool mostrartodo; string where;
         DataTable dt = new DataTable();
         private bool TiboBusqueda = true; //false= codigo,true=nombre
         private string codigo;
@@ -25,9 +22,9 @@ namespace SiasoftAppExt
         private bool Filtro = false;
         private string idbod;
         private string codemp;
-        public string UltBusqueda="";
-        public  string Conexion;
-        public  DataSet ds1 = new DataSet() ;
+        public string UltBusqueda = "";
+        public string Conexion;
+        public DataSet ds1 = new DataSet();
         DateTime fechaCreacion;
         public int IdRowReturn
         {
@@ -46,8 +43,8 @@ namespace SiasoftAppExt
         }
         public string CmpTabla = "inmae_ref";
         public string CmpCodigo = "cod_ref";
-        public string CmpNombre = "cod_ant";
-        public string CmpOrden = "cod_ant";
+        public string CmpNombre = "nom_ref";
+        public string CmpOrden = "nom_ref";
         public string CmpIdRow = "idrow";
         public string CmpTitulo = "Maestra de Referencias";
         public bool MostrarTodo = false;
@@ -83,16 +80,14 @@ namespace SiasoftAppExt
                 string bb = TxtShear.Text.Trim();
                 dataGrid.ItemsSource = null;
                 string www = string.Empty;
-                if (TiboBusqueda)  www = TxtConvertTextSinFiltro(bb);
+                if (TiboBusqueda) www = TxtConvertTextSinFiltro(bb);
                 if (!TiboBusqueda) www = bb;
-                if (Filtro==false) www = TxtConvertTextSinFiltro(bb);
+                if (Filtro == false) www = TxtConvertTextSinFiltro(bb);
                 if (Filtro == true) www = TxtConvertText(bb);
                 if (www.Trim() != "") www = " and " + www;
                 dt = GetDataTable(" where (inmae_ref.estado=1 ) " + www);
                 foreach (System.Data.DataColumn col in dt.Columns) col.ReadOnly = false;
-                //dv = new DataView(dt);
-                //        dv.Sort = "nom_ref ASC,cod_ant ASC";
-                //dv.Sort = "nombre ASC";
+
                 dataGrid.ItemsSource = dt.DefaultView; ;
 
                 //dataGrid.ItemsSource = GetDataTable(" where " + www).DefaultView;
@@ -125,23 +120,14 @@ namespace SiasoftAppExt
             try
             {
 
-                //IIF(RTRIM(COD_ANT) = RTRIM(NOM_REF), NOM_REF, RTRIM(COD_ANT) + ' ' + NOM_REF)
 
-                //string sql = "select top 300 IIF(RTRIM(COD_ANT) = RTRIM(NOM_REF), NOM_REF, RTRIM(COD_ANT) + ' ' + NOM_REF)   as nombre," + cmpcodigo + " as codigo,val_ref,00000000.00 as saldo,cod_prv,inmae_ref.cod_tip,tip.por_des,tip.por_desc  from inmae_ref inner join inmae_tip as tip on tip.cod_tip=inmae_ref.cod_tip "+ _where + " order by nombre" ;
-                string sql = "select top 450 IIF(RTRIM(NOM_REF) = RTRIM(COD_ANT), RTRIM(COD_ANT), RTRIM(COD_ANT) + ' /' + RTRIM(NOM_REF))   as nombre," + cmpcodigo + " as codigo,val_ref,00000000.00 as saldo,cod_prv,inmae_ref.cod_tip,tip.por_des,tip.por_desc  from inmae_ref inner join inmae_tip as tip on tip.cod_tip=inmae_ref.cod_tip " + _where + " order by nombre";
+                string sql = "select top 450 RTRIM(nom_ref) as nombre," + cmpcodigo + " as codigo,val_ref,00000000.00 as saldo,isnull(cod_prv,'-') as cod_prv, ";
+                sql += "isnull(inmae_ref.cod_tip,'-') as cod_tip,isnull(tip.por_des,0) as por_des,isnull(tip.por_desc,0) as por_desc ";
+                sql += "from inmae_ref ";
+                sql += "left join inmae_tip as tip on tip.cod_tip=inmae_ref.cod_tip " + _where + " order by nombre ";
                 
-                //Clipboard.SetText(sql);
-
-                //MessageBox.Show(sql);
-                dt = SiaWin.DB.SqlDT(sql, "productos", idemp);
-                //SiaWin.Browse(dt);
-                     //           SqlConnection conn1 = new SqlConnection(Conexion);
-                //SqlCommand cmd1 = new SqlCommand(sql, conn1);
-                //conn1.Open();
-                //SqlDataReader dr = cmd1.ExecuteReader();
-                //dt.Load(dr);
-                TxtTotal.Content = "Total registros :" + dt.Rows.Count;
-                //conn1.Close();
+                dt = SiaWin.DB.SqlDT(sql, "productos", idemp);                
+                TxtTotal.Content = "Total registros :" + dt.Rows.Count;                
             }
             catch (SqlException SQLex)
             {
@@ -153,6 +139,9 @@ namespace SiasoftAppExt
             }
             return dt;
         }
+
+
+
         private string TxtConvertText(string txt)
         {
             string s = txt;
@@ -160,7 +149,7 @@ namespace SiasoftAppExt
             int inicount = 0;
             string cadena = "";
             string cadenaOR = "";
-            string cadenaOROR = ""; // COD_ANT
+            string cadenaOROR = ""; // nom_ref
             string[] words = s.Split(' ');
             foreach (string word in words)
             {
@@ -168,13 +157,13 @@ namespace SiasoftAppExt
                 {
                     cadena = "rtrim(cod_ref) like '%" + word + "%'";
                     cadenaOR = "rtrim(" + cmpnombre + ") like '%" + word + "%'";
-                    cadenaOROR = "rtrim(cod_ant) like '%" + word + "%'";
+                    cadenaOROR = "rtrim(nom_ref) like '%" + word + "%'";
                 }
                 else
                 {
                     cadena = cadena + " and rtrim(cod_ref) like '%" + word + "%'";
                     cadenaOR = cadenaOR + " and rtrim(" + cmpnombre + ") like '%" + word + "%'";
-                    cadenaOROR = cadenaOROR + " and rtrim(COD_ANT) like '%" + word + "%'";
+                    cadenaOROR = cadenaOROR + " and rtrim(nom_ref) like '%" + word + "%'";
                 }
                 inicount = inicount + 1;
             }
@@ -184,9 +173,9 @@ namespace SiasoftAppExt
         private string TxtConvertTextSinFiltro(string txt)
         {
             string s = txt;
-             //return "rtrim(cod_ant)>='" + s.Trim() + "'";
-            //return "(rtrim(cod_ref) like '" + s.Trim() + "%' OR rtrim(NOM_REF)+rtrim(cod_ant) LIKE '"+s.Trim()+"%')";
-            return "(rtrim(cod_ref) like '" + s.Trim() + "%' OR rtrim(cod_ant) LIKE '" + s.Trim() + "%')";
+            //return "rtrim(nom_ref)>='" + s.Trim() + "'";
+            //return "(rtrim(cod_ref) like '" + s.Trim() + "%' OR rtrim(NOM_REF)+rtrim(nom_ref) LIKE '"+s.Trim()+"%')";
+            return "(rtrim(cod_ref) like '" + s.Trim() + "%' OR rtrim(nom_ref) LIKE '" + s.Trim() + "%')";
             //select cod_ref, nom_ref from inmae_ref where (COD_REF LIKE '4515%' OR NOM_REF LIKE '4515%') AND ESTADO = 1
         }
         private void dataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -204,7 +193,7 @@ namespace SiasoftAppExt
                 this.Nombre = row[0].ToString();
                 //this.IdRowReturn = nPnt;
                 UltBusqueda = TxtShear.Text;
-                if(string.IsNullOrEmpty(UltBusqueda)) SiaWin.Func.Var["_UltimaReferenciaBuscar"] = row["codigo"].ToString().Trim();
+                if (string.IsNullOrEmpty(UltBusqueda)) SiaWin.Func.Var["_UltimaReferenciaBuscar"] = row["codigo"].ToString().Trim();
                 if (!string.IsNullOrEmpty(UltBusqueda)) SiaWin.Func.Var["_UltimaReferenciaBuscar"] = UltBusqueda;
             }
             else
@@ -224,7 +213,7 @@ namespace SiasoftAppExt
             {
                 if (mostrartodo == false)
                 {
-                    
+
                     TxtShear.SelectAll();
                     TxtShear.Focus();
                     TxtShear.SelectAll();
@@ -236,7 +225,7 @@ namespace SiasoftAppExt
                 DataRowView row = (DataRowView)dataGrid.SelectedItems[0];
                 if (row != null)
                 {
-                   // int nPnt = Int32.Parse(row[0].ToString());
+                    // int nPnt = Int32.Parse(row[0].ToString());
                     this.Codigo = row[1].ToString();
                     this.Nombre = row[0].ToString();
                     //this.IdRowReturn = nPnt;
@@ -247,14 +236,14 @@ namespace SiasoftAppExt
                     if (dtpv == null) return;
                     //DataTable dtcnd = LoadBodega(codigo, idBod, 21); //cnd
                     //DataSet ds1 = LoadData(codigo, idBod); //cnd
-                    if (dtcnd.Rows.Count+ dtpv.Rows.Count == 0 )
+                    if (dtcnd.Rows.Count + dtpv.Rows.Count == 0)
                     {
                         MessageBox.Show("Producto:" + codigo + "-" + Nombre.Trim() + " Sin saldos en bodegas..");
                         return;
                     }
                     //MessageBox.Show(ds1.Tables[0].Rows.Count.ToString());
                     SaldosBodegas xx = new SaldosBodegas(this.Codigo, this.Nombre, 0, Conexion, idbod, idemp);
-                    xx.TxtLinea.Text= row["cod_tip"].ToString();
+                    xx.TxtLinea.Text = row["cod_tip"].ToString();
                     xx.TxtProveedor.Text = row["cod_prv"].ToString();
                     xx.dataGrid.ItemsSource = dtcnd.DefaultView;
                     xx.dataGridPV.ItemsSource = dtpv.DefaultView;
@@ -272,7 +261,7 @@ namespace SiasoftAppExt
                     }
                     xx.TotalCndExit.Text = sumInv.ToString("N2");
                     //xx.TotalCndImpor.Text = sumImp.ToString("N2");
-                    xx.TotalCnd.Text = (sumInv+sumImp).ToString("N2");
+                    xx.TotalCnd.Text = (sumInv + sumImp).ToString("N2");
                     decimal sumInvPv = 0;
                     decimal sumImpPv = 0;
                     //foreach (System.Data.DataColumn col in ds1.Tables[0].Columns) col.ReadOnly = false;
@@ -283,12 +272,12 @@ namespace SiasoftAppExt
                         //dr["saldo"] = saldoin; //change the name
                         sumInvPv = sumInvPv + saldoinPv;
                         //sumImpPv = sumImpPv;
-                            //+ saldoinImpPv;
+                        //+ saldoinImpPv;
                     }
                     xx.TotalPvExit.Text = sumInvPv.ToString("N2");
                     //xx.TotalPvImpor.Text = sumImpPv.ToString("N2");
                     xx.TotalPv.Text = (sumInvPv + sumImpPv).ToString("N2");
-                    xx.TotalExit.Text = (sumInv+sumInvPv).ToString("N2");
+                    xx.TotalExit.Text = (sumInv + sumInvPv).ToString("N2");
                     //xx.TotalImpor.Text =(sumImp+sumImpPv).ToString("N2");
                     xx.Total.Text = (sumInv + sumInvPv).ToString("N2");
                     //xx.dataGrid.ItemsSource = ds1.Tables[0].DefaultView;
@@ -358,8 +347,8 @@ namespace SiasoftAppExt
             //GroupId = 0;
             ultbusqueda = UltBusqueda;
             if (TiboBusqueda) TxtTipoBusqueda.Text = "Busqueda por:";
-            if (TiboBusqueda==false) TxtTipoBusqueda.Text = "Busqueda por:";
-            
+            if (TiboBusqueda == false) TxtTipoBusqueda.Text = "Busqueda por:";
+
             if (MostrarTodo == true)
             {
                 if (where != string.Empty)
@@ -415,11 +404,11 @@ namespace SiasoftAppExt
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error App:"+e.Message);
+                MessageBox.Show("Error App:" + e.Message);
             }
             return null;
         }
-        private DataTable LoadBodega(string refe, string bod,int tipo)
+        private DataTable LoadBodega(string refe, string bod, int tipo)
         {
 
             DataTable dttipo = new DataTable();
@@ -429,15 +418,15 @@ namespace SiasoftAppExt
                 StringBuilder sqlUltFechaVta = new StringBuilder();
                 string sqlor = "";
 
-                
 
-                if (tipo == 1) sqlor = " or tipo_bod=3 and inmae_bod.cod_emp<>'' and  inmae_bod.cod_bod<>'900'  ";                
 
-                string sql = "select cod_bod,nom_bod,cod_emp,000000000.00 as saldo,0000000000.00 as importacion,00000000000.00 as total,0 as indactual,space(10) as ultfecvta,000000 as dias,space(10) as fec_crea from inmae_bod where tipo_bod="+tipo.ToString()+sqlor+" order by cod_bod";
+                if (tipo == 1) sqlor = " or tipo_bod=3 and inmae_bod.cod_emp<>'' and  inmae_bod.cod_bod<>'900'  ";
+
+                string sql = "select cod_bod,nom_bod,cod_emp,000000000.00 as saldo,0000000000.00 as importacion,00000000000.00 as total,0 as indactual,space(10) as ultfecvta,000000 as dias,space(10) as fec_crea from inmae_bod where tipo_bod=" + tipo.ToString() + sqlor + " order by cod_bod";
                 //MessageBox.Show(sql);
                 dttipo = SiaWin.DB.SqlDT(sql, "SaldosBodega", idemp);
-                
-                if(dttipo.Rows.Count>0)
+
+                if (dttipo.Rows.Count > 0)
                 {
                     foreach (DataRow dr in dttipo.Rows) // search whole table
                     {
@@ -496,16 +485,16 @@ namespace SiasoftAppExt
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error:" + ex.Message,"SaldosBodegas-LoadBodega");
+                MessageBox.Show("Error:" + ex.Message, "SaldosBodegas-LoadBodega");
             }
             return dttipo;
         }
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key==Key.F9)
+            if (e.Key == Key.F9)
             {
-                if(Filtro==false)
+                if (Filtro == false)
                 {
                     Filtro = true;
                     TxtFiltro.Visibility = Visibility.Visible;
@@ -524,7 +513,7 @@ namespace SiasoftAppExt
 
             }
             return;
-            if (e.Key==Key.F8)
+            if (e.Key == Key.F8)
             {
                 if (TiboBusqueda)
                 {

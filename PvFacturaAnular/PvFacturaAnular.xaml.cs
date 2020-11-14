@@ -117,18 +117,7 @@ namespace SiasoftAppExt
                     MessageBox.Show("El documento Digitado no existe...");
                     return;
                 }
-                //if(TxtNota.Text.Trim()=="")
-                //{
-                //    MessageBox.Show("Digite Nota.... ");
-                //    TxtNota.Focus();
-                //    return;
-                //}
-                //if(TxtAutoriza.Text.Trim()=="")
-                //{
-                //    MessageBox.Show("Digite Autorizado...");
-                //    TxtAutoriza.Focus();
-                //    return;
-                //}
+
                 if(CBXconcepto.SelectedIndex<0)
                 {
                     MessageBox.Show("Seleccione concepto de devolucion....");
@@ -212,13 +201,15 @@ namespace SiasoftAppExt
                 }
                 else
                 {
-                    bod_remision = "cuerpo.cod_bod= '"+codbod+ "' ";
+                    where = "cuerpo.cod_bod= '"+codbod+ "' ";
                 }
 
                 string cadena = "select cabeza.cod_trn,cabeza.num_trn,cuerpo.cod_bod,cabeza.fec_trn,cabeza.idreg from InCab_doc as cabeza ";
-                cadena = cadena + "inner join InCue_doc as cuerpo on cabeza.idreg = cuerpo.idregcab	";
-                //cadena = cadena + "where cuerpo.cod_bod='"+codbod+ "' and cabeza.cod_trn='"+tipodoc+"' and cabeza.num_trn='"+factura.Trim()+"' ";                
+                cadena = cadena + "inner join InCue_doc as cuerpo on cabeza.idreg = cuerpo.idregcab	";                
                 cadena = cadena + "where " + where + " and cabeza.cod_trn='" + tipodoc + "' and cabeza.num_trn='" + factura.Trim() + "' ";
+
+                
+                
                 DataTable dt = SiaWin.Func.SqlDT(cadena, "Factura", idemp);
                 if (dt.Rows.Count > 0)
                 {

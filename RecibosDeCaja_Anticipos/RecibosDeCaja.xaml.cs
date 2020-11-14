@@ -107,26 +107,13 @@ namespace SiasoftAppExt
         {
             InitializeComponent();
             TextFecha.Text = DateTime.Now.ToString();
-            SiaWin = Application.Current.MainWindow;
-            //idemp = SiaWin._BusinessId;
-            codpvta = SiaWin._UserTag;
-            //LoadInfo();
-            ActivaDesactivaControles(0);
-            //this.DataContext = this;
+            SiaWin = Application.Current.MainWindow;            
+            codpvta = SiaWin._UserTag;            
+            ActivaDesactivaControles(0);            
             FechaIni.Text = DateTime.Now.ToShortDateString();
             FechaFin.Text = DateTime.Now.ToShortDateString();
             BtbGrabar.Focus();
 
-
-            if (SiaWin._UserId == 21 || SiaWin._UserId == 205)
-            {
-                TextFecha.Focusable = true;
-            }
-            else
-            {
-                TextFecha.Focusable = false;
-            }
-            //string valorr = ((Inicio)Application.Current.MainWindow).ValReturn;
         }
 
 
@@ -162,9 +149,14 @@ namespace SiasoftAppExt
                     }
                     else
                     {
+                        MessageBox.Show("f1");
                         nompvta = SiaWin.Func.cmpCodigo("copventas", "cod_pvt", "nom_pvt", codpvta, idemp);
                         TxtPVenta.Text = codpvta + "-" + nompvta;
+
+
                         codbod = SiaWin.Func.cmpCodigo("copventas", "cod_pvt", "cod_bod", codpvta, idemp);
+                        
+
                         codcco = SiaWin.Func.cmpCodigo("copventas", "cod_pvt", "cod_cco", codpvta, idemp);
                         if (string.IsNullOrEmpty(codbod))
                         {
@@ -175,10 +167,12 @@ namespace SiasoftAppExt
                 }
                 else
                 {
+
                     nompvta = SiaWin.Func.cmpCodigo("copventas", "cod_pvt", "nom_pvt", codpvta, idemp);
                     TxtPVenta.Text = codpvta + "---" + nompvta;
 
                     //fecha cierre
+
                     string query = "select fec_rc,fec_cons,con_cie from Co_confi";
                     DataTable dt = SiaWin.Func.SqlDT(query, "table", idemp);
                     if (dt.Rows.Count > 0)
@@ -188,10 +182,13 @@ namespace SiasoftAppExt
 
                 }
 
-
-                dtVen = SiaWin.Func.SqlDT("select cod_mer as cod_ven,cod_mer+'-'+nom_mer as nom_ven from inmae_mer where estado=1  order by cod_mer", "inmae_mer", idemp);
+                
+                dtVen = SiaWin.Func.SqlDT("select cod_mer as cod_ven,nom_mer as nom_ven from inmae_mer where estado=1  order by cod_mer", "inmae_mer", idemp);
                 dtVen.PrimaryKey = new System.Data.DataColumn[] { dtVen.Columns["cod_mer"] };
-                dtVen1 = SiaWin.Func.SqlDT("select cod_mer as cod_ven,cod_mer+'-'+nom_mer as nom_ven from inmae_mer where estado=1  order by cod_mer", "inmae_mer", idemp);
+
+               
+
+                dtVen1 = SiaWin.Func.SqlDT("select cod_mer as cod_ven,nom_mer as nom_ven from inmae_mer where estado=1  order by cod_mer", "inmae_mer", idemp);
                 dtVen1.PrimaryKey = new System.Data.DataColumn[] { dtVen1.Columns["cod_mer"] };
 
                 // establecer paths
@@ -209,6 +206,7 @@ namespace SiasoftAppExt
                 MessageBox.Show(e.Message);
             }
         }
+       
         public void ActivaDesactivaControles(int estado)
         {
             if (estado == 0)
@@ -308,9 +306,7 @@ namespace SiasoftAppExt
                 dtProntpp.Clear();
             }
         }
-
-
-        //popo
+        
         public string consecutivo()
         {
 
@@ -464,13 +460,7 @@ namespace SiasoftAppExt
                     double.TryParse(dtCue.Compute("Sum(abono)", "tip_apli=4").ToString(), out saldoCxCAnt);
                     double.TryParse(dtCue.Compute("Sum(abono)", "tip_apli=1").ToString(), out saldoCxP);
                     double.TryParse(dtCue.Compute("Sum(abono)", "tip_apli=2").ToString(), out saldoCxPAnt);
-                    double.TryParse(dtCue.Compute("Sum(dto_imal)", "tip_apli=3").ToString(), out dtosImal);
-                    double.TryParse(dtCue.Compute("Sum(dto_incol)", "tip_apli=3").ToString(), out dtosIncol);
-                    double.TryParse(dtCue.Compute("Sum(dto_tmk)", "tip_apli=3").ToString(), out dtosTmk);
-                    double.TryParse(dtCue.Compute("Sum(dto_gab)", "tip_apli=3").ToString(), out dtosGab);
-                    double.TryParse(dtCue.Compute("Sum(dto_vcd)", "tip_apli=3").ToString(), out dtosVcd);
-                    double.TryParse(dtCue.Compute("Sum(dto_sic)", "tip_apli=3").ToString(), out dtosSic);
-                    double.TryParse(dtCue.Compute("Sum(dto_ot)", "tip_apli=3").ToString(), out dtosOt);
+                    
                     Retefte = Convert.ToDouble(TextRetefte.Value);
                     Reteica = Convert.ToDouble(TextIca.Value);
                     ImpAsu = Convert.ToDouble(TextImpAsum.Value);
@@ -524,13 +514,7 @@ namespace SiasoftAppExt
                             double.TryParse(dtCue.Compute("Sum(abono)", "tip_apli=4").ToString(), out saldoCxCAnt);
                             double.TryParse(dtCue.Compute("Sum(abono)", "tip_apli=1").ToString(), out saldoCxP);
                             double.TryParse(dtCue.Compute("Sum(abono)", "tip_apli=2").ToString(), out saldoCxPAnt);
-                            double.TryParse(dtCue.Compute("Sum(dto_imal)", "tip_apli=3").ToString(), out dtosImal);
-                            double.TryParse(dtCue.Compute("Sum(dto_incol)", "tip_apli=3").ToString(), out dtosIncol);
-                            double.TryParse(dtCue.Compute("Sum(dto_tmk)", "tip_apli=3").ToString(), out dtosTmk);
-                            double.TryParse(dtCue.Compute("Sum(dto_gab)", "tip_apli=3").ToString(), out dtosGab);
-                            double.TryParse(dtCue.Compute("Sum(dto_vcd)", "tip_apli=3").ToString(), out dtosVcd);
-                            double.TryParse(dtCue.Compute("Sum(dto_sic)", "tip_apli=3").ToString(), out dtosSic);
-                            double.TryParse(dtCue.Compute("Sum(dto_ot)", "tip_apli=3").ToString(), out dtosOt);
+                            
                             Retefte = Convert.ToDouble(TextRetefte.Value);
                             Reteica = Convert.ToDouble(TextIca.Value);
                             ImpAsu = Convert.ToDouble(TextImpAsum.Value);                            
@@ -663,7 +647,7 @@ namespace SiasoftAppExt
                 ReportParameter paramcodemp = new ReportParameter();
                 paramcodemp.Values.Add(BusinessCode);
                 paramcodemp.Name = "codemp";
-                parameters.Add(paramcodemp);
+                parameters.Add(paramcodemp); 
 
                 ReportParameter paramcodtrn = new ReportParameter();
                 paramcodtrn.Values.Add(_codtrn);
@@ -684,8 +668,8 @@ namespace SiasoftAppExt
                 paramValorLetras.Name = "ValorLetras";
                 parameters.Add(paramValorLetras);
 
-
-                string repnom = @"/Contabilidad/ReciboDeCajaOficial";
+                                   
+                string repnom = @"/Empresas/Aluwork/Contabilidad/ReciboDeCajaOficial";
                 string TituloReport = "Recibo de Caja Oficial -";
 
                 SiaWin.Reportes(parameters, repnom, TituloReporte: TituloReport, Modal: true, idemp: idemp, ZoomPercent: 50);
@@ -897,50 +881,7 @@ namespace SiasoftAppExt
                             if (tipapli == 2 || tipapli == 3) sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,doc_cruc,doc_ref,cre_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'" + item["cod_cta"].ToString() + "','" + item["cod_cco"].ToString() + "','" + item["cod_ter"].ToString() + "','Pago/Abono Doc:" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "'," + abono.ToString("F", CultureInfo.InvariantCulture) + ");";
                             if (tipapli == 1 || tipapli == 4) sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,doc_cruc,doc_ref,deb_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'" + item["cod_cta"].ToString() + "','" + item["cod_cco"].ToString() + "','" + item["cod_ter"].ToString() + "','Pago/Abono Doc:" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "'," + abono.ToString("F", CultureInfo.InvariantCulture) + ");";
                         }
-                        double dtoImal = Convert.ToDouble(item["dto_imal"].ToString());
-                        if (dtoImal > 0)
-                        {
-                            int tipapli = Convert.ToInt32(item["tip_apli"].ToString());
-                            if (tipapli == 2 || tipapli == 3) sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,doc_cruc,doc_ref,deb_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'530535','" + item["cod_cco"].ToString() + "','" + item["cod_ter"].ToString() + "','Dto Imal Doc:" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "'," + dtoImal.ToString("F", CultureInfo.InvariantCulture) + ");";
-                        }
-                        double dtoIncol = Convert.ToDouble(item["dto_incol"].ToString());
-                        if (dtoIncol > 0)
-                        {
-                            int tipapli = Convert.ToInt32(item["tip_apli"].ToString());
-                            if (tipapli == 2 || tipapli == 3) sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,doc_cruc,doc_ref,deb_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'530535','" + item["cod_cco"].ToString() + "','" + item["cod_ter"].ToString() + "','Dto Incol Doc:" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "'," + dtoIncol.ToString("F", CultureInfo.InvariantCulture) + ");";
-                        }
-                        double dtoTmk = Convert.ToDouble(item["dto_tmk"].ToString());
-                        if (dtoTmk > 0)
-                        {
-                            int tipapli = Convert.ToInt32(item["tip_apli"].ToString());
-                            if (tipapli == 2 || tipapli == 3) sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,doc_cruc,doc_ref,deb_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'530535','" + item["cod_cco"].ToString() + "','" + item["cod_ter"].ToString() + "','Dto Tmk Doc:" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "'," + dtoTmk.ToString("F", CultureInfo.InvariantCulture) + ");";
-                        }
-                        double dtoGab = Convert.ToDouble(item["dto_gab"].ToString());
-                        if (dtoGab > 0)
-                        {
-                            int tipapli = Convert.ToInt32(item["tip_apli"].ToString());
-                            if (tipapli == 2 || tipapli == 3) sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,doc_cruc,doc_ref,deb_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'530535','" + item["cod_cco"].ToString() + "','" + item["cod_ter"].ToString() + "','Dto Gab Doc:" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "'," + dtoGab.ToString("F", CultureInfo.InvariantCulture) + ");";
-                        }
-                        double dtoVcd = Convert.ToDouble(item["dto_vcd"].ToString());
-                        if (dtoVcd > 0)
-                        {
-                            int tipapli = Convert.ToInt32(item["tip_apli"].ToString());
-                            if (tipapli == 2 || tipapli == 3) sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,doc_cruc,doc_ref,deb_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'530535','" + item["cod_cco"].ToString() + "','" + item["cod_ter"].ToString() + "','Dto Vcd Doc:" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "'," + dtoVcd.ToString("F", CultureInfo.InvariantCulture) + ");";
-                        }
-                        double dtoSic = Convert.ToDouble(item["dto_sic"].ToString());
-                        if (dtoSic > 0)
-                        {
-                            int tipapli = Convert.ToInt32(item["tip_apli"].ToString());
-                            if (tipapli == 2 || tipapli == 3) sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,doc_cruc,doc_ref,deb_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'530535','" + item["cod_cco"].ToString() + "','" + item["cod_ter"].ToString() + "','Dto Sicolsa Doc:" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "'," + dtoSic.ToString("F", CultureInfo.InvariantCulture) + ");";
-                        }
-                        double dtoOt = Convert.ToDouble(item["dto_ot"].ToString());
-                        if (dtoOt > 0)
-                        {
-                            int tipapli = Convert.ToInt32(item["tip_apli"].ToString());
-                            if (tipapli == 2 || tipapli == 3) sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,doc_cruc,doc_ref,deb_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'530535','" + item["cod_cco"].ToString() + "','" + item["cod_ter"].ToString() + "','Dto Otros Doc:" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "'," + dtoOt.ToString("F", CultureInfo.InvariantCulture) + ");";
-                        }
-
-
+                        
                     }
 
                     if (Retefte > 0)
@@ -1128,11 +1069,8 @@ namespace SiasoftAppExt
                     //DataSet ds = new DataSet();
                     StringBuilder _sql = new StringBuilder();
                     ds.Clear();
-                    //_sql.Append("select cab.cod_trn,cab.num_trn,cab.fec_trn,cab.bod_tra,cab.bod_tra+'-'+bod.ini_bod as bod_dest,cue.cod_bod,cue.cod_ref,rtrim(ref.nom_ref) as nom_ref,rtrim(tip.nom_tip) as nom_tip,iif(trn.tip_trn=1,cue.cantidad,-cue.cantidad) as cantidad,trn.tip_trn,iif(cab.tip_traslado=0,'Tienda',iif(cab.tip_traslado=1,'GerenteProducto',iif(cab.tip_traslado=2,'GerenteAdmon','Ninguno'))) as tipotraslado,cab.idreg from incue_doc as cue ");
-                    // _sql.Append(" inner join incab_doc as cab on cab.idreg = cue.idregcab inner join inmae_ref as ref on ref.cod_ref = cue.cod_ref inner join inmae_bod as bod on bod.cod_bod = cab.bod_tra ");
-                    // _sql.Append(" inner join inmae_trn as trn on trn.cod_trn=cab.cod_trn inner join inmae_tip as tip on tip.cod_tip =ref.cod_tip where convert(date,cab.fec_trn) between '" + FechaIni.Text + "' and '" + FechaFin.Text + "' and (cab.cod_trn = '051' or cab.cod_trn = '141')");
-                    //_sql.Append(" and cue.cod_bod = '" + codbod.Trim() + "' order by cab.fec_trn ");
-                    _sql.Append("select cab.rc_prov,cab.cod_trn,cab.num_trn,cab.fec_trn,cue.cod_cco,cco.alias,cab.cod_ven,cab.detalle,cue.cod_cta,cue.cod_ter,rtrim(ter.nom_ter) as nom_ter,doc_cruc,deb_mov + cre_mov as valor,cab.idreg,dto_imal,dto_incol,dto_tmk,dto_gab,dto_sic,dto_vcd,dto_ot,cue.doc_cruc,");
+                    
+                    _sql.Append("select cab.rc_prov,cab.cod_trn,cab.num_trn,cab.fec_trn,cue.cod_cco,cab.cod_ven,cab.detalle,cue.cod_cta,cue.cod_ter,rtrim(ter.nom_ter) as nom_ter,doc_cruc,deb_mov + cre_mov as valor,cab.idreg,cue.doc_cruc,");
                     _sql.Append("CASE cta.tip_apli WHEN 3 THEN 'CxC'  ELSE 'CxCAnt' END as tipo,cta.tip_apli,cab.idreg ");
                     _sql.Append(" from cocue_doc as cue  inner join cocab_doc as cab on cab.idreg = cue.idregcab and cab.cod_trn = '01 ' ");
                     _sql.Append("inner join comae_cta as cta on cta.cod_cta = cue.cod_cta and cta.tip_apli between 3 and 4 ");
@@ -1194,12 +1132,8 @@ namespace SiasoftAppExt
                     string numtrn = row["idreg"].ToString();
                     string codterc = row["cod_ter"].ToString();
                     int idreg = (int)row["idreg"];
-
-                    //MessageBox.Show("idreg:"+ idreg);
-                    if (idreg > 0) ImprimeRC(idreg);
-                    //                  MessageBox.Show(codterc);
-                    //ImprimeDocumento(Convert.ToInt32(numtrn), codterc);
-                    //ImprimirDoc(Convert.ToInt32(numtrn), "Reimp");
+                    
+                    if (idreg > 0) ImprimeRC(idreg);                    
                 }
             }
             catch (Exception ex)
@@ -1269,22 +1203,7 @@ namespace SiasoftAppExt
             }
         }
 
-        public void loadDescuentos(string tercero)
-        {
-            try
-            {
-                string query = "select tblDesc.Cod_tip,linea.nom_tip,tblDesc.des_ppag from InTer_tip as tblDesc ";
-                query += "left join InMae_tip as linea on linea.cod_tip = tblDesc.Cod_tip ";
-                query += "where tblDesc.Cod_ter ='" + tercero + "' ";
-                dtProntpp = SiaWin.Func.SqlDT(query, "tabla", idemp);
-                dataDescu.ItemsSource = dtProntpp.DefaultView;
-            }
-            catch (Exception w)
-            {
-                MessageBox.Show("error al traer los descuentos del cliente:" + w);
-            }
-        }
-
+        
         private async void ConsultaSaldoCartera()
         {
 
@@ -1314,8 +1233,7 @@ namespace SiasoftAppExt
             {
                 try
                 {
-                    loadDescuentos(TextCodeCliente.Text);
-
+                 
                     sumaTotal();
                     dataGrid.ItemsSource = ((DataTable)slowTask.Result).DefaultView;
                 }
@@ -1420,13 +1338,6 @@ namespace SiasoftAppExt
                 double.TryParse(dtCue.Compute("Sum(abono)", "tip_apli=4").ToString(), out abonoCxCAnt);
                 double.TryParse(dtCue.Compute("Sum(abono)", "tip_apli=1").ToString(), out abonoCxP);
                 double.TryParse(dtCue.Compute("Sum(abono)", "tip_apli=2").ToString(), out abonoCxPAnt);
-                double.TryParse(dtCue.Compute("Sum(dto_imal)", "tip_apli=3").ToString(), out dtosImal);
-                double.TryParse(dtCue.Compute("Sum(dto_incol)", "tip_apli=3").ToString(), out dtosIncol);
-                double.TryParse(dtCue.Compute("Sum(dto_tmk)", "tip_apli=3").ToString(), out dtosTmk);
-                double.TryParse(dtCue.Compute("Sum(dto_gab)", "tip_apli=3").ToString(), out dtosGab);
-                double.TryParse(dtCue.Compute("Sum(dto_vcd)", "tip_apli=3").ToString(), out dtosVcd);
-                double.TryParse(dtCue.Compute("Sum(dto_sic)", "tip_apli=3").ToString(), out dtosSic);
-                double.TryParse(dtCue.Compute("Sum(dto_ot)", "tip_apli=3").ToString(), out dtosOt);
                 Retefte = Convert.ToDouble(TextRetefte.Value);
                 Reteica = Convert.ToDouble(TextIca.Value);
                 ImpAsu = Convert.ToDouble(TextImpAsum.Value);
@@ -1706,13 +1617,7 @@ namespace SiasoftAppExt
                     foreach (System.Data.DataRow cue in dtCue.Rows)
                     {
                         cue["abono"] = 0;
-                        cue["dto_imal"] = 0;
-                        cue["dto_incol"] = 0;
-                        cue["dto_tmk"] = 0;
-                        cue["dto_gab"] = 0;
-                        cue["dto_vcd"] = 0;
-                        cue["dto_sic"] = 0;
-                        cue["dto_ot"] = 0;
+                        
                     }
                     sumaAbonos();
                     return;
@@ -1733,21 +1638,7 @@ namespace SiasoftAppExt
                     TextMenorVlr.Value = Convert.ToDecimal(dt_cabeza.Rows[0]["mnpag"]);
                     TextAnticipo.Value = Convert.ToDecimal(dt_cabeza.Rows[0]["antic"]);
 
-                    double imal = Convert.ToDouble(dt_cabeza.Rows[0]["dto_imal"]);
-                    TxtBDtoImal.Text = imal.ToString("C");
-                    double incol = Convert.ToDouble(dt_cabeza.Rows[0]["dto_incol"]);
-                    TxtBDtoIncol.Text = incol.ToString("C");
-                    double tmk = Convert.ToDouble(dt_cabeza.Rows[0]["dto_tmk"]);
-                    TxtBDtoTmk.Text = tmk.ToString("C");
-                    double gabriel = Convert.ToDouble(dt_cabeza.Rows[0]["dto_gab"]);
-                    TxtBDtoGab.Text = gabriel.ToString("C");
-                    double victor = Convert.ToDouble(dt_cabeza.Rows[0]["dto_vcd"]);
-                    TxtBDtoVcd.Text = victor.ToString("C");
-                    double sic = Convert.ToDouble(dt_cabeza.Rows[0]["dto_sic"]);
-                    TxtBDtoSic.Text = sic.ToString("C");
-                    double ot = Convert.ToDouble(dt_cabeza.Rows[0]["dto_ot"]);
-                    TxtBDtoOt.Text = ot.ToString("C");
-
+                    
 
                     DataTable dt_cuerpo = SiaWin.Func.SqlDT("select * from cocuercpv where rcprov='" + recibo + "' and cod_ven='" + vendedor + "';", "table", idemp);
                     //SiaWin.Browse(dt_cuerpo);
@@ -1765,13 +1656,7 @@ namespace SiasoftAppExt
                                 if (cod_trn_cue == cod_trn && num_trn_cue == num_trn)
                                 {
                                     cue["abono"] = item["vr_abono"].ToString();
-                                    cue["dto_imal"] = item["dto_imal"].ToString();
-                                    cue["dto_incol"] = item["dto_incol"].ToString();
-                                    cue["dto_tmk"] = item["dto_tmk"].ToString();
-                                    cue["dto_gab"] = item["dto_gab"].ToString();
-                                    cue["dto_vcd"] = item["dto_vcd"].ToString();
-                                    cue["dto_sic"] = item["dto_sic"].ToString();
-                                    cue["dto_ot"] = item["dto_ot"].ToString();
+                                    
                                 }
                             }
                         }
@@ -1802,14 +1687,7 @@ namespace SiasoftAppExt
                     TxtBDtoOt.Text = value.ToString("C");
                     foreach (System.Data.DataRow cue in dtCue.Rows)
                     {
-                        cue["abono"] = 0;
-                        cue["dto_imal"] = 0;
-                        cue["dto_incol"] = 0;
-                        cue["dto_tmk"] = 0;
-                        cue["dto_gab"] = 0;
-                        cue["dto_vcd"] = 0;
-                        cue["dto_sic"] = 0;
-                        cue["dto_ot"] = 0;
+                        cue["abono"] = 0;                        
                     }
                     sumaAbonos();
                 }
@@ -1863,7 +1741,7 @@ namespace SiasoftAppExt
                 if (e.Key == Key.F8)
                 {
                     GridNumericColumn Colum = ((SfDataGrid)sender).CurrentColumn as GridNumericColumn;
-                    if (Colum.MappingName == "abono" || Colum.MappingName == "dto_imal" || Colum.MappingName == "dto_incol" || Colum.MappingName == "dto_tmk" || Colum.MappingName == "dto_gab" || Colum.MappingName == "dto_vcd" || Colum.MappingName == "dto_sic" || Colum.MappingName == "dto_ot")
+                    if (Colum.MappingName == "abono" )
                     {
                         System.Data.DataRow dr = dtCue.Rows[dataGrid.SelectedIndex];
                         dr.BeginEdit();
@@ -1901,7 +1779,7 @@ namespace SiasoftAppExt
 
                 GridNumericColumn Colum = ((SfDataGrid)sender).CurrentColumn as GridNumericColumn;
 
-                if (Colum.MappingName == "abono" || Colum.MappingName == "dto_imal" || Colum.MappingName == "dto_incol" || Colum.MappingName == "dto_tmk" || Colum.MappingName == "dto_gab" || Colum.MappingName == "dto_vcd" || Colum.MappingName == "dto_sic" || Colum.MappingName == "dto_ot")
+                if (Colum.MappingName == "abono" )
                 {
                     System.Data.DataRow dr = dtCue.Rows[dataGrid.SelectedIndex];
                     decimal _saldo = Convert.ToDecimal(dr["saldo"].ToString());
@@ -2087,7 +1965,10 @@ namespace SiasoftAppExt
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (idemp <= 0) idemp = SiaWin._BusinessId;
+
+            
             LoadInfo();
+            
             if (string.IsNullOrEmpty(codter)) return;
             try
             {
@@ -2143,14 +2024,7 @@ namespace SiasoftAppExt
             TxtBDtoOt.Text = value.ToString("C");
             foreach (System.Data.DataRow cue in dtCue.Rows)
             {
-                cue["abono"] = 0;
-                cue["dto_imal"] = 0;
-                cue["dto_incol"] = 0;
-                cue["dto_tmk"] = 0;
-                cue["dto_gab"] = 0;
-                cue["dto_vcd"] = 0;
-                cue["dto_sic"] = 0;
-                cue["dto_ot"] = 0;
+                cue["abono"] = 0;                
             }
             sumaAbonos();
 
@@ -2226,38 +2100,14 @@ namespace SiasoftAppExt
             }
         }
 
-        private void BtnAllImpri_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (dataGridSF == null || dataGridSF.View.Records.Count<=0)
-                {
-                    MessageBox.Show("realize una consulta para poder imprimir todos los recibos de la consulta","alerta",MessageBoxButton.OK,MessageBoxImage.Exclamation);
-                    return;
-                }
-
-                //SiaWin.Browse(dtAllPrinter);
-                ViewDocuments ww = new ViewDocuments();
-                ww.ShowInTaskbar = false;
-                ww.idemp = idemp;
-                ww.SiaWin = SiaWin;
-                ww.BusinessCode = BusinessCode;
-                ww.dt = dtAllPrinter;                
-                ww.Owner = Application.Current.MainWindow;
-                ww.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                ww.ShowDialog();
-            }
-            catch (Exception w)
-            {
-                MessageBox.Show("error al imprimir todos los recibos:"+w);
-            }
-        }
-
+ 
 
 
 
     }
 }
+
+
 
 
 

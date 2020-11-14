@@ -98,7 +98,7 @@ namespace SiasoftAppExt
                 Tx_grupo.Text = "";
                 Tx_subgrupo.Text = "";
                 TxCodRef.Text = "";
-                TxCodAnt.Text = "";
+                TxNom.Text = "";
 
 
                 dataGridGrupo.ItemsSource = null;
@@ -508,9 +508,9 @@ namespace SiasoftAppExt
             {
                 #region validaciones
 
-                if (string.IsNullOrEmpty(TxCodRef.Text) || string.IsNullOrEmpty(TxCodAnt.Text))
+                if (string.IsNullOrEmpty(TxCodRef.Text) || string.IsNullOrEmpty(TxNom.Text))
                 {
-                    MessageBox.Show("el campo referencia y codigo anterior deben de esta llenos para poder crear la referencia", "alerta", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    MessageBox.Show("el campo referencia y el nombre deben de esta llenos para poder crear la referencia", "alerta", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     return;
                 }
 
@@ -531,7 +531,7 @@ namespace SiasoftAppExt
                 MessageBoxResult result = MessageBox.Show("usted desea crear la referencia:" + TxCodRef.Text, "Confirmacion", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
-                    string query = "insert into inmae_ref (cod_ref,nom_ref,cod_ant,cod_tip,cod_gru,cod_sgr) values ('" + TxCodRef.Text + "','" + TxCodAnt.Text + "','" + TxCodAnt.Text + "','" + Tx_linea.Text + "','" + Tx_grupo.Text + "','" + Tx_subgrupo.Text + "');";
+                    string query = "insert into inmae_ref (cod_ref,nom_ref,cod_tip,cod_gru,cod_sgr) values ('" + TxCodRef.Text + "','" + TxNom.Text + "','" + Tx_linea.Text + "','" + Tx_grupo.Text + "','" + Tx_subgrupo.Text + "');";
                     if (SiaWin.Func.SqlCRUD(query, idemp) == true)
                     {
                         SiaWin.seguridad.Auditor(0, SiaWin._ProyectId, SiaWin._UserId, SiaWin._UserGroup, SiaWin._BusinessId, moduloid, -1, -9, "se inserto la referencia exitosamente :" + TxCodRef.Text + "", "");
