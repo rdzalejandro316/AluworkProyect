@@ -42,7 +42,7 @@ namespace SiasoftAppExt
         string cnEmp = "";
         string cod_empresa = "";
 
-        Tercero MTer = new Tercero();
+        public Tercero MTer = new Tercero();
         Tercero _MTer = new Tercero();
 
         public string cod_ter = "";
@@ -1229,7 +1229,7 @@ namespace SiasoftAppExt
             }
             catch (Exception w)
             {
-                MessageBox.Show("error al buscar:" + 2);
+                //MessageBox.Show("error al buscar:" + 2);
             }
         }
 

@@ -41,7 +41,7 @@
                         <TextBlock Text="Fecha Corte:  "  Grid.Row="0" Grid.Column="0" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="13"/>
                         <DatePicker x:Name="FechaIni" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" ></DatePicker>
 
-                        <SiaSf:ComboBoxAdv  FontSize="12" x:Name="comboBoxCuentas" Margin="5" AllowMultiSelect="True" Grid.Column="2" Grid.Row="0"		DefaultText="Seleccione Cuenta" ItemsSource="{Binding Cuentas}"   SelectionChanged="comboBoxCuentas_SelectionChanged" DisplayMemberPath="nom_cta"  SelectedValuePath="cod_cta"  SelectedValueDelimiter="," />
+                        <SiaSf:ComboBoxAdv  FontSize="12" x:Name="comboBoxCuentas" Margin="5" AllowMultiSelect="True" Grid.Column="2" Grid.Row="0"		DefaultText="Seleccione Cuenta" ItemsSource="{Binding Cuentas}"   SelectionChanged="comboBoxCuentas_SelectionChanged" DisplayMemberPath="nom_cta"  SelectedValuePath="cod_cta"  SelectedValueDelimiter="," AllowSelectAll="True"/>
 
                         <TextBlock Text="Detallado" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="Black"  FontSize="13" Margin="10 0 0 0"/>
                         <ComboBox Name="Cbx_Detalle" Grid.Row="0" Grid.Column="4" Margin="5" SelectionChanged="ComboBox_SelectionChanged">
@@ -60,7 +60,7 @@
                         <SiaSf:ComboBoxAdv  FontSize="12" x:Name="comboBoxVendedor" Margin="5" AllowMultiSelect="True" Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="1"	DefaultText="Seleccione Vendedor"  DisplayMemberPath="nom_mer" AllowSelectAll="True"  SelectedValuePath="cod_mer"  SelectedValueDelimiter="," />
                         <!--<TextBox x:Name="TextCod_Ven" Grid.Row="1" Grid.Column="4" Foreground="Orange" VerticalAlignment="Stretch" Margin="2,6,2,6" HorizontalAlignment="Stretch" FontSize="13" PreviewKeyDown="TextBox_PreviewKeyDown" Tag="inmae_mer" LostFocus="TextCod_Ven_LostFocus" ToolTip="F8 buscar"/>
                         <TextBlock x:Name="TextNombreVend" Text=""  Grid.Row="1" Grid.Column="5" Foreground="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="13"  Background="LightGray"  Margin="2,6,2,6"/>-->
-                        <CheckBox x:Name="CheckIncluirInter" Grid.Row="1" Grid.Column="6" Content="Excluir InterEmpresa" VerticalAlignment="Center" Margin="10,5,5,5"/>
+                        <!--<CheckBox x:Name="CheckIncluirInter" Grid.Row="1" Grid.Column="6" Content="Excluir InterEmpresa" VerticalAlignment="Center" Margin="10,5,5,5"/>-->
 
                         <StackPanel Grid.Column="5" Grid.ColumnSpan="2" Orientation="Horizontal">
                             <Button x:Name="BtnEjecutar" Content="Ejecutar" Grid.Column="5" Margin="5,5,5,0" FontSize="11" Width="90" Background="#FFC107" Foreground="DarkBlue" Click="ButtonRefresh_Click"  Cursor="Hand" Height="30" VerticalAlignment="Top"/>

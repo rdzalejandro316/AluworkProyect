@@ -10,10 +10,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
 
         </Grid.RowDefinitions>
+        
         <Grid Grid.Row="0" Background="WhiteSmoke">
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
@@ -40,77 +40,8 @@
             <TextBlock Grid.Row="1" Grid.Column="3" Name="TxtProveedor"   Foreground="Gray"   FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
         </Grid>
+    
         <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="25"/>
-            </Grid.RowDefinitions>
-
-            <TextBlock Grid.Row="0" Text="Bodega Principal" Width="170" Margin="5,1,0,0" Foreground="red" HorizontalAlignment="Left" VerticalAlignment="top"/>
-            <DataGrid AutoGeneratingColumn="OnAutoGeneratingColumn" Grid.Row="1" Name="dataGrid" Margin="2,1,1,2"   AutoGenerateColumns="False"    Background="White" RowBackground="White"
-AlternatingRowBackground="Azure" IsReadOnly="True" CanUserAddRows="True" SelectionUnit="FullRow"   CanUserDeleteRows="True"  HorizontalGridLinesBrush="LightGray"
-          VerticalGridLinesBrush="LightGray" HeadersVisibility="Column" SelectionMode="Single"  RowHeight="21" FontSize="12"   >
-                <DataGrid.Resources>
-                    <Style TargetType="{x:Type DataGridColumnHeader}">
-                        <Setter Property="Background" Value="#373737" />
-                        <Setter Property="Foreground" Value="White" />
-                        <Setter Property="FontSize" Value="11"/>
-                        <Setter Property="Height" Value="23"/>
-                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                    </Style>
-                </DataGrid.Resources>
-                <DataGrid.Columns>
-
-
-                    <DataGridTextColumn Header="Codigo" Binding="{Binding cod_bod}" Width="50"/>
-                    <DataGridTextColumn Header="Nombre" Binding="{Binding nom_bod}" Width="250" />
-                    <DataGridTextColumn Header="Existencia" Binding="{Binding saldo,StringFormat={}{0:n2}}" Width="70" >
-                        <DataGridTextColumn.CellStyle>
-                            <Style>
-                                <Setter Property="TextBlock.TextAlignment" Value="Right" />
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Importacion" Visibility="Collapsed" Binding="{Binding importacion,StringFormat={}{0:n2}}" Width="70" >
-                        <DataGridTextColumn.CellStyle>
-                            <Style>
-                                <Setter Property="TextBlock.TextAlignment" Value="Right" />
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Total Bodega" Visibility="Collapsed" Binding="{Binding total,StringFormat={}{0:n2}}" Width="75" >
-                        <DataGridTextColumn.CellStyle>
-                            <Style>
-                                <Setter Property="TextBlock.TextAlignment" Value="Right" />
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-
-                    </DataGridTextColumn>
-
-                    <DataGridTextColumn Header="Ult.FechaVenta" Binding="{Binding ultfecvta, StringFormat=dd/MM/yyyy}" Width="70" />
-                    
-                    <DataGridTextColumn Header="Dias" Binding="{Binding dias}" Width="60" />
-                    
-                </DataGrid.Columns>
-            </DataGrid>
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="300"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="75"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Total Bodega(s)"  Margin="5,5,0,0" Foreground="Green" HorizontalAlignment="Left" VerticalAlignment="top" FontWeight="Bold"/>
-                <TextBox Grid.Column="1" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="2" Name="TotalCndExit"    FontWeight="Bold"  FontSize="15"  Foreground="Green" HorizontalAlignment="Stretch" Focusable="False" VerticalAlignment="Stretch"/>
-                <TextBox Grid.Column="2" Visibility="Collapsed" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="2" Name="TotalCndImpor"    FontWeight="Bold"  FontSize="15"  Foreground="Green" HorizontalAlignment="Stretch" Focusable="False" VerticalAlignment="Stretch"/>
-                <TextBox Grid.Column="3" Visibility="Collapsed" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="2" Name="TotalCnd"    FontWeight="Bold"  FontSize="15"  Foreground="Green" HorizontalAlignment="Stretch" Focusable="False" VerticalAlignment="Stretch"/>
-            </Grid>
-
-        </Grid>
-        <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
                 <RowDefinition Height="*"/>

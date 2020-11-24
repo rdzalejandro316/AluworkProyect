@@ -12,3 +12,17 @@ C:\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\projec
 C:\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\project\Mantenimiento\obj\Debug\Mantenimiento.pdb
 C:\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\Mantenimiento.dll
 C:\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\Mantenimiento.pdb
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\Mantenimiento\obj\Debug\Mantenimiento.csprojAssemblyReference.cache
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\Mantenimiento\obj\Debug\Mantenimiento.g.cs
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\Mantenimiento\obj\Debug\Mantenimiento_MarkupCompile.cache
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\Mantenimiento\obj\Debug\Mantenimiento_MarkupCompile.lref
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\Mantenimiento\obj\Debug\Mantenimiento.baml
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\Mantenimiento\obj\Debug\Mantenimiento.g.resources
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\Mantenimiento\obj\Debug\Mantenimiento.Properties.Resources.resources
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\Mantenimiento\obj\Debug\Mantenimiento.csproj.GenerateResource.cache
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\Mantenimiento\obj\Debug\Mantenimiento.csproj.CoreCompileInputs.cache
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\Mantenimiento\obj\Debug\Mantenimiento.csproj.CopyComplete
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\Mantenimiento\obj\Debug\Mantenimiento.dll
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\Mantenimiento\obj\Debug\Mantenimiento.pdb
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\Mantenimiento.dll
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\Mantenimiento.pdb

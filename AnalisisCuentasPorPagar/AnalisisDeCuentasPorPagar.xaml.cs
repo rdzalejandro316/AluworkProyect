@@ -221,8 +221,7 @@ namespace SiasoftAppExt
 
                 string Vededor = TextCod_Ven.Text.Trim();
                 string Tercero = TextCod_Ter.Text.Trim();
-                int exclinter = 0;
-                if (CheckIncluirInter.IsChecked==true) exclinter = 1;
+                int exclinter = 0;                
 
                 var slowTask = Task<DataSet>.Factory.StartNew(() => SlowDude(ffi, Cta, Tercero, Vededor, where,exclinter, source.Token), source.Token);
                 await slowTask;
@@ -424,14 +423,7 @@ namespace SiasoftAppExt
                 cmd.Parameters.AddWithValue("@Cco", "");//if you have parameters.
                 cmd.Parameters.AddWithValue("@Ven", "");//if you have parameters.
                 cmd.Parameters.AddWithValue("@codemp", codemp);//if you have parameters.
-                int exclinter = 0;
-                if (CheckIncluirInter.IsChecked == true) exclinter = 1;
-
-                //cmd.Parameters.AddWithValue("@ExcluirInterEmpresa", exclinter);
-
-
-                //cmd.Parameters.AddWithValue("@Cco", TextCod_bod.Text.Trim());//if you have parameters.
-                //cmd.Parameters.AddWithValue("@Where", where);//if you have parameters.
+                int exclinter = 0;                
                 da = new SqlDataAdapter(cmd);
                 da.Fill(ds1);
                 con.Close();
@@ -767,11 +759,8 @@ namespace SiasoftAppExt
                 parameters.Add(paramTipoReporte);
 
                 int exclinter = 0;
-                if (CheckIncluirInter.IsChecked == true) exclinter = 1;
-
                 
-
-
+                                
 
                 ReportParameter paramExclInter = new ReportParameter();
                 paramExclInter.Values.Add(exclinter.ToString());

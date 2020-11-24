@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace MaestraTerceros
 {
-    class Tercero : INotifyPropertyChanged, IDataErrorInfo
+    public class Tercero : INotifyPropertyChanged, IDataErrorInfo
     {        
 
         public event PropertyChangedEventHandler PropertyChanged;

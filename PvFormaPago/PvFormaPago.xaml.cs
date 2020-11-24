@@ -28,7 +28,9 @@ namespace SiasoftAppExt
         public DataTable dtCue = new DataTable();
         DataTable dtFpag = new DataTable();
         public double totalPagar = 0;
+        public string predeterminarfpag = "";
         public bool flag = false;
+
 
         //consulta
         public string idreg = "";
@@ -60,7 +62,22 @@ namespace SiasoftAppExt
 
                 if (string.IsNullOrEmpty(idreg))
                 {
+
                     TxtTotalRecaudo.Text = totalPagar.ToString("C2");
+
+                    if (!string.IsNullOrWhiteSpace(predeterminarfpag))
+                    {
+                        DataTable dt = SiaWin.Func.SqlDT("select * from inmae_fpag where cod_pag='01'; ", "formapago", idemp);
+                        if (dt.Rows.Count > 0)
+                        {
+                            string codpag = dt.Rows[0]["cod_pag"].ToString().Trim();
+                            string nompag = dt.Rows[0]["nom_pag"].ToString().Trim();
+                            string codcta = dt.Rows[0]["cod_cta"].ToString().Trim();
+                            insertGrid(codpag, nompag, codcta, totalPagar);
+                            TxtTotalRecaudo.Text = "0";
+                        }
+                    }
+
                 }
                 else
                 {
@@ -315,10 +332,10 @@ namespace SiasoftAppExt
             }
         }
 
-        void insertGrid(string cod_pag, string nom_pag, string cod_cta)
+        void insertGrid(string cod_pag, string nom_pag, string cod_cta, double val = 0)
         {
 
-            dtCue.Rows.Add(cod_pag, nom_pag, 0, cod_cta, "", "");
+            dtCue.Rows.Add(cod_pag, nom_pag, val, cod_cta, "", "");
         }
 
         private void BtnDel_Click(object sender, RoutedEventArgs e)

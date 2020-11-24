@@ -314,3 +314,4 @@ D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\RecibosDeCaja_Anticipos\ob
 D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\RecibosDeCaja_Anticipos\obj\Debug\RecibosDeCaja.pdb
 D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\RecibosDeCaja.dll
 D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\RecibosDeCaja.pdb
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\RecibosDeCaja_Anticipos\obj\Debug\RecibosDeCaja.csprojAssemblyReference.cache

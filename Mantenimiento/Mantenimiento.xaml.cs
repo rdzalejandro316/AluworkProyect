@@ -42,8 +42,9 @@ namespace SiasoftAppExt
         public void CargarEmpresas()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("select database_nam,businessname  from business where (select Seg_AccProjectBusiness.Access from Seg_AccProjectBusiness where GroupId = " + SiaWin._UserGroup.ToString() + "  and ProjectId = " + SiaWin._ProyectId.ToString() + " and Access = 1 and Business.BusinessId = Seg_AccProjectBusiness.BusinessId)= 1");
+            sb.Append("select DataBase_Name,businessname  from business where (select Seg_AccProjectBusiness.Access from Seg_AccProjectBusiness where GroupId = " + SiaWin._UserGroup.ToString() + "  and ProjectId = " + SiaWin._ProyectId.ToString() + " and Access = 1 and Business.BusinessId = Seg_AccProjectBusiness.BusinessId)= 1");
             DataTable empresas = SiaWin.Func.SqlDT(sb.ToString(), "Empresas", 0);
+            //SiaWin.Browse(empresas);
             comboBoxEmpresas.ItemsSource = empresas.DefaultView;
         }
 
@@ -62,7 +63,6 @@ namespace SiasoftAppExt
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
-                MessageBox.Show("aqui88");
 
 
             }
@@ -96,6 +96,7 @@ namespace SiasoftAppExt
 
 
                 string empresa = comboBoxEmpresas.SelectedValue.ToString();
+
                 int execute = Convert.ToInt32(ChExecute.IsChecked);
 
 
@@ -103,9 +104,10 @@ namespace SiasoftAppExt
                 await slowTask;
 
                 BtnEjecutar.IsEnabled = true;
+
                 if (((DataSet)slowTask.Result).Tables[0].Rows.Count > 0)
                 {
-
+                    //MessageBox.Show(((DataSet)slowTask.Result).Tables[0].Rows.Count.ToString());
                     GridMantenimiento.ItemsSource = ((DataSet)slowTask.Result).Tables[0];
                     TabControl1.SelectedIndex = 2;
                     TabControl1.SelectedIndex = 1;
@@ -118,7 +120,7 @@ namespace SiasoftAppExt
             catch (Exception ex)
             {
                 this.Opacity = 1;
-                MessageBox.Show("aqui 2.1" + ex);
+                MessageBox.Show( ex.Message);
 
             }
         }

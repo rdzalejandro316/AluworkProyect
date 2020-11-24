@@ -250,8 +250,7 @@ namespace SiasoftAppExt
 
                 //string procedure = columndto == true ? "s" : "_empSpCoAnalisisCxc";
 
-                int exclinter = 0;
-                if (CheckIncluirInter.IsChecked == true) exclinter = 1;
+                int exclinter = 0;                
 
                 var slowTask = Task<DataSet>.Factory.StartNew(() => LoadData(ffi, Cta, Tercero, "", where, exclinter, Ven, detalle, source.Token), source.Token);
                 await slowTask;

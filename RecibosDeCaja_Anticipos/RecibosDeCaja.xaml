@@ -98,10 +98,7 @@
                         <TextBlock Text="ReteFte:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" Foreground="Gray"/>
                         <TextBlock Text="Ica:" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" Foreground="Gray"/>
                         <TextBlock Text="ReteIva:" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" Foreground="Gray"/>
-
-                        <TextBlock Text="Imp val asumido:" Grid.Column="2"  Grid.Row="5" HorizontalAlignment="Right" Foreground="Gray"/>
-                        <syncfusion:CurrencyTextBox CurrencySymbol="" x:Name="TextImpAsum" CurrencyDecimalDigits="2" HorizontalContentAlignment="Right" Grid.Column="3" Grid.Row="5" LostFocus="ActualizaTotal"/>
-
+                       
                         <TextBlock Text="May.Vlr.Pagado:" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" Foreground="Gray"/>
                         <TextBlock Text="Men.Vlr.Pagado:" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Right" Foreground="Gray"/>
                         <TextBlock Text="Anticipo:" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Right" Foreground="Gray"/>

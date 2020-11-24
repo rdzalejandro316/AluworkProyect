@@ -93,7 +93,7 @@
                             <CheckBox Name="ChExecute" Content="Ejecutar" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
                             <TextBlock Text="Empresa :" Grid.Column="2" Grid.Row="3" Foreground="Black" Style="{StaticResource title}"/>
-                            <syncfusion:ComboBoxAdv FontSize="10" x:Name="comboBoxEmpresas" Margin="5" AllowMultiSelect="False" Grid.Column="3" Grid.Row="3" DefaultText="Seleccione la Empresa" DisplayMemberPath="businessname"  SelectedValuePath="database_nam"/>
+                            <syncfusion:ComboBoxAdv FontSize="10" x:Name="comboBoxEmpresas" Margin="5" AllowMultiSelect="False" Grid.Column="3" Grid.Row="3" DefaultText="Seleccione la Empresa" DisplayMemberPath="businessname"  SelectedValuePath="DataBase_Name"/>
 
                             <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="4">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

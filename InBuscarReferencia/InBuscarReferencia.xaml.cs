@@ -125,9 +125,9 @@ namespace SiasoftAppExt
                 sql += "isnull(inmae_ref.cod_tip,'-') as cod_tip,isnull(tip.por_des,0) as por_des,isnull(tip.por_desc,0) as por_desc ";
                 sql += "from inmae_ref ";
                 sql += "left join inmae_tip as tip on tip.cod_tip=inmae_ref.cod_tip " + _where + " order by nombre ";
-                
-                dt = SiaWin.DB.SqlDT(sql, "productos", idemp);                
-                TxtTotal.Content = "Total registros :" + dt.Rows.Count;                
+
+                dt = SiaWin.DB.SqlDT(sql, "productos", idemp);
+                TxtTotal.Content = "Total registros :" + dt.Rows.Count;
             }
             catch (SqlException SQLex)
             {
@@ -224,70 +224,36 @@ namespace SiasoftAppExt
             {
                 DataRowView row = (DataRowView)dataGrid.SelectedItems[0];
                 if (row != null)
-                {
-                    // int nPnt = Int32.Parse(row[0].ToString());
+                {                    
                     this.Codigo = row[1].ToString();
                     this.Nombre = row[0].ToString();
-                    //this.IdRowReturn = nPnt;
-                    /// valida si hay saldos en bodega
-                    DataTable dtcnd = LoadBodega(codigo, idBod, 1); //cnd
-                    if (dtcnd == null) return;
+                    
+                    
                     DataTable dtpv = LoadBodega(codigo, idBod, 2); //cnd
                     if (dtpv == null) return;
-                    //DataTable dtcnd = LoadBodega(codigo, idBod, 21); //cnd
-                    //DataSet ds1 = LoadData(codigo, idBod); //cnd
-                    if (dtcnd.Rows.Count + dtpv.Rows.Count == 0)
-                    {
-                        MessageBox.Show("Producto:" + codigo + "-" + Nombre.Trim() + " Sin saldos en bodegas..");
-                        return;
-                    }
+                 
+
                     //MessageBox.Show(ds1.Tables[0].Rows.Count.ToString());
                     SaldosBodegas xx = new SaldosBodegas(this.Codigo, this.Nombre, 0, Conexion, idbod, idemp);
                     xx.TxtLinea.Text = row["cod_tip"].ToString();
-                    xx.TxtProveedor.Text = row["cod_prv"].ToString();
-                    xx.dataGrid.ItemsSource = dtcnd.DefaultView;
+                    xx.TxtProveedor.Text = row["cod_prv"].ToString();                    
                     xx.dataGridPV.ItemsSource = dtpv.DefaultView;
                     xx.TxtFecCrea.Text = fechaCreacion.ToShortDateString();
-                    decimal sumInv = 0;
-                    decimal sumImp = 0;
-                    //foreach (System.Data.DataColumn col in ds1.Tables[0].Columns) col.ReadOnly = false;
-                    foreach (DataRow dr in dtcnd.Rows) // search whole table
-                    {
-                        decimal saldoin = Convert.ToDecimal(dr["saldo"]);
-                        //decimal saldoinImp = Convert.ToDecimal(dr["importacion"]);
-                        //dr["saldo"] = saldoin; //change the name
-                        sumInv = sumInv + saldoin;
-                        //sumImp = sumImp + saldoinImp;
-                    }
-                    xx.TotalCndExit.Text = sumInv.ToString("N2");
-                    //xx.TotalCndImpor.Text = sumImp.ToString("N2");
-                    xx.TotalCnd.Text = (sumInv + sumImp).ToString("N2");
+                    decimal sumInv = 0;                                                            
                     decimal sumInvPv = 0;
                     decimal sumImpPv = 0;
-                    //foreach (System.Data.DataColumn col in ds1.Tables[0].Columns) col.ReadOnly = false;
+                    
                     foreach (DataRow dr in dtpv.Rows) // search whole table
                     {
-                        decimal saldoinPv = Convert.ToDecimal(dr["saldo"]);
-                        //decimal saldoinImpPv = Convert.ToDecimal(dr["importacion"]);
-                        //dr["saldo"] = saldoin; //change the name
-                        sumInvPv = sumInvPv + saldoinPv;
-                        //sumImpPv = sumImpPv;
-                        //+ saldoinImpPv;
+                        decimal saldoinPv = Convert.ToDecimal(dr["saldo"]);                        
+                        sumInvPv = sumInvPv + saldoinPv;                        
                     }
-                    xx.TotalPvExit.Text = sumInvPv.ToString("N2");
-                    //xx.TotalPvImpor.Text = sumImpPv.ToString("N2");
+                    xx.TotalPvExit.Text = sumInvPv.ToString("N2");                    
                     xx.TotalPv.Text = (sumInvPv + sumImpPv).ToString("N2");
-                    xx.TotalExit.Text = (sumInv + sumInvPv).ToString("N2");
-                    //xx.TotalImpor.Text =(sumImp+sumImpPv).ToString("N2");
-                    xx.Total.Text = (sumInv + sumInvPv).ToString("N2");
-                    //xx.dataGrid.ItemsSource = ds1.Tables[0].DefaultView;
+                    xx.TotalExit.Text = (sumInv + sumInvPv).ToString("N2");                    
+                    xx.Total.Text = (sumInv + sumInvPv).ToString("N2");                    
                     xx.ShowInTaskbar = false;
-                    xx.Owner = Application.Current.MainWindow;
-                    xx.dataGrid.Focus();
-                    xx.dataGrid.SelectedItem = dataGrid.Items[0];
-                    xx.dataGrid.SelectedIndex = 0;
-                    xx.dataGrid.Focus();
-                    xx.dataGrid.SelectedIndex = 0;
+                    xx.Owner = Application.Current.MainWindow;                    
                     xx.ShowDialog();
                     e.Handled = true;
                 }
@@ -381,6 +347,8 @@ namespace SiasoftAppExt
                 SqlConnection con = new SqlConnection(SiaWin._cn);
                 SqlCommand cmd = new SqlCommand();
                 SqlDataAdapter da = new SqlDataAdapter();
+                
+                
                 //DataSet ds1 = new DataSet();
                 //cmd = new SqlCommand("ConsultaCxcCxpAll", con);
                 cmd = new SqlCommand("_EmpSaldosInventariosPorReferenciaBodegas", con);
@@ -420,10 +388,8 @@ namespace SiasoftAppExt
 
 
 
-                if (tipo == 1) sqlor = " or tipo_bod=3 and inmae_bod.cod_emp<>'' and  inmae_bod.cod_bod<>'900'  ";
-
                 string sql = "select cod_bod,nom_bod,cod_emp,000000000.00 as saldo,0000000000.00 as importacion,00000000000.00 as total,0 as indactual,space(10) as ultfecvta,000000 as dias,space(10) as fec_crea from inmae_bod where tipo_bod=" + tipo.ToString() + sqlor + " order by cod_bod";
-                //MessageBox.Show(sql);
+                
                 dttipo = SiaWin.DB.SqlDT(sql, "SaldosBodega", idemp);
 
                 if (dttipo.Rows.Count > 0)
@@ -431,10 +397,13 @@ namespace SiasoftAppExt
                     foreach (DataRow dr in dttipo.Rows) // search whole table
                     {
                         string idbodx = dr["cod_bod"].ToString().Trim();
-                        string codemp = dr["cod_emp"].ToString().Trim();
-                        if (!string.IsNullOrEmpty(codemp))
+                        //string codemp = dr["cod_emp"].ToString().Trim();
+                        
+                        if (!string.IsNullOrEmpty(idbodx))
                         {
                             decimal saldoin = SiaWin.Func.SaldoInv(refe, idbodx, codemp);
+
+
                             //decimal saldoinimp = SiaWin.Func.SaldoInv(refe, "980", codemp);
                             dr["saldo"] = saldoin; //change the name
                                                    //dr["importacion"] = saldoinimp; //change the name

@@ -62,6 +62,7 @@ namespace SiasoftAppExt
         DataTable dtVen1 = new DataTable();
         DataTable dtBan = new DataTable();
         DataTable dtCue = new DataTable();
+        DataTable dtCuentas = new DataTable();
         public string centro_cos_ven = "";
 
         //pronto pago tabla
@@ -107,9 +108,9 @@ namespace SiasoftAppExt
         {
             InitializeComponent();
             TextFecha.Text = DateTime.Now.ToString();
-            SiaWin = Application.Current.MainWindow;            
-            codpvta = SiaWin._UserTag;            
-            ActivaDesactivaControles(0);            
+            SiaWin = Application.Current.MainWindow;
+            codpvta = SiaWin._UserTag;
+            ActivaDesactivaControles(0);
             FechaIni.Text = DateTime.Now.ToShortDateString();
             FechaFin.Text = DateTime.Now.ToShortDateString();
             BtbGrabar.Focus();
@@ -155,7 +156,7 @@ namespace SiasoftAppExt
 
 
                         codbod = SiaWin.Func.cmpCodigo("copventas", "cod_pvt", "cod_bod", codpvta, idemp);
-                        
+
 
                         codcco = SiaWin.Func.cmpCodigo("copventas", "cod_pvt", "cod_cco", codpvta, idemp);
                         if (string.IsNullOrEmpty(codbod))
@@ -182,11 +183,11 @@ namespace SiasoftAppExt
 
                 }
 
-                
+
                 dtVen = SiaWin.Func.SqlDT("select cod_mer as cod_ven,nom_mer as nom_ven from inmae_mer where estado=1  order by cod_mer", "inmae_mer", idemp);
                 dtVen.PrimaryKey = new System.Data.DataColumn[] { dtVen.Columns["cod_mer"] };
 
-               
+                dtCuentas = SiaWin.Func.SqlDT("select * from Co_confi", "config", idemp);
 
                 dtVen1 = SiaWin.Func.SqlDT("select cod_mer as cod_ven,nom_mer as nom_ven from inmae_mer where estado=1  order by cod_mer", "inmae_mer", idemp);
                 dtVen1.PrimaryKey = new System.Data.DataColumn[] { dtVen1.Columns["cod_mer"] };
@@ -206,7 +207,7 @@ namespace SiasoftAppExt
                 MessageBox.Show(e.Message);
             }
         }
-       
+
         public void ActivaDesactivaControles(int estado)
         {
             if (estado == 0)
@@ -246,8 +247,7 @@ namespace SiasoftAppExt
                 TotalRecaudo.Text = "0,00";
                 TextRetefte.Text = "0,00";
                 TextIca.Text = "0,00";
-                TextReteIva.Text = "0,00";
-                TextImpAsum.Text = "0,00";
+                TextReteIva.Text = "0,00";                
                 TextVlrRecibido.Text = "0,00";
                 TextMayorVlr.Text = "0,00";
                 TextMenorVlr.Text = "0,00";
@@ -294,8 +294,7 @@ namespace SiasoftAppExt
                 TotalRecaudo.Text = "0,00";
                 TextRetefte.Text = "0,00";
                 TextIca.Text = "0,00";
-                TextReteIva.Text = "0,00";
-                TextImpAsum.Text = "0,00";
+                TextReteIva.Text = "0,00";                
                 TextVlrRecibido.Text = "0,00";
                 TextMayorVlr.Text = "0,00";
                 TextMenorVlr.Text = "0,00";
@@ -306,7 +305,7 @@ namespace SiasoftAppExt
                 dtProntpp.Clear();
             }
         }
-        
+
         public string consecutivo()
         {
 
@@ -460,10 +459,9 @@ namespace SiasoftAppExt
                     double.TryParse(dtCue.Compute("Sum(abono)", "tip_apli=4").ToString(), out saldoCxCAnt);
                     double.TryParse(dtCue.Compute("Sum(abono)", "tip_apli=1").ToString(), out saldoCxP);
                     double.TryParse(dtCue.Compute("Sum(abono)", "tip_apli=2").ToString(), out saldoCxPAnt);
-                    
+
                     Retefte = Convert.ToDouble(TextRetefte.Value);
-                    Reteica = Convert.ToDouble(TextIca.Value);
-                    ImpAsu = Convert.ToDouble(TextImpAsum.Value);
+                    Reteica = Convert.ToDouble(TextIca.Value);                    
                     Reteiva = Convert.ToDouble(TextReteIva.Value);
                     Mayorvlr = Convert.ToDouble(TextMayorVlr.Value);
                     Menorvlr = Convert.ToDouble(TextMenorVlr.Value);
@@ -514,16 +512,15 @@ namespace SiasoftAppExt
                             double.TryParse(dtCue.Compute("Sum(abono)", "tip_apli=4").ToString(), out saldoCxCAnt);
                             double.TryParse(dtCue.Compute("Sum(abono)", "tip_apli=1").ToString(), out saldoCxP);
                             double.TryParse(dtCue.Compute("Sum(abono)", "tip_apli=2").ToString(), out saldoCxPAnt);
-                            
+
                             Retefte = Convert.ToDouble(TextRetefte.Value);
-                            Reteica = Convert.ToDouble(TextIca.Value);
-                            ImpAsu = Convert.ToDouble(TextImpAsum.Value);                            
+                            Reteica = Convert.ToDouble(TextIca.Value);                            
                             Reteiva = Convert.ToDouble(TextReteIva.Value);
                             Mayorvlr = Convert.ToDouble(TextMayorVlr.Value);
                             Menorvlr = Convert.ToDouble(TextMenorVlr.Value);
                             Anticipo = Convert.ToDouble(TextAnticipo.Value);
                             // MessageBox.Show("aqui1");
-                            double _abonototal = (saldoCxC + saldoCxPAnt + Anticipo + Mayorvlr) - (saldoCxCAnt + saldoCxP + Retefte + Reteica+ ImpAsu + Reteiva + Menorvlr + dtosImal + dtosIncol + dtosTmk + dtosGab + dtosVcd + dtosSic + dtosOt);
+                            double _abonototal = (saldoCxC + saldoCxPAnt + Anticipo + Mayorvlr) - (saldoCxCAnt + saldoCxP + Retefte + Reteica + ImpAsu + Reteiva + Menorvlr + dtosImal + dtosIncol + dtosTmk + dtosGab + dtosVcd + dtosSic + dtosOt);
 
                             double valorPasar = Math.Round(_abonototal);
                             // descontar o sumar otros valores                            
@@ -642,12 +639,12 @@ namespace SiasoftAppExt
 
                 string enletras = SiaWin.Func.enletras(totalfac.ToString());  //valor en letra
 
-                
+
                 List<ReportParameter> parameters = new List<ReportParameter>();
                 ReportParameter paramcodemp = new ReportParameter();
                 paramcodemp.Values.Add(BusinessCode);
                 paramcodemp.Name = "codemp";
-                parameters.Add(paramcodemp); 
+                parameters.Add(paramcodemp);
 
                 ReportParameter paramcodtrn = new ReportParameter();
                 paramcodtrn.Values.Add(_codtrn);
@@ -668,7 +665,7 @@ namespace SiasoftAppExt
                 paramValorLetras.Name = "ValorLetras";
                 parameters.Add(paramValorLetras);
 
-                                   
+
                 string repnom = @"/Empresas/Aluwork/Contabilidad/ReciboDeCajaOficial";
                 string TituloReport = "Recibo de Caja Oficial -";
 
@@ -869,7 +866,7 @@ namespace SiasoftAppExt
 
 
 
-                    string sqlcab = sqlConsecutivo + @"INSERT INTO cocab_doc (cod_trn,fec_trn,num_trn,detalle,cod_ven,rc_prov,ven_com,pun_ven,UserId) values ('" + codtrn + "','"+ TextFecha.Text + "',@iConsecutivo,'" + TextNota.Text.Trim() + "','" + CmbVen.SelectedValue + "','" + TextRProv.Text.Trim() + "','" + CmbVen1.SelectedValue + "','" + codpvta + "',"+ SiaWin._UserId + ");DECLARE @NewID INT;SELECT @NewID = SCOPE_IDENTITY();";
+                    string sqlcab = sqlConsecutivo + @"INSERT INTO cocab_doc (cod_trn,fec_trn,num_trn,detalle,cod_ven,rc_prov,ven_com,pun_ven,UserId) values ('" + codtrn + "','" + TextFecha.Text + "',@iConsecutivo,'" + TextNota.Text.Trim() + "','" + CmbVen.SelectedValue + "','" + TextRProv.Text.Trim() + "','" + CmbVen1.SelectedValue + "','" + codpvta + "'," + SiaWin._UserId + ");DECLARE @NewID INT;SELECT @NewID = SCOPE_IDENTITY();";
                     string sql = "";
                     foreach (System.Data.DataRow item in dtCue.Rows)
                     {
@@ -881,68 +878,73 @@ namespace SiasoftAppExt
                             if (tipapli == 2 || tipapli == 3) sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,doc_cruc,doc_ref,cre_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'" + item["cod_cta"].ToString() + "','" + item["cod_cco"].ToString() + "','" + item["cod_ter"].ToString() + "','Pago/Abono Doc:" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "'," + abono.ToString("F", CultureInfo.InvariantCulture) + ");";
                             if (tipapli == 1 || tipapli == 4) sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,doc_cruc,doc_ref,deb_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'" + item["cod_cta"].ToString() + "','" + item["cod_cco"].ToString() + "','" + item["cod_ter"].ToString() + "','Pago/Abono Doc:" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "','" + item["num_trn"].ToString() + "'," + abono.ToString("F", CultureInfo.InvariantCulture) + ");";
                         }
-                        
+
                     }
 
                     if (Retefte > 0)
                     {
-                        sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,deb_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'13551505','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','ReteFte:" + TextNomCliente.Text.Trim() + "'," + Retefte.ToString("F", CultureInfo.InvariantCulture) + ");";
+                        string ctartf = dtCuentas.Rows.Count > 0 ? dtCuentas.Rows[0]["c_rete"].ToString().Trim() : "13551505";
+                        sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,deb_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'" + ctartf + "','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','ReteFte:" + TextNomCliente.Text.Trim() + "'," + Retefte.ToString("F", CultureInfo.InvariantCulture) + ");";
                     }
                     else
                     {
-                        if (Retefte<0)
+                        if (Retefte < 0)
                         {
+                            string ctartf = dtCuentas.Rows.Count > 0 ? dtCuentas.Rows[0]["c_rete"].ToString().Trim() : "13551505";
                             double positive = (Retefte) * -1;
-                            sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,cre_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'13551505','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','ReteFte:" + TextNomCliente.Text.Trim() + "'," + positive.ToString("F", CultureInfo.InvariantCulture) + ");";
+                            sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,cre_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'" + ctartf + "','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','ReteFte:" + TextNomCliente.Text.Trim() + "'," + positive.ToString("F", CultureInfo.InvariantCulture) + ");";
                         }
                     }
 
 
                     if (Reteica > 0)
                     {
-                        sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,deb_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'135518','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','ReteIca" + TextNomCliente.Text.Trim() + "'," + Reteica.ToString("F", CultureInfo.InvariantCulture) + ");";
+                        string ctarica = dtCuentas.Rows.Count > 0 ? dtCuentas.Rows[0]["c_ica"].ToString().Trim() : "135518";
+                        sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,deb_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'" + ctarica + "','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','ReteIca" + TextNomCliente.Text.Trim() + "'," + Reteica.ToString("F", CultureInfo.InvariantCulture) + ");";
                     }
                     else
                     {
                         if (Reteica < 0)
                         {
+                            string ctarica = dtCuentas.Rows.Count > 0 ? dtCuentas.Rows[0]["c_ica"].ToString().Trim() : "135518";
                             double positive = (Reteica) * -1;
-                            sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,cre_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'135518','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','ReteIca" + TextNomCliente.Text.Trim() + "'," + positive.ToString("F", CultureInfo.InvariantCulture) + ");";
+                            sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,cre_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'" + ctarica + "','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','ReteIca" + TextNomCliente.Text.Trim() + "'," + positive.ToString("F", CultureInfo.InvariantCulture) + ");";
                         }
                     }
 
 
-
-                    if (ImpAsu > 0)
-                    {
-                        sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,deb_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'531520','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','ReteIca" + TextNomCliente.Text.Trim() + "'," + ImpAsu.ToString("F", CultureInfo.InvariantCulture) + ");";
-                    }
+                 
 
 
                     if (Reteiva > 0)
                     {
-                        sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,deb_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'135517','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','ReteIva:" + TextNomCliente.Text.Trim() + "'," + Reteiva.ToString("F", CultureInfo.InvariantCulture) + ");";
+                        string ctariva = dtCuentas.Rows.Count > 0 ? dtCuentas.Rows[0]["c_riva"].ToString().Trim() : "135517";
+                        sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,deb_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'" + ctariva + "','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','ReteIva:" + TextNomCliente.Text.Trim() + "'," + Reteiva.ToString("F", CultureInfo.InvariantCulture) + ");";
                     }
                     else
                     {
                         if (Reteiva < 0)
                         {
+                            string ctariva = dtCuentas.Rows.Count > 0 ? dtCuentas.Rows[0]["c_riva"].ToString().Trim() : "135517";
                             double positive = (Reteiva) * -1;
-                            sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,cre_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'135517','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','ReteIva:" + TextNomCliente.Text.Trim() + "'," + positive.ToString("F", CultureInfo.InvariantCulture) + ");";
+                            sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,cre_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'" + ctariva + "','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','ReteIva:" + TextNomCliente.Text.Trim() + "'," + positive.ToString("F", CultureInfo.InvariantCulture) + ");";
                         }
                     }
 
 
                     if (Mayorvlr > 0)
                     {
-                        sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,cre_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'429505','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','Mayor Vr Recibido:" + TextNomCliente.Text.Trim() + "'," + Mayorvlr.ToString("F", CultureInfo.InvariantCulture) + ");";
+                        string ctamayorvlr = dtCuentas.Rows.Count > 0 ? dtCuentas.Rows[0]["cta_ajup"].ToString().Trim() : "429505";
+                        sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,cre_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'" + ctamayorvlr + "','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','Mayor Vr Recibido:" + TextNomCliente.Text.Trim() + "'," + Mayorvlr.ToString("F", CultureInfo.InvariantCulture) + ");";
                     }
                     if (Menorvlr > 0)
                     {
-                        sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,deb_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'530535','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','Menor Vr Recibido:" + TextNomCliente.Text.Trim() + "'," + Menorvlr.ToString("F", CultureInfo.InvariantCulture) + ");";
+                        string ctamenorvlr = dtCuentas.Rows.Count > 0 ? dtCuentas.Rows[0]["cta_ajun"].ToString().Trim() : "530535";
+                        sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,deb_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'" + ctamenorvlr + "','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','Menor Vr Recibido:" + TextNomCliente.Text.Trim() + "'," + Menorvlr.ToString("F", CultureInfo.InvariantCulture) + ");";
                     }
                     if (Anticipo > 0)
                     {
+                        string ctaanticipo = dtCuentas.Rows.Count > 0 ? dtCuentas.Rows[0]["cta_ant"].ToString().Trim() : "280505";
                         sql = sql + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,cre_mov) values (@NewID,'" + codtrn + "',@iConsecutivo,'280505','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','Anticipo:" + TextNomCliente.Text.Trim() + "'," + Anticipo.ToString("F", CultureInfo.InvariantCulture) + ");";
                     }
 
@@ -965,40 +967,22 @@ namespace SiasoftAppExt
                                 string fec_venc = item1["fec_venc"].ToString().Trim().Substring(0, 10);
 
                                 DateTime d;
-                                if (DateTime.TryParse(fec_venc, out d) == false)
-                                {
-                                    fec_venc = DateTime.Now.ToString("dd/MM/yyy");
-                                }
+                                if (DateTime.TryParse(fec_venc, out d) == false) fec_venc = DateTime.Now.ToString("dd/MM/yyy");
 
                                 string fec_con = item1["fec_con"].ToString().Trim();
 
+                                string des_mov = "Pago / Abono:" + TextCodeCliente.Text.Trim() + " CONS: " + fec_con.Trim() + "";
 
-                                string des_mov = "Pago / Abono:" + TextCodeCliente.Text.Trim() + " CONS: "+fec_con.Trim() + "";
-
-
-                                if (!string.IsNullOrWhiteSpace(tarjeta))
-                                {
-                                    des_mov += " - "+ tarjeta;
-                                }
-                                if (!string.IsNullOrWhiteSpace(empresa))
-                                {
-                                    des_mov += " - " + empresa;
-                                }
-
-
-
+                                if (!string.IsNullOrWhiteSpace(tarjeta)) des_mov += " - " + tarjeta;
+                                if (!string.IsNullOrWhiteSpace(empresa)) des_mov += " - " + empresa;
 
                                 string documento = item1["documento"].ToString().Trim();
 
                                 string cod_banco = item1["cod_banco"].ToString().Trim();
 
-                                //if (cod_ban == "45" || cod_ban == "50")
-                                sqlban = sqlban + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,deb_mov,fec_venc,num_chq,cod_banc,cod_pag,fec_con) values (@NewID,'" + codtrn + "',@iConsecutivo,'" + _cta.Trim() + "','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','"+ des_mov + "'," + abono.ToString("F", CultureInfo.InvariantCulture) + ",'" + fec_venc + "','" + documento + "','" + cod_banco + "','" + cod_ban + "','" + fec_con + "');";
-                                //else
-                                //  sqlban = sqlban + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,deb_mov,fec_con,cod_pag) values (@NewID,'" + codtrn + "',@iConsecutivo,'" + _cta.Trim() + "','','" + codter.Trim() + "','Pago/Abono:" + TextNomCliente.Text.Trim() + "'," + abono.ToString("F", CultureInfo.InvariantCulture) + ",'" + fec_con + "','" + cod_ban + "');";
+                                sqlban = sqlban + @"INSERT INTO cocue_doc (idregcab,cod_trn,num_trn,cod_cta,cod_cco,cod_ter,des_mov,deb_mov,fec_venc,num_chq,cod_banc,cod_pag,fec_con) values (@NewID,'" + codtrn + "',@iConsecutivo,'" + _cta.Trim() + "','" + centro_cos_ven.Trim() + "','" + codter.Trim() + "','" + des_mov + "'," + abono.ToString("F", CultureInfo.InvariantCulture) + ",'" + fec_venc + "','" + documento + "','" + cod_banco + "','" + cod_ban + "','" + fec_con + "');";
 
-
-                           }
+                            }
                         }
                     }
                     //mierda
@@ -1012,13 +996,8 @@ namespace SiasoftAppExt
                 }
                 catch (SqlException ex)
                 {
-                    //for (int i = 0; i < ex.Errors.Count; i++)
-                    //{
-                    //    errorMessages.Append(" SQL-Index #" + i + "\n" + "Message: " + ex.Errors[i].Message + "\n" + "LineNumber: " + ex.Errors[i].LineNumber + "\n" + "Source: " + ex.Errors[i].Source + "\n" + "Procedure: " + ex.Errors[i].Procedure + "\n");
-                    //}
-                    //transaction.Rollback();
+
                     MessageBox.Show("error al guardar el documento contacte al administrador" + ex.Message);
-                    //MessageBox.Show(errorMessages.ToString());
                     return -1;
                 }
                 catch (Exception ex)
@@ -1069,7 +1048,7 @@ namespace SiasoftAppExt
                     //DataSet ds = new DataSet();
                     StringBuilder _sql = new StringBuilder();
                     ds.Clear();
-                    
+
                     _sql.Append("select cab.rc_prov,cab.cod_trn,cab.num_trn,cab.fec_trn,cue.cod_cco,cab.cod_ven,cab.detalle,cue.cod_cta,cue.cod_ter,rtrim(ter.nom_ter) as nom_ter,doc_cruc,deb_mov + cre_mov as valor,cab.idreg,cue.doc_cruc,");
                     _sql.Append("CASE cta.tip_apli WHEN 3 THEN 'CxC'  ELSE 'CxCAnt' END as tipo,cta.tip_apli,cab.idreg ");
                     _sql.Append(" from cocue_doc as cue  inner join cocab_doc as cab on cab.idreg = cue.idregcab and cab.cod_trn = '01 ' ");
@@ -1132,8 +1111,8 @@ namespace SiasoftAppExt
                     string numtrn = row["idreg"].ToString();
                     string codterc = row["cod_ter"].ToString();
                     int idreg = (int)row["idreg"];
-                    
-                    if (idreg > 0) ImprimeRC(idreg);                    
+
+                    if (idreg > 0) ImprimeRC(idreg);
                 }
             }
             catch (Exception ex)
@@ -1203,7 +1182,7 @@ namespace SiasoftAppExt
             }
         }
 
-        
+
         private async void ConsultaSaldoCartera()
         {
 
@@ -1233,7 +1212,7 @@ namespace SiasoftAppExt
             {
                 try
                 {
-                 
+
                     sumaTotal();
                     dataGrid.ItemsSource = ((DataTable)slowTask.Result).DefaultView;
                 }
@@ -1339,8 +1318,7 @@ namespace SiasoftAppExt
                 double.TryParse(dtCue.Compute("Sum(abono)", "tip_apli=1").ToString(), out abonoCxP);
                 double.TryParse(dtCue.Compute("Sum(abono)", "tip_apli=2").ToString(), out abonoCxPAnt);
                 Retefte = Convert.ToDouble(TextRetefte.Value);
-                Reteica = Convert.ToDouble(TextIca.Value);
-                ImpAsu = Convert.ToDouble(TextImpAsum.Value);
+                Reteica = Convert.ToDouble(TextIca.Value);                
                 Reteiva = Convert.ToDouble(TextReteIva.Value);
                 Mayorvlr = Convert.ToDouble(TextMayorVlr.Value);
                 Menorvlr = Convert.ToDouble(TextMenorVlr.Value);
@@ -1551,11 +1529,11 @@ namespace SiasoftAppExt
                     }
                     else
                     {
-                        string select = "select * from co_rprovanu where cod_ven='"+ CmbVen.SelectedValue.ToString().Trim() + "' and rc_prov='"+ valor + "'";
+                        string select = "select * from co_rprovanu where cod_ven='" + CmbVen.SelectedValue.ToString().Trim() + "' and rc_prov='" + valor + "'";
                         DataTable dt_anu = SiaWin.Func.SqlDT(select, "anulado", idemp);
-                        if (dt_anu.Rows.Count>0)
+                        if (dt_anu.Rows.Count > 0)
                         {
-                            MessageBox.Show("el recibo provisional "+valor.Trim()+" se encuentra anulado","alerta",MessageBoxButton.OK,MessageBoxImage.Exclamation);
+                            MessageBox.Show("el recibo provisional " + valor.Trim() + " se encuentra anulado", "alerta", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                             TextRProv.Text = "";
                             bandera = false;
                         }
@@ -1600,8 +1578,7 @@ namespace SiasoftAppExt
                     TextVlrRecibido.Value = 0;
                     TextRetefte.Value = 0;
                     TextIca.Value = 0;
-                    TextReteIva.Value = 0;
-                    TextImpAsum.Value = 0;
+                    TextReteIva.Value = 0;                    
                     TextReteIva.Value = 0;
                     TextMayorVlr.Value = 0;
                     TextMenorVlr.Value = 0;
@@ -1617,7 +1594,7 @@ namespace SiasoftAppExt
                     foreach (System.Data.DataRow cue in dtCue.Rows)
                     {
                         cue["abono"] = 0;
-                        
+
                     }
                     sumaAbonos();
                     return;
@@ -1633,12 +1610,11 @@ namespace SiasoftAppExt
                     TextRetefte.Value = Convert.ToDecimal(dt_cabeza.Rows[0]["rte_fte"]);
                     TextIca.Value = Convert.ToDecimal(dt_cabeza.Rows[0]["rte_ica"]);
                     TextReteIva.Value = Convert.ToDecimal(dt_cabeza.Rows[0]["rte_iva"]);                    
-                    TextImpAsum.Value = Convert.ToDecimal(dt_cabeza.Rows[0]["rte_tim"]);
                     TextMayorVlr.Value = Convert.ToDecimal(dt_cabeza.Rows[0]["mypag"]);
                     TextMenorVlr.Value = Convert.ToDecimal(dt_cabeza.Rows[0]["mnpag"]);
                     TextAnticipo.Value = Convert.ToDecimal(dt_cabeza.Rows[0]["antic"]);
 
-                    
+
 
                     DataTable dt_cuerpo = SiaWin.Func.SqlDT("select * from cocuercpv where rcprov='" + recibo + "' and cod_ven='" + vendedor + "';", "table", idemp);
                     //SiaWin.Browse(dt_cuerpo);
@@ -1656,7 +1632,7 @@ namespace SiasoftAppExt
                                 if (cod_trn_cue == cod_trn && num_trn_cue == num_trn)
                                 {
                                     cue["abono"] = item["vr_abono"].ToString();
-                                    
+
                                 }
                             }
                         }
@@ -1672,8 +1648,7 @@ namespace SiasoftAppExt
                     TextVlrRecibido.Value = 0;
                     TextRetefte.Value = 0;
                     TextIca.Value = 0;
-                    TextReteIva.Value = 0;
-                    TextImpAsum.Value = 0;
+                    TextReteIva.Value = 0;                    
                     TextMayorVlr.Value = 0;
                     TextMenorVlr.Value = 0;
                     TextAnticipo.Value = 0;
@@ -1687,7 +1662,7 @@ namespace SiasoftAppExt
                     TxtBDtoOt.Text = value.ToString("C");
                     foreach (System.Data.DataRow cue in dtCue.Rows)
                     {
-                        cue["abono"] = 0;                        
+                        cue["abono"] = 0;
                     }
                     sumaAbonos();
                 }
@@ -1741,7 +1716,7 @@ namespace SiasoftAppExt
                 if (e.Key == Key.F8)
                 {
                     GridNumericColumn Colum = ((SfDataGrid)sender).CurrentColumn as GridNumericColumn;
-                    if (Colum.MappingName == "abono" )
+                    if (Colum.MappingName == "abono")
                     {
                         System.Data.DataRow dr = dtCue.Rows[dataGrid.SelectedIndex];
                         dr.BeginEdit();
@@ -1779,7 +1754,7 @@ namespace SiasoftAppExt
 
                 GridNumericColumn Colum = ((SfDataGrid)sender).CurrentColumn as GridNumericColumn;
 
-                if (Colum.MappingName == "abono" )
+                if (Colum.MappingName == "abono")
                 {
                     System.Data.DataRow dr = dtCue.Rows[dataGrid.SelectedIndex];
                     decimal _saldo = Convert.ToDecimal(dr["saldo"].ToString());
@@ -1966,9 +1941,9 @@ namespace SiasoftAppExt
         {
             if (idemp <= 0) idemp = SiaWin._BusinessId;
 
-            
+
             LoadInfo();
-            
+
             if (string.IsNullOrEmpty(codter)) return;
             try
             {
@@ -2024,7 +1999,7 @@ namespace SiasoftAppExt
             TxtBDtoOt.Text = value.ToString("C");
             foreach (System.Data.DataRow cue in dtCue.Rows)
             {
-                cue["abono"] = 0;                
+                cue["abono"] = 0;
             }
             sumaAbonos();
 
@@ -2100,7 +2075,7 @@ namespace SiasoftAppExt
             }
         }
 
- 
+
 
 
 

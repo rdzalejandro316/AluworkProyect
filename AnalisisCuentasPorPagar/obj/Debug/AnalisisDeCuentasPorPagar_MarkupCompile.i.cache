@@ -4,7 +4,7 @@
 library
 C#
 .cs
-C:\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\project\AnalisisCuentasPorPagar\obj\Debug\
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\AnalisisCuentasPorPagar\obj\Debug\
 AnalisisDeCuentasPorPagar
 none
 false
@@ -12,9 +12,9 @@ DEBUG;TRACE
 
 4-1096445496
 
-111285350201
-341132476472
+8-1927058059
+34-707317284
 AnalisisDeCuentasPorPagar.xaml;AnalisisDeCuentasPorPagarDetalle.xaml;BrowMini.xaml;ReporteCxP.xaml;
 
-False
+True
 

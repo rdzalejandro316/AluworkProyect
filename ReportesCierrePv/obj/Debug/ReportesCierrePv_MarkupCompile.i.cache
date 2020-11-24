@@ -4,7 +4,7 @@
 library
 C#
 .cs
-C:\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\project\ReportesCierrePv\obj\Debug\
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\ReportesCierrePv\obj\Debug\
 ReportesCierrePv
 none
 false
@@ -12,9 +12,9 @@ DEBUG;TRACE
 
 4-386176009
 
-13-457802983
-271951264200
+10624756053
+271803846384
 botrcprovi.xaml;frasclien.xaml;Frasprv.xaml;ReportesCierrePv.xaml;
 
-False
+True
 

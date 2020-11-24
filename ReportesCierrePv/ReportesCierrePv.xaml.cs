@@ -174,55 +174,28 @@ namespace SiasoftAppExt
                 ReportViewer viewer = new ReportViewer();
 
                 viewer.ServerReport.ReportPath = this.ReportPath;
-                viewer.ServerReport.ReportServerUrl = new Uri("http://192.168.0.12:7333/ReportserverGS");
+                viewer.ServerReport.ReportServerUrl = new Uri(DtServer.Rows[0]["ServerIP"].ToString().Trim());
 
-                //if (reporteId == 1) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePVentas/cierrepv1";
-                //if (reporteId == 2) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePVentas/cierrepv_1"
-                //if (reporteId == 8) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePVentas/cierrepv2";
-                //if (reporteId == 4) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePVentas/cierrepv4";
-                //if (reporteId == 5) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePVentas/cierrepv3";
-                //if (reporteId == 6) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePVentas/cierrepv5";
 
 
                 //ventas
-                if (reporteId == 1) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePVentas/GS_Cierre_Ventas";
+                if (reporteId == 1) viewer.ServerReport.ReportPath = @"/Empresas/Aluwork/Otros/FrmCierrePVentas/GS_Cierre_Ventas";
 
                 //Compras
-                if (reporteId == 2) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePVentas/GS_Cierre_Compras";
+                if (reporteId == 2) viewer.ServerReport.ReportPath = @"/Empresas/Aluwork/Otros/FrmCierrePVentas/GS_Cierre_Compras";
 
                 //notas credito contado
-                if (reporteId == 3) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePVentas/GS_Cierre_notas_cre_cont";
-
-                //ventas con tarjeta
-                if (reporteId == 4) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePVentas/GS_Cierre_ventas_tarjeta";
-
-                //Reca credicon
-                if (reporteId == 5) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePVentas/GS_Cierre_reibos_credicontado";
-
-                //Reca credicon pendiente
-                if (reporteId == 6) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePVentas/GS_Cierre_reibos_cred_pendie";
+                if (reporteId == 3) viewer.ServerReport.ReportPath = @"/Empresas/Aluwork/Otros/FrmCierrePVentas/GS_Cierre_reimpresionb";
 
                 //Recibos de caja
-                if (reporteId == 7) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePVentas/GS_Cierre_reibos_caja";
-
-                //Entr/salidas traslados
-                if (reporteId == 8) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePVentas/GS_Cierre_traslados";
-
-
-                //interempresa
-                if (reporteId == 9) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePVentas/GS_Cierre_traslados_interempresa";
+                if (reporteId == 7) viewer.ServerReport.ReportPath = @"/Empresas/Aluwork/Otros/FrmCierrePVentas/GS_Cierre_reibos_caja";
 
                 //Documentos Diarios
-                if (reporteId == 10) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePVentas/GS_Cierre_Documentos_diarios";
+                if (reporteId == 10) viewer.ServerReport.ReportPath = @"/Empresas/Aluwork/Otros/FrmCierrePVentas/GS_Cierre_Documentos_diarios";
 
                 //Ventas Resumidas                
-                if (reporteId == 11) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePventas/GS_CIERRE021";
+                if (reporteId == 11) viewer.ServerReport.ReportPath = @"/Empresas/Aluwork/Otros/FrmCierrePventas/GS_CIERRE021";
 
-                //fact domicilio pendtes           
-                if (reporteId == 12) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePventas/CuentasPorPagarDetalladas";
-
-                //fact domicilio pendtes           
-                if (reporteId == 13) viewer.ServerReport.ReportPath = @"/Otros/FrmCierrePventas/GS_Efectivo";
 
 
 
@@ -248,7 +221,7 @@ namespace SiasoftAppExt
                         parameters.Add(new ReportParameter("codemp", codemp));
                     }
 
-                    
+
                     if (reporteId == 12)
                     {
                         parameters.Add(new ReportParameter("codemp", codemp));
@@ -260,7 +233,7 @@ namespace SiasoftAppExt
                         parameters.Add(new ReportParameter("Cco", ""));
                         string ven = "A1";
                         if (codBod == "008") ven = "A2";
-                        parameters.Add(new ReportParameter("Ven",ven));
+                        parameters.Add(new ReportParameter("Ven", ven));
                         parameters.Add(new ReportParameter("Resumen", "1"));
                         parameters.Add(new ReportParameter("TipoApli", "1"));
                         parameters.Add(new ReportParameter("ExcluirInterEmpresa", "1"));
@@ -644,52 +617,66 @@ namespace SiasoftAppExt
         #endregion
         private void Limpiartablas_Click(object sender, RoutedEventArgs e)
         {
-            using (SqlConnection connection = new SqlConnection(cnemp))
+            try
             {
-                connection.Open();
-                StringBuilder errorMessages = new StringBuilder();
-                SqlCommand command = connection.CreateCommand();
-                SqlTransaction transaction;
-                // Start a local transaction.
-                transaction = connection.BeginTransaction("Transaction");
-                command.Connection = connection;
-                command.Transaction = transaction;
-                try
+                using (SqlConnection connection = new SqlConnection(cnemp))
                 {
-                    string sqlcab = @"delete from pvrcprovi delete from pvfrasprv delete from pvfrasclien"; ;
-                    command.CommandText = sqlcab;
-                    command.ExecuteScalar();
-                    transaction.Commit();
-                    connection.Close();
-                    System.Windows.MessageBox.Show("Documentos diarios borrados", "Alerta", MessageBoxButton.OK, MessageBoxImage.Stop);
-                }
-                catch (SqlException ex)
-                {
-                    for (int i = 0; i < ex.Errors.Count; i++)
+                    connection.Open();
+                    StringBuilder errorMessages = new StringBuilder();
+                    SqlCommand command = connection.CreateCommand();
+                    SqlTransaction transaction;
+                    // Start a local transaction.
+                    transaction = connection.BeginTransaction("Transaction");
+                    command.Connection = connection;
+                    command.Transaction = transaction;
+                    try
                     {
-                        errorMessages.Append(" SQL-Index #" + i + "\n" + "Message: " + ex.Errors[i].Message + "\n" + "LineNumber: " + ex.Errors[i].LineNumber + "\n" + "Source: " + ex.Errors[i].Source + "\n" + "Procedure: " + ex.Errors[i].Procedure + "\n");
+                        string sqlcab = @"delete from pvrcprovi delete from pvfrasprv delete from pvfrasclien"; ;
+                        command.CommandText = sqlcab;
+                        command.ExecuteScalar();
+                        transaction.Commit();
+                        connection.Close();
+                        System.Windows.MessageBox.Show("Documentos diarios borrados", "Alerta", MessageBoxButton.OK, MessageBoxImage.Stop);
                     }
-                    transaction.Rollback();
-                    System.Windows.MessageBox.Show(errorMessages.ToString());
+                    catch (SqlException ex)
+                    {
+                        for (int i = 0; i < ex.Errors.Count; i++)
+                        {
+                            errorMessages.Append(" SQL-Index #" + i + "\n" + "Message: " + ex.Errors[i].Message + "\n" + "LineNumber: " + ex.Errors[i].LineNumber + "\n" + "Source: " + ex.Errors[i].Source + "\n" + "Procedure: " + ex.Errors[i].Procedure + "\n");
+                        }
+                        transaction.Rollback();
+                        System.Windows.MessageBox.Show(errorMessages.ToString());
+
+                    }
+                    catch (Exception ex)
+                    {
+                        errorMessages.Append("c Error1:#" + ex.Message.ToString());
+                        transaction.Rollback();
+                        System.Windows.MessageBox.Show(errorMessages.ToString());
+                    }
 
                 }
-                catch (Exception ex)
-                {
-                    errorMessages.Append("c Error1:#" + ex.Message.ToString());
-                    transaction.Rollback();
-                    System.Windows.MessageBox.Show(errorMessages.ToString());
-                }
-
             }
-
+            catch (Exception w)
+            {
+                System.Windows.MessageBox.Show("err:" + w);
+            }
         }
 
         private void docvarios_Click(object sender, RoutedEventArgs e)
         {
-            Botrcprovi botrcprovi = new Botrcprovi();
-            botrcprovi.ShowInTaskbar = false;
-            botrcprovi.Owner = System.Windows.Application.Current.MainWindow;
-            botrcprovi.ShowDialog();
+
+            try
+            {
+                Botrcprovi botrcprovi = new Botrcprovi();
+                botrcprovi.ShowInTaskbar = false;
+                botrcprovi.Owner = System.Windows.Application.Current.MainWindow;
+                botrcprovi.ShowDialog();
+            }
+            catch (Exception w)
+            {
+                System.Windows.MessageBox.Show("xd:" + w);
+            }            
         }
 
         private void radiogeneral_click(object sender, RoutedEventArgs e)
@@ -723,23 +710,24 @@ namespace SiasoftAppExt
                 if (check.IsChecked == true) flag = true;
 
 
-
                 if (check.IsChecked == true)
                 {
+                    fechaCorte = this.tbxFechaEmision1.Text;
+
                     if (check.Name == "sexto_")
                     {
                         DataTable consultando2 = new DataTable();
                         string sql2 = "select top 1 'RECIBOS PROVISIONALES' AS dato_ from pvrcprovi union select 'FACTURAS CLIENTES' AS dato_ from pvfrasclien  union select 'FACTURAS PROVEEDORES' AS dato_ from pvfrasprv order by dato_";
                         consultando2 = SiaWin.DB.SqlDT(sql2, "temp", idEmp);
                         if (consultando2.Rows.Count > 0)
-                            this.hagoreporte(Convert.ToInt32(check.Tag), check.Content.ToString().Trim());
+                            loaddocumento(Convert.ToInt32(check.Tag), check.Content.ToString().Trim());
                         else
                             System.Windows.MessageBox.Show("NO ha capturado informacion de Recibos");
                     }
                     else
                     {
                         int idrep = Convert.ToInt32(check.Tag);
-                        this.hagoreporte(idrep, check.Content.ToString().Trim());
+                        loaddocumento(idrep, check.Content.ToString().Trim());
                     }
                 }
             }
@@ -748,71 +736,6 @@ namespace SiasoftAppExt
             if (flag == false) System.Windows.MessageBox.Show("debe de seleccionar algun check para generar el reporte", "Alerta", MessageBoxButton.OK, MessageBoxImage.Stop);
 
 
-            #region codigo de luis
-
-            //if (primer.IsChecked == false)
-            //{
-            //    primer.IsChecked = true;
-            //    this.ReporteId = 1;
-            //    this.hagoreporte(this.ReporteId);
-
-            //}
-            //else
-            //{
-            //    if (segund.IsChecked == false)
-            //    {
-            //        segund.IsChecked = true;
-            //        ReporteId = 11;
-            //        hagoreporte(this.ReporteId);
-            //    }
-            //    else
-            //    {
-            //        if (tercer.IsChecked == false)
-            //        {
-            //            tercer.IsChecked = true;
-            //            ReporteId = 2;
-            //            hagoreporte(this.ReporteId);
-            //        }
-            //        else
-            //        {
-            //            if (quinto.IsChecked == false)
-            //            {
-            //                this.quinto.IsChecked = true;
-            //                this.ReporteId = 4;
-            //                this.hagoreporte(this.ReporteId);
-            //            }
-            //            else
-            //            {
-            //                if (cuarto.IsChecked == false)
-            //                {
-            //                    this.cuarto.IsChecked = true;
-            //                    this.ReporteId = 3;
-            //                    this.hagoreporte(this.ReporteId);
-            //                }
-            //                else
-            //                {
-            //                    if (sexto_.IsChecked == false)
-            //                    {
-            //                        DataTable consultando2 = new DataTable();
-            //                        string sql2 = "select top 1 'RECIBOS PROVISIONALES' AS dato_ from pvrcprovi union select 'FACTURAS CLIENTES' AS dato_ from pvfrasclien  union select 'FACTURAS PROVEEDORES' AS dato_ from pvfrasprv order by dato_";
-            //                        consultando2 = SiaWin.DB.SqlDT(sql2, "temp", idEmp);
-            //                        if (consultando2.Rows.Count > 0)
-            //                        {
-            //                            this.sexto_.IsChecked = true;
-            //                            this.ReporteId = 5;
-            //                            this.hagoreporte(this.ReporteId);
-            //                        }
-            //                        else
-            //                        {
-            //                            System.Windows.MessageBox.Show("NO ha capturado informacion de Recibos");
-            //                        }
-            //                    }
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
-            #endregion
         }
 
         private void verificacion()
@@ -826,32 +749,37 @@ namespace SiasoftAppExt
                 condatos = false;
         }
 
-        public void hagoreporte(int reporteId, string name)
-        {
-
-            fechaCorte = this.tbxFechaEmision1.Text;
-            //this.viewer.Clear();
-            //this.loaddocumento(this.ReporteId);
-            this.loaddocumento(reporteId, name);
-
-        }
 
         private void frasclien_Click(object sender, RoutedEventArgs e)
         {
-            Frasclien ventana = new Frasclien();
-            ventana.ShowInTaskbar = false;
-            ventana.Owner = System.Windows.Application.Current.MainWindow;
-            ventana.ShowDialog();
-
+            try
+            {
+                Frasclien ventana = new Frasclien();
+                ventana.ShowInTaskbar = false;
+                ventana.Owner = System.Windows.Application.Current.MainWindow;
+                ventana.ShowDialog();
+            }
+            catch (Exception w)
+            {
+                System.Windows.MessageBox.Show("errr:"+w);
+            }            
         }
 
 
         private void frasprv_Click(object sender, RoutedEventArgs e)
         {
-            Frasprv ventana = new Frasprv();
-            ventana.ShowInTaskbar = false;
-            ventana.Owner = System.Windows.Application.Current.MainWindow;
-            ventana.ShowDialog();
+            try
+            {
+                Frasprv ventana = new Frasprv();
+                ventana.ShowInTaskbar = false;
+                ventana.Owner = System.Windows.Application.Current.MainWindow;
+                ventana.ShowDialog();
+            }
+            catch (Exception w)
+            {
+                System.Windows.MessageBox.Show("err:"+w);
+            }
+            
         }
 
 

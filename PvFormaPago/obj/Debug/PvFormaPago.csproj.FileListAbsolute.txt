@@ -1,0 +1,14 @@
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvFormaPago\obj\Debug\PvFormaPago.csprojAssemblyReference.cache
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvFormaPago\obj\Debug\PvFormaPago.g.cs
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvFormaPago\obj\Debug\PvFormaPago_MarkupCompile.cache
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvFormaPago\obj\Debug\PvFormaPago_MarkupCompile.lref
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvFormaPago\obj\Debug\PvFormaPago.baml
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvFormaPago\obj\Debug\PvFormaPago.g.resources
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvFormaPago\obj\Debug\PvFormaPago.Properties.Resources.resources
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvFormaPago\obj\Debug\PvFormaPago.csproj.GenerateResource.cache
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvFormaPago\obj\Debug\PvFormaPago.csproj.CoreCompileInputs.cache
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvFormaPago\obj\Debug\PvFormaPago.csproj.CopyComplete
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvFormaPago\obj\Debug\PvFormaPago.dll
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvFormaPago\obj\Debug\PvFormaPago.pdb
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\PvFormaPago.dll
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\PvFormaPago.pdb

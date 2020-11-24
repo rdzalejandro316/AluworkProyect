@@ -55,7 +55,7 @@ namespace SiasoftAppExt
             {
                 LoadConfig();
                 cartera();
-                Recibos();
+                //Recibos();
                 if (!string.IsNullOrEmpty(id_pedido)) Pedido();                
             }
             catch (Exception w)
@@ -104,7 +104,9 @@ namespace SiasoftAppExt
                 TabItemExt tabItemExt1 = new TabItemExt();
                 tabItemExt1.Header = "Reporte Cartera";                
 
-                string path = "/PuntoDeVenta/Cartera_punto_pv";
+                string path = "/Empresas/Aluwork/PuntoDeVenta/Cartera_punto_pv";
+                //Inventarios / CruceTrasladosEntreBodegas
+
                 parameters.Add(new ReportParameter("Ter", tercero));
                 parameters.Add(new ReportParameter("Cta", "13050505,280505"));
                 parameters.Add(new ReportParameter("TipoApli", "-1"));
@@ -174,7 +176,7 @@ namespace SiasoftAppExt
                 TabItemExt tabItemExt1 = new TabItemExt();
                 tabItemExt1.Header = "Reporte Recibos";
 
-                string path = "/PuntoDeVenta/RecibosProvisionales_punto_pv";
+                string path = "/Empresas/Aluwork/PuntoDeVenta/RecibosProvisionales_punto_pv";
                 parameters.Add(new ReportParameter("cod_ter", tercero));
                 parameters.Add(new ReportParameter("fecha_ini", DateTime.Today.AddMonths(-1).ToString("dd/MM/yyyy")));
                 parameters.Add(new ReportParameter("fecha_fin", DateTime.Now.ToString("dd/MM/yyyy")));

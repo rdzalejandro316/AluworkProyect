@@ -102,36 +102,16 @@
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
-
-                        <!--<CheckBox Grid.Row="0" Grid.Column="0" Name="primer" Tag="1" Content="Ventas Contado"  Style="{StaticResource check}"/>
-                        <CheckBox Grid.Row="1" Grid.Column="0" Name="segund" Tag="11" Content="Ventas Credito" Style="{StaticResource check}" />
-                        <CheckBox Grid.Row="0" Grid.Column="1" Name="tercer" Tag="2" Content="Entr/salidas traslados" Style="{StaticResource check}"/>
-                        <CheckBox Grid.Row="1" Grid.Column="1" Name="quinto" Tag="4" Content="Entr/Salidas Automaticas" Style="{StaticResource check}"/>
-                        <CheckBox Grid.Row="0" Grid.Column="2" Name="cuarto" Tag="3" Content="Ventas con Tarjeta" Style="{StaticResource check}"/>
-                        <CheckBox Grid.Row="1" Grid.Column="2" Name="sexto_" Tag="5" Content="Documentos Diarios" Style="{StaticResource check}"/>-->
-
-
+                        
                         <CheckBox Grid.Row="0" Grid.Column="0" Name="primer" Tag="1" Content="Ventas Contado"  Style="{StaticResource check}"/>
-                        <!--<CheckBox Grid.Row="1" Grid.Column="0" Name="segund" Tag="2" Content="Ventas Credito" Style="{StaticResource check}" />-->
                         <CheckBox Grid.Row="1" Grid.Column="0" Tag="2" Content="Compras" Style="{StaticResource check}"/>
                         <CheckBox Grid.Row="2" Grid.Column="0" Name="tercer" Tag="3" Content="Reimpresiones" Style="{StaticResource check}" />
-
-                        <CheckBox Grid.Row="0" Grid.Column="1"  Tag="4" Content="Ventas con Tarjeta" Style="{StaticResource check}"/>
-                        <CheckBox Grid.Row="1" Grid.Column="1" Tag="5" Content="Recaudo credicontado" Style="{StaticResource check}"/>
-                        <CheckBox Grid.Row="2" Grid.Column="1" Tag="6" Content="Rec credicon pendiente" Style="{StaticResource check}"/>
-
-                        <CheckBox Grid.Row="0" Grid.Column="2" Tag="7" Content="Recibos de caja" Style="{StaticResource check}"/>
-                        <CheckBox Grid.Row="1" Grid.Column="2"  Tag="8" Content="Entr/salidas traslados" Style="{StaticResource check}"/>
-                        <CheckBox Grid.Row="2" Grid.Column="2" Tag="9" Content="Entr/Salidas Automaticas" Style="{StaticResource check}"/>
-
-                        <CheckBox Grid.Row="0" Grid.Column="3" Name="sexto_" Tag="10" Content="Documentos Diarios" Style="{StaticResource check}"/>
-
-                        <CheckBox Grid.Row="1" Grid.Column="3" Tag="11" Content="Ventas Resumidas" Style="{StaticResource check}"/>
-
-                        <CheckBox Grid.Row="2" Grid.Column="3" Tag="12" Content="fact domicilio pendtes" Style="{StaticResource check}"/>
-                                                
                         <CheckBox Grid.Row="3" Grid.Column="0" Tag="13" Content="Efectivo" Style="{StaticResource check}"/>
 
+                        <CheckBox Grid.Row="0" Grid.Column="1" Tag="7" Content="Recibos de caja" Style="{StaticResource check}"/>
+                        <CheckBox Grid.Row="1" Grid.Column="1" Name="sexto_" Tag="10" Content="Documentos Diarios" Style="{StaticResource check}"/>
+                        <CheckBox Grid.Row="2" Grid.Column="1" Tag="11" Content="Ventas Resumidas" Style="{StaticResource check}"/>
+                                                                       
                     </Grid>
 
 

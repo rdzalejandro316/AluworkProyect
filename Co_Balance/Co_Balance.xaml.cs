@@ -719,14 +719,14 @@ namespace SiasoftAppExt
                 paramCtaNivFin.Name = "ctanivfin";
                 parameters.Add(paramCtaNivFin);
 
-                //SiaWin.Reportes(parameters, @"/Contabilidad/Balances/BalanceGeneral", TituloReporte: "Balance General", Modal: true, idemp: idemp, ZoomPercent:50);
+                SiaWin.Reportes(parameters, @"/Empresas/Aluwork/Contabilidad/Balances/BalanceGeneral", TituloReporte: "Balance General", Modal: true, idemp: idemp, ZoomPercent:50);
 
             
-                ReporteBalance rp = new ReporteBalance(parameters, @"/Empresas/Noga/Contabilidad/Balances/BalanceGeneral");
-                rp.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                rp.Owner = SiaWin;
-                rp.Show();
-                rp = null;
+                //ReporteBalance rp = new ReporteBalance(parameters, @"/Empresas/Aluwork/Contabilidad/Balances/BalanceGeneral");
+                //rp.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                //rp.Owner = SiaWin;
+                //rp.Show();
+                //rp = null;
             }
             catch (Exception ex)
             {
@@ -755,7 +755,7 @@ namespace SiasoftAppExt
                 string pass = DtServer.Rows[0]["userserverpassword"].ToString().Trim();
 
                 viewer.Reset();
-                string xnameReporte = @"/Empresas/Noga/Contabilidad/Balances/AuxiliarCuenta";
+                string xnameReporte = @"/Empresas/Aluwork/Contabilidad/Balances/AuxiliarCuenta";
                 viewer.ServerReport.ReportPath = xnameReporte;
                 viewer.ServerReport.ReportServerUrl = new Uri(server);
                 viewer.SetDisplayMode(DisplayMode.Normal);
@@ -779,7 +779,7 @@ namespace SiasoftAppExt
                 // auxiliar cuenta tercero
 
                 viewer1.Reset();
-                string xnameReporte1 = @"/Empresas/Noga/Contabilidad/Balances/AuxiliarTerceroCuenta";
+                string xnameReporte1 = @"/Empresas/Aluwork/Contabilidad/Balances/AuxiliarTerceroCuenta";
                 viewer1.ServerReport.ReportPath = xnameReporte1;
                 viewer1.ServerReport.ReportServerUrl = new Uri(server);
                 viewer1.SetDisplayMode(DisplayMode.Normal);
@@ -800,7 +800,7 @@ namespace SiasoftAppExt
 
 
                 viewer2.Reset();
-                string xnameReporte904 = @"/Empresas/Noga/Contabilidad/Balances/ImpuestosAuxiliarCuenta904";
+                string xnameReporte904 = @"/Empresas/Aluwork/Contabilidad/Balances/ImpuestosAuxiliarCuenta904";
                 viewer2.ServerReport.ReportPath = xnameReporte904;
                 viewer2.ServerReport.ReportServerUrl = new Uri(server);
                 viewer2.SetDisplayMode(DisplayMode.Normal);
