@@ -159,3 +159,17 @@ C:\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\projec
 C:\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\project\PvReimprimeFacturaNC\obj\Debug\PvReimprimeFacturaNC.pdb
 C:\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\PvReimprimeFacturaNC.dll
 C:\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\PvReimprimeFacturaNC.pdb
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvReimprimeFacturaNC\obj\Debug\PvReimprimeFacturaNC.csprojAssemblyReference.cache
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvReimprimeFacturaNC\obj\Debug\PvReimprimeFacturaNC.g.cs
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvReimprimeFacturaNC\obj\Debug\PvReimprimeFacturaNC_MarkupCompile.cache
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvReimprimeFacturaNC\obj\Debug\PvReimprimeFacturaNC_MarkupCompile.lref
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvReimprimeFacturaNC\obj\Debug\PvReimprimeFacturaNC.baml
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvReimprimeFacturaNC\obj\Debug\PvReimprimeFacturaNC.g.resources
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvReimprimeFacturaNC\obj\Debug\PvReimprimeFacturaNC.Properties.Resources.resources
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvReimprimeFacturaNC\obj\Debug\PvReimprimeFacturaNC.csproj.GenerateResource.cache
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvReimprimeFacturaNC\obj\Debug\PvReimprimeFacturaNC.csproj.CoreCompileInputs.cache
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvReimprimeFacturaNC\obj\Debug\PvReimprimeFacturaNC.csproj.CopyComplete
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvReimprimeFacturaNC\obj\Debug\PvReimprimeFacturaNC.dll
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\PvReimprimeFacturaNC\obj\Debug\PvReimprimeFacturaNC.pdb
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\PvReimprimeFacturaNC.dll
+D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\PvReimprimeFacturaNC.pdb

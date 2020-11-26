@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 
 namespace SiasoftAppExt
-{    
+{
     public partial class PvReimprimeFacturaNC : Window
     {
         //Sia.PublicarPnt(9306,"PvReimprimeFacturaNC");
@@ -32,6 +32,8 @@ namespace SiasoftAppExt
         public string numAnu = string.Empty;
         public double totalFactura = 0;
         public bool loaded = false;
+        public bool typeFormatRemision = false;
+
         public PvReimprimeFacturaNC()
         {
             InitializeComponent();
@@ -47,7 +49,7 @@ namespace SiasoftAppExt
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadInfo();
-            
+
         }
         public void LoadInfo()
         {
@@ -152,16 +154,16 @@ namespace SiasoftAppExt
 
             }
         }
-   
+
         private DataSet LoadData(string FI, string FF, string bodega, string cod_trn, string numtrn)
         {
             try
             {
-                string query = " declare @Bod varchar(max) = '"+bodega+"'; ";
+                string query = " declare @Bod varchar(max) = '" + bodega + "'; ";
                 query += "declare @tmpbod table (cod_bod char(3) INDEX ix1 NONCLUSTERED); ";
                 query += "if @Bod='' BEGIN INSERT INTO @tmpbod SELECT COD_bod FROM inmae_bod  END; ";
                 query += "if @Bod<>'' BEGIN insert into @tmpbod SELECT value FROM STRING_SPLIT(@Bod,',')  END;  ";
-                
+
                 query += " select cab.idreg,cab.cod_trn,cab.num_trn,cab.fec_trn,cab.cod_cli,ter.cod_ven,vend.nom_mer,rtrim(ter.nom_ter) as nom_cli,cue.cod_bod,sum(cue.cantidad) as cantidad,sum(isnull(cue.subtotal+cue.val_iva-cue.val_des-cue.val_ret-cue.val_ica-cue.val_riva,0)) as tot_tot,max(trn.tip_trn) as tip_trn,cab.fa_cufe,cab.fa_fecharesp,cab.fa_codigo,cab.fa_msg,cab.fa_docelect,cab.trn_anu,cab.num_anu,0 as imprimir from incue_doc as cue ";
                 query += " inner join incab_doc as cab on cab.idreg = cue.idregcab and cab.cod_trn='" + cod_trn + "'  inner join inmae_bod as bod on bod.cod_bod = cue.cod_bod ";
                 query += " inner join comae_ter as ter on cab.cod_cli = ter.cod_ter ";
@@ -171,7 +173,7 @@ namespace SiasoftAppExt
                 if (numtrn.Trim() != "") query += " where cab.num_trn like '%" + numtrn.Trim() + "%' ";
                 query += " and cue.cod_bod in (select cod_bod from @tmpbod)" + " ";
                 query += " group by cab.idreg,cab.cod_trn,cab.num_trn,cab.fec_trn,cab.cod_cli,ter.nom_ter,cue.cod_bod,fa_cufe,cab.fa_fecharesp,cab.fa_codigo,cab.fa_msg ,fa_docelect,cab.trn_anu,cab.num_anu,ter.cod_ven,vend.nom_mer order by cab.cod_trn,cab.fec_trn";
-                
+
                 DataSet ds = new DataSet();
                 if (string.IsNullOrEmpty(cod_trn)) return null;
                 dt.Clear();
@@ -187,58 +189,14 @@ namespace SiasoftAppExt
             }
         }
 
-        private void ImprimeLoteFacturas(DataTable dtFactuas)
-        {
-            if(dtFactuas.Rows.Count<=0)
-            {
-                MessageBox.Show("No hay facturas para imprimir...");
-                    return;
-            }
-            try
-            {
-                    bool pdffile = false;
-                    if(GeneraPdfFile.IsChecked==true) pdffile = true;
-                SiaWin.Func.ImprimeLoteFacturas(dtFactuas, codbod, codpvta, false, idEmp, pdffile);
 
-
-
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "ImprimeLoteFacturas");
-            }
-
-        }
         private void ReImprimir_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 // valida si hay mas de un documento seleccionado , activado con f8 imprimir=1
-                
 
-                int _TipoDoc = CmbTipoDoc.SelectedIndex;
-                if (_TipoDoc == 1 || _TipoDoc == 2 || _TipoDoc == 3)
-                {
-                    string exp = "imprimir=1";
-                    //Sia.Browse(dt.Select(exp).CopyToDataTable());
-                    DataRow[] dataRow = dt.Select(exp);
-                    if (dataRow != null && dataRow.Length > 0)
-                    {
-                        DataTable rowsTable = dt.Select(exp).CopyToDataTable();
-                        if (SiaWin._UserId == 120)
-                        {
-                            SiaWin.Browse(rowsTable);
-                        }
 
-                        if (rowsTable.Rows.Count > 0) // imprime por lotes , solo imprime
-                        {
-                            ImprimeLoteFacturas(rowsTable);
-                            return;
-                        }
-
-                    }
-                }
-               
                 if (dataGridSF.SelectedIndex >= 0)
                 {
                     MessageBoxResult result = MessageBox.Show("USTED DESEA REIMPRIMIR EL DOCUMENTO SELECCIONADO...?", "Siasoft?", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -254,7 +212,7 @@ namespace SiasoftAppExt
                     }
                     string numtrn = row["idreg"].ToString();
                     string cod_trn = row["cod_trn"].ToString().Trim();
-                    codtrn = cod_trn;                   
+                    codtrn = cod_trn;
                     idrowcab = Convert.ToInt32(numtrn);
                     cufe = row["fa_cufe"].ToString();
                     codigo = row["fa_codigo"].ToString();
@@ -263,37 +221,38 @@ namespace SiasoftAppExt
 
                     string numero_tran = row["num_trn"].ToString();
 
-                    string tipo  = ((ComboBoxItem)CmbTipoDoc.SelectedItem).Content.ToString().Trim(); 
+                    string tipo = ((ComboBoxItem)CmbTipoDoc.SelectedItem).Content.ToString().Trim();
 
                     SiaWin.seguridad.Auditor(
-                        0, 
-                        SiaWin._ProyectId, 
-                        SiaWin._UserId, 
-                        SiaWin._UserGroup, 
-                        SiaWin._BusinessId, 
-                        moduloid, 
-                        -1, 
+                        0,
+                        SiaWin._ProyectId,
+                        SiaWin._UserId,
+                        SiaWin._UserGroup,
+                        SiaWin._BusinessId,
+                        moduloid,
+                        -1,
                         -9,
-                         "PUNTO DE VENTA - "+codpvta+" REIMPRIMIO DOCUMENTO "+ tipo.ToUpper()+" - "+ numero_tran, 
+                         "PUNTO DE VENTA - " + codpvta + " REIMPRIMIO DOCUMENTO " + tipo.ToUpper() + " - " + numero_tran,
                         "REIMPRESION"
                         );
 
                     totalFactura = row["tot_tot"] == null ? 0 : Convert.ToDouble(row["tot_tot"].ToString());
 
-                    
+                    typeFormatRemision = CBtype.SelectedIndex == 0 ? false : true;
+
                     this.Close();
                 }
                 else
                 {
                     MessageBox.Show("seleccione el documento que quire imprimir");
                 }
-                                
+
             }
             catch (Exception w)
             {
-                MessageBox.Show("error en la pantalla externa de imprimir:"+w);
+                MessageBox.Show("error en la pantalla externa de imprimir:" + w);
             }
-            
+
         }
 
         private void dataGridSF_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -324,31 +283,41 @@ namespace SiasoftAppExt
 
         private void CmbTipoDoc_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (loaded == false) return;
-            TextTotalEntradas.Text = "0";
-            GeneraPdfFile.IsChecked = false;
-            dt.Clear();
-            dataGridSF.ItemsSource = null;
-            int _TipoDoc = CmbTipoDoc.SelectedIndex;
-            if (_TipoDoc== 1 || _TipoDoc == 2 || _TipoDoc == 3)
+
+            try
             {
-                BtnDownloadxml.Visibility = Visibility.Visible;
-                BtnEstadoDian.Visibility = Visibility.Visible;
-                GeneraPdfFile.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                BtnDownloadxml.Visibility = Visibility.Hidden;
-                BtnEstadoDian.Visibility = Visibility.Hidden;
-                GeneraPdfFile.Visibility = Visibility.Hidden;
+                //if (CmbTipoDoc.SelectedIndex == 1 || CmbTipoDoc.SelectedIndex == 4 || CmbTipoDoc.SelectedIndex == 5)
+                //    CBtype.IsEnabled = true;
+                //else                
+                //    CBtype.IsEnabled = false;                                    
 
             }
+            catch (Exception w)
+            {
+                MessageBox.Show("error al seleccionar:" + w);
+            }
+            //if (loaded == false) return;
+            //TextTotalEntradas.Text = "0";
+            //dt.Clear();
+            //dataGridSF.ItemsSource = null;
+            //int _TipoDoc = CmbTipoDoc.SelectedIndex;
+            //if (_TipoDoc == 1 || _TipoDoc == 2 || _TipoDoc == 3)
+            //{
+            //    BtnDownloadxml.Visibility = Visibility.Visible;
+            //    BtnEstadoDian.Visibility = Visibility.Visible;
+            //}
+            //else
+            //{
+            //    BtnDownloadxml.Visibility = Visibility.Hidden;
+            //    BtnEstadoDian.Visibility = Visibility.Hidden;
+
+            //}
         }
 
         private void BtnEstadoDian_Click(object sender, RoutedEventArgs e)
         {
-           // DocumentStatusResponse resp = serviceClient.EstadoDocumento(tbxTokenEmpresa.Text.Trim(), tbxTokenPassword.Text.Trim(), tbxEstadoDocumento.Text.Trim());
-           // MessageBox.Show(resp.codigo + Environment.NewLine + resp.estatusDocumento + Environment.NewLine + resp.mensaje, "Estado de Documento");
+            // DocumentStatusResponse resp = serviceClient.EstadoDocumento(tbxTokenEmpresa.Text.Trim(), tbxTokenPassword.Text.Trim(), tbxEstadoDocumento.Text.Trim());
+            // MessageBox.Show(resp.codigo + Environment.NewLine + resp.estatusDocumento + Environment.NewLine + resp.mensaje, "Estado de Documento");
 
         }
     }
