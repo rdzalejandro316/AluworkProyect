@@ -1,4 +1,4 @@
-﻿ using MenuReporte;
+﻿using MenuReporte;
 using Microsoft.Reporting.WinForms;
 using Syncfusion.Windows.Reports;
 using Syncfusion.Windows.Reports.Viewer;
@@ -20,10 +20,7 @@ namespace SiasoftAppExt
 {
     //Sia.PublicarPnt(9549,"MenuReporte");
     //Sia.TabU(9549);
-
-    //pruebas
-    //Sia.PublicarPnt(9552,"MenuReporte");
-    //Sia.TabU(9552);
+    
     public partial class MenuReporte : UserControl
     {
         dynamic SiaWin;
@@ -80,7 +77,7 @@ namespace SiasoftAppExt
 
                     foreach (DataRow row in ((DataTable)slowTask.Result).Rows)
                     {
-                        TreeViewItem item = new TreeViewItem();                        
+                        TreeViewItem item = new TreeViewItem();
                         //item.Cursor = Cursors.Hand;
                         item.FontSize = 13;
 
@@ -153,7 +150,7 @@ namespace SiasoftAppExt
                             string header = row["name_item"].ToString().Trim();
                             addNode(parent, header, tag);
                         }
-                    }                    
+                    }
 
                 }
 
@@ -166,7 +163,7 @@ namespace SiasoftAppExt
                 MessageBox.Show("Error-" + w);
             }
         }
-      
+
 
         private DataTable SlowDude(CancellationToken cancellationToken)
         {
@@ -187,8 +184,8 @@ namespace SiasoftAppExt
                 {
                     var MultiTag = (TagMultiple)item.Tag;
                     TreeViewItem Subitem = new TreeViewItem();
-                    
-                    
+
+
                     //lo agregar como tipo tres
                     if (item.Items.Count > 0)
                     {
@@ -197,12 +194,12 @@ namespace SiasoftAppExt
                             var MultiTagSub = (TagMultiple)itemSub.Tag;
                             if (MultiTagSub.Id_Row == NodeParent.Trim())
                             {
-                                Button btn = new Button();                                
+                                Button btn = new Button();
                                 btn.Tag = TagSubItem;
                                 btn.Content = headerSubItem;
                                 Subitem.Header = btn;
                                 Subitem.Tag = TagSubItem;
-                                btn.Click += button_Click;                                
+                                btn.Click += button_Click;
                                 itemSub.Items.Add(Subitem);
                             }
                         }
@@ -243,36 +240,14 @@ namespace SiasoftAppExt
 
                     switch (MultiTag.typePnt)
                     {
-                        case "1"://abre un tab interno de esta pantalla
-                                 //Syncfusion.Windows.Reports.Viewer.ReportViewer viewer = new Syncfusion.Windows.Reports.Viewer.ReportViewer();
-                                 //viewer.ReportPath = MultiTag.urlRep;
-                                 //viewer.ReportServerUrl = MultiTag.serverIp;
-                                 //viewer.ProcessingMode = ProcessingMode.Remote;
-                                 //viewer.ReportServerCredential = new System.Net.NetworkCredential(MultiTag.userServer, MultiTag.userServerPass);
-                                 //List<DataSourceCredentials> crdentials = new List<DataSourceCredentials>();
-
-                            //foreach (var dataSource in viewer.GetDataSources())
-                            //{
-                            //    DataSourceCredentials credn = new DataSourceCredentials();
-                            //    credn.Name = dataSource.Name;
-                            //    credn.UserId = "wilmer.barrios@siasoftsas.com";
-                            //    credn.Password = "Camilo654321*";
-                            //    crdentials.Add(credn);
-                            //}
-                            //viewer.SetDataSourceCredentials(crdentials);
-                            //viewer.RefreshReport();
-
-                            //TabItemExt tabItemExt1 = new TabItemExt();
-                            //tabItemExt1.Header = MultiTag.NamePnt;
-                            //tabItemExt1.Content = viewer;
-                            //TabControlPricipal.Items.Add(tabItemExt1);
+                        case "1":
                             WindowsFormsHost form = new WindowsFormsHost();
 
                             Microsoft.Reporting.WinForms.ReportViewer viewer = new Microsoft.Reporting.WinForms.ReportViewer();
                             viewer.ServerReport.ReportPath = MultiTag.urlRep;
-                            viewer.ServerReport.ReportServerUrl = new Uri(MultiTag.serverIp); 
+                            viewer.ServerReport.ReportServerUrl = new Uri(MultiTag.serverIp);
                             ReportServerCredentials rsCredentials = viewer.ServerReport.ReportServerCredentials;
-                            rsCredentials.NetworkCredentials = new System.Net.NetworkCredential(@"grupo\wilmer.barrios", "Colombia2019.*.");
+                            rsCredentials.NetworkCredentials = new System.Net.NetworkCredential(@"sql\wilmer.barrios", "Deox.2019+");
                             List<Microsoft.Reporting.WinForms.DataSourceCredentials> crdentials = new List<Microsoft.Reporting.WinForms.DataSourceCredentials>();
                             viewer.SetDisplayMode(DisplayMode.Normal);
                             viewer.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Remote;
@@ -280,8 +255,8 @@ namespace SiasoftAppExt
                             {
                                 Microsoft.Reporting.WinForms.DataSourceCredentials credn = new Microsoft.Reporting.WinForms.DataSourceCredentials();
                                 credn.Name = dataSource.Name;
-                                credn.UserId = "wilmer.barrios@siasoftsas.com";
-                                credn.Password = "Camilo654321*";
+                                credn.UserId = "sa";
+                                credn.Password = "Q1w2e3r4*/*";
                                 crdentials.Add(credn);
                             }
                             form.Child = viewer;
@@ -315,16 +290,16 @@ namespace SiasoftAppExt
                             SiaWin.TabU(MultiTag.Id_screen);
                             break;
                         case "3"://windows                            
-                            DataTable dt = SiaWin.Func.SqlDT("select * from screens where id_screen='"+ MultiTag.Id_screen + "' ", "Menu", 0);
-                            if (dt.Rows.Count>0)
-                            {                                
-                                dynamic ww = SiaWin.WindowExt(MultiTag.Id_screen, dt.Rows[0]["FileExt"].ToString().Trim());                                
+                            DataTable dt = SiaWin.Func.SqlDT("select * from screens where id_screen='" + MultiTag.Id_screen + "' ", "Menu", 0);
+                            if (dt.Rows.Count > 0)
+                            {
+                                dynamic ww = SiaWin.WindowExt(MultiTag.Id_screen, dt.Rows[0]["FileExt"].ToString().Trim());
                                 ww.ShowInTaskbar = false;
                                 ww.Owner = Application.Current.MainWindow;
                                 ww.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                                 ww.ShowDialog();
-                            }                            
-                            break;                            
+                            }
+                            break;
                         case "4":
                             WebBrowser webPowBi = new WebBrowser();
                             string urlPowBi = MultiTag.urlRep;
@@ -351,7 +326,7 @@ namespace SiasoftAppExt
             }
             catch (Exception w)
             {
-                MessageBox.Show("error en el click:"+w);
+                MessageBox.Show("error en el click:" + w);
             }
         }
 
@@ -395,7 +370,7 @@ namespace SiasoftAppExt
             LoadItems();
         }
 
-        
+
 
     }
 }

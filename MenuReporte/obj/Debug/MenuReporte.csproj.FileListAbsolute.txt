@@ -150,3 +150,17 @@ C:\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\projec
 C:\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\project\MenuReporte\obj\Debug\MenuReporte.pdb
 C:\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\MenuReporte.dll
 C:\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\MenuReporte.pdb
+C:\AluworkApp\SiasoftApp\Library\project\MenuReporte\obj\Debug\MenuReporte.csprojAssemblyReference.cache
+C:\AluworkApp\SiasoftApp\Library\project\MenuReporte\obj\Debug\MenuReporte.g.cs
+C:\AluworkApp\SiasoftApp\Library\project\MenuReporte\obj\Debug\MenuReporte_MarkupCompile.cache
+C:\AluworkApp\SiasoftApp\Library\project\MenuReporte\obj\Debug\MenuReporte_MarkupCompile.lref
+C:\AluworkApp\SiasoftApp\Library\project\MenuReporte\obj\Debug\MenuReporte.baml
+C:\AluworkApp\SiasoftApp\Library\project\MenuReporte\obj\Debug\MenuReporte.dll
+C:\AluworkApp\SiasoftApp\Library\project\MenuReporte\obj\Debug\MenuReporte.pdb
+C:\AluworkApp\SiasoftApp\Library\project\MenuReporte\obj\Debug\MenuReporte.g.resources
+C:\AluworkApp\SiasoftApp\Library\project\MenuReporte\obj\Debug\MenuReporte.Properties.Resources.resources
+C:\AluworkApp\SiasoftApp\Library\project\MenuReporte\obj\Debug\MenuReporte.csproj.GenerateResource.cache
+C:\AluworkApp\SiasoftApp\Library\project\MenuReporte\obj\Debug\MenuReporte.csproj.CoreCompileInputs.cache
+C:\AluworkApp\SiasoftApp\Library\project\MenuReporte\obj\Debug\MenuReporte.csproj.CopyComplete
+C:\AluworkApp\SiasoftApp\Library\MenuReporte.dll
+C:\AluworkApp\SiasoftApp\Library\MenuReporte.pdb
