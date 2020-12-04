@@ -75,3 +75,17 @@ C:\SiasoftApp\SiasoftGSNueva\SiasoftGS\Library\project\PvAjustePrecio\obj\Debug\
 C:\SiasoftApp\SiasoftGSNueva\SiasoftGS\Library\project\PvAjustePrecio\obj\Debug\PvAjustePrecio.pdb
 C:\SiasoftApp\SiasoftGSNueva\SiasoftGS\Library\PvAjustePrecio.dll
 C:\SiasoftApp\SiasoftGSNueva\SiasoftGS\Library\PvAjustePrecio.pdb
+C:\AluworkApp\SiasoftApp\Library\project\PvAjustePrecio\obj\Debug\PvAjustePrecio.csprojAssemblyReference.cache
+C:\AluworkApp\SiasoftApp\Library\project\PvAjustePrecio\obj\Debug\PvAjustePrecio.g.cs
+C:\AluworkApp\SiasoftApp\Library\project\PvAjustePrecio\obj\Debug\PvAjustePrecio_MarkupCompile.cache
+C:\AluworkApp\SiasoftApp\Library\project\PvAjustePrecio\obj\Debug\PvAjustePrecio_MarkupCompile.lref
+C:\AluworkApp\SiasoftApp\Library\project\PvAjustePrecio\obj\Debug\PvAjustePrecio.baml
+C:\AluworkApp\SiasoftApp\Library\project\PvAjustePrecio\obj\Debug\PvAjustePrecio.g.resources
+C:\AluworkApp\SiasoftApp\Library\project\PvAjustePrecio\obj\Debug\PvAjustePrecio.Properties.Resources.resources
+C:\AluworkApp\SiasoftApp\Library\project\PvAjustePrecio\obj\Debug\PvAjustePrecio.csproj.GenerateResource.cache
+C:\AluworkApp\SiasoftApp\Library\project\PvAjustePrecio\obj\Debug\PvAjustePrecio.csproj.CoreCompileInputs.cache
+C:\AluworkApp\SiasoftApp\Library\project\PvAjustePrecio\obj\Debug\PvAjustePrecio.csproj.CopyComplete
+C:\AluworkApp\SiasoftApp\Library\project\PvAjustePrecio\obj\Debug\PvAjustePrecio.dll
+C:\AluworkApp\SiasoftApp\Library\project\PvAjustePrecio\obj\Debug\PvAjustePrecio.pdb
+C:\AluworkApp\SiasoftApp\Library\PvAjustePrecio.dll
+C:\AluworkApp\SiasoftApp\Library\PvAjustePrecio.pdb

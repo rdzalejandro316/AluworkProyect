@@ -4,7 +4,7 @@
 library
 C#
 .cs
-\\192.168.0.10\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\project\PvAjustePrecio\obj\Debug\
+C:\AluworkApp\SiasoftApp\Library\project\PvAjustePrecio\obj\Debug\
 PvAjustePrecio
 none
 false
@@ -12,8 +12,8 @@ DEBUG;TRACE
 
 1-1875397711
 
-81964583339
-141673121420
+51568318567
+14-944130929
 PvAjustePrecio.xaml;
 
 True

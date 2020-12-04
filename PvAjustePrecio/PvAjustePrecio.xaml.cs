@@ -18,12 +18,13 @@ using System.Windows.Shapes;
 namespace SiasoftAppExt
 {
 
-    //Sia.PublicarPnt(9473,"PvAjustePrecio");
-    //dynamic ww = ((Inicio)Application.Current.MainWindow).WindowExt(9473,"PvAjustePrecio");    
+    //Sia.PublicarPnt(10717,"PvAjustePrecio");
+    //dynamic ww = ((Inicio)Application.Current.MainWindow).WindowExt(10717,"PvAjustePrecio");    
     //ww.ShowInTaskbar=false;
     //ww.Owner = Application.Current.MainWindow;
     //ww.WindowStartupLocation=WindowStartupLocation.CenterScreen;
     //ww.ShowDialog(); 
+
 
     public partial class PvAjustePrecio : Window
     {
