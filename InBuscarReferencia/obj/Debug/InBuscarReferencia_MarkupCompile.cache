@@ -4,7 +4,7 @@
 library
 C#
 .cs
-D:\SiasoftDesarrollos\Aluwork\Siasoft\Library\project\InBuscarReferencia\obj\Debug\
+C:\Users\aleja\Source\Repos\AluworkProyect\InBuscarReferencia\obj\Debug\
 InBuscarReferencia
 none
 false
@@ -16,5 +16,5 @@ DEBUG;TRACE
 131569487696
 InBuscarReferencia.xaml;SaldosBodegas.xaml;
 
-False
+True
 

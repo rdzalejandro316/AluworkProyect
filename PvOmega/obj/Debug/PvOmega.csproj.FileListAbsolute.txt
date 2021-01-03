@@ -1,0 +1,14 @@
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvOmega\obj\Debug\PvOmega.csprojAssemblyReference.cache
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvOmega\obj\Debug\PvOmega.g.cs
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvOmega\obj\Debug\PvOmega_MarkupCompile.cache
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvOmega\obj\Debug\PvOmega_MarkupCompile.lref
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvOmega\obj\Debug\PvOmega.baml
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvOmega\obj\Debug\PvOmega.g.resources
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvOmega\obj\Debug\PvOmega.Properties.Resources.resources
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvOmega\obj\Debug\PvOmega.csproj.GenerateResource.cache
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvOmega\obj\Debug\PvOmega.csproj.CoreCompileInputs.cache
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvOmega\obj\Debug\PvOmega.dll
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvOmega\obj\Debug\PvOmega.pdb
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\PvOmega.dll
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\PvOmega.pdb
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvOmega\obj\Debug\PvOmega.csproj.CopyComplete

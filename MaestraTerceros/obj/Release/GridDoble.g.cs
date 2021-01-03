@@ -12,7 +12,6 @@
 using MaestraTerceros;
 using SiasoftAppExt;
 using Syncfusion.SfSkinManager;
-using Syncfusion.UI.Xaml.Grid.Converter;
 using System;
 using System.Diagnostics;
 using System.Windows;

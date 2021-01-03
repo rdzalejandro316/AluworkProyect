@@ -9,6 +9,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using SiasoftAppExt;
+using Syncfusion.Windows.Controls.Notification;
 using System;
 using System.Diagnostics;
 using System.Windows;

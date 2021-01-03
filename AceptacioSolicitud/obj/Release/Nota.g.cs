@@ -10,6 +10,7 @@
 //------------------------------------------------------------------------------
 
 using AceptacioSolicitud;
+using SiasoftAppExt;
 using System;
 using System.Diagnostics;
 using System.Windows;
