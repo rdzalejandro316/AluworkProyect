@@ -77,12 +77,13 @@
                 <Grid Grid.Row="1">
                     <SiaSf:SfDataGrid  Width="800" x:Name="dataGridSF"  Margin="5,5,5,5"
                         EnableDataVirtualization = "True" FilterChanged="dataGridSF_FilterChanged"
-                        AutoGenerateColumns="True" ShowGroupDropArea="False" FontSize="10" AllowFiltering="False"
+                        AutoGenerateColumns="False" ShowGroupDropArea="False" FontSize="10" AllowFiltering="False"
                        HorizontalAlignment="Left" 
                         ItemsSource="{Binding DtTraslados}" AllowResizingColumns="True">
                         <SiaSf:SfDataGrid.Columns>
                             <SiaSf:GridTextColumn HeaderText="Linea" MappingName="cod_tip" Width="120" AllowFiltering="True"/>
-                            <SiaSf:GridTextColumn HeaderText="Nombre Linea" MappingName="nom_tip" Width="450" AllowFiltering="True"/>
+                            <SiaSf:GridTextColumn HeaderText="Codigo" MappingName="cod_ref" Width="100" AllowFiltering="True"/>
+                            <SiaSf:GridTextColumn HeaderText="Nombre Producto" MappingName="nom_ref" Width="450" AllowFiltering="True"/>
                             <SiaSf:GridTextColumn HeaderText="Saldo" DisplayBinding="{Binding Path=saldo_fin, StringFormat='n2'}"  Width="90" />
 
                         </SiaSf:SfDataGrid.Columns>

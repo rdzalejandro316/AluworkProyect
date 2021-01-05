@@ -10,7 +10,6 @@
 //------------------------------------------------------------------------------
 
 using SiasoftAppExt;
-using Syncfusion.SfSkinManager;
 using System;
 using System.Diagnostics;
 using System.Windows;
@@ -31,7 +30,6 @@ using System.Windows.Media.TextFormatting;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Shell;
-using WindowPV;
 
 
 namespace SiasoftAppExt {

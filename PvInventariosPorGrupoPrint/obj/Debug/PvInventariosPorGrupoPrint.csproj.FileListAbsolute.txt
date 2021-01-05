@@ -54,3 +54,17 @@ C:\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\projec
 C:\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\project\PvInventariosPorGrupoPrint\obj\Debug\PvInventariosPorGrupoPrint.pdb
 C:\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\PvInventariosPorGrupoPrint.dll
 C:\SiasoftApp\SiasoftGSNueva\SiasoftGSV2019\SiasoftGSV2019_actual\Library\PvInventariosPorGrupoPrint.pdb
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvInventariosPorGrupoPrint\obj\Debug\PvInventariosPorGrupoPrint.csprojAssemblyReference.cache
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvInventariosPorGrupoPrint\obj\Debug\PvInventariosPorGrupoPrint.g.cs
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvInventariosPorGrupoPrint\obj\Debug\PvInventariosPorGrupoPrint_MarkupCompile.cache
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvInventariosPorGrupoPrint\obj\Debug\PvInventariosPorGrupoPrint_MarkupCompile.lref
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvInventariosPorGrupoPrint\obj\Debug\PvInventariosPorGrupoPrint.baml
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvInventariosPorGrupoPrint\obj\Debug\PvInventariosPorGrupoPrint.g.resources
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvInventariosPorGrupoPrint\obj\Debug\PvInventariosPorGrupoPrint.Properties.Resources.resources
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvInventariosPorGrupoPrint\obj\Debug\PvInventariosPorGrupoPrint.csproj.GenerateResource.cache
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvInventariosPorGrupoPrint\obj\Debug\PvInventariosPorGrupoPrint.csproj.CoreCompileInputs.cache
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvInventariosPorGrupoPrint\obj\Debug\PvInventariosPorGrupoPrint.csproj.CopyComplete
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvInventariosPorGrupoPrint\obj\Debug\PvInventariosPorGrupoPrint.dll
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PvInventariosPorGrupoPrint\obj\Debug\PvInventariosPorGrupoPrint.pdb
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\PvInventariosPorGrupoPrint.dll
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\PvInventariosPorGrupoPrint.pdb

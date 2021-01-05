@@ -15,15 +15,18 @@ using System.Linq;
 using Microsoft.Reporting.WinForms;
 using System.Collections.Generic;
 
-//using Syncfusion.UI.Xaml.Grid;
 
-//using Syncfusion.UI.Xaml.Grid;
 
 namespace SiasoftAppExt
 {
-    /// <summary>
-    /// Lógica de interacción para UserControl1.xaml
-    /// </summary>
+
+    //Sia.PublicarPnt(9456, "PvInventariosPorGrupoPrint");  
+    //dynamic ww = ((Inicio)Application.Current.MainWindow).WindowExt(9456, "PvInventariosPorGrupoPrint");
+    //ww.idemp=010;
+    //ww.ShowInTaskbar=false;
+    //ww.Owner = Application.Current.MainWindow;
+    //ww.WindowStartupLocation=WindowStartupLocation.CenterScreen;
+    //ww.ShowDialog();   
     public partial class PvInventariosPorGrupoPrint : Window
     {
         bool load = true;
@@ -68,7 +71,7 @@ namespace SiasoftAppExt
             TxtBodega.Text = codbod;
             LoadInfo();
             TxtBodega.Text = codbod;
-            CreaColumnas(1);
+            //CreaColumnas(1);
             this.UpdateLayout();
 
             //CmbTipoRep.SelectedIndex = 1;
@@ -641,7 +644,7 @@ namespace SiasoftAppExt
                 dsPrintSaldosGrupo.Clear();
                 sfBusyIndicator.IsBusy = false;
                 TextTotalEntradas.Text = "0";
-                CreaColumnas(((ComboBox)sender).SelectedIndex);
+                //CreaColumnas(((ComboBox)sender).SelectedIndex);
             }
             load = false;
         }

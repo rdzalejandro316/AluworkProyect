@@ -9,7 +9,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using ImagenesDocumento;
+using MaterialDesignThemes.Wpf;
+using MaterialDesignThemes.Wpf.Transitions;
 using SiasoftAppExt;
 using System;
 using System.Diagnostics;
