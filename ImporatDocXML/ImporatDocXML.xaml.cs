@@ -11,6 +11,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,7 +22,7 @@ using System.Xml.Linq;
 
 namespace SiasoftAppExt
 {
- 
+
     //Sia.PublicarPnt(9480,"ImporatDocXML");    
     //dynamic ww = ((Inicio)Application.Current.MainWindowf).WindowExt(9480, "ImporatDocXML");
     //ww.ShowInTaskbar=false;
@@ -78,7 +79,7 @@ namespace SiasoftAppExt
             InitializeComponent();
 
             SiaWin = Application.Current.MainWindow;
-            idemp = SiaWin._BusinessId; ;
+            idemp = SiaWin._BusinessId;
             //LoadConfig();
             TablaXML.Columns.Add("Cod_ref");
             TablaXML.Columns.Add("Descripcion");
@@ -112,157 +113,165 @@ namespace SiasoftAppExt
         }
         public void CargarBodegas(string cod_emp)
         {
-            DataTable dtBod = SiaWin.Func.SqlDT("select cod_bod,cod_bod+'-'+nom_bod as nom_bod from inmae_bod where cod_emp='" + cod_emp + "';", "Bodegas", idemp);
+            DataTable dtBod = SiaWin.Func.SqlDT("select cod_bod,nom_bod as nom_bod from inmae_bod;", "Bodegas", idemp);
             comboBoxBodegas.ItemsSource = dtBod.DefaultView;
         }
 
 
         private void Llenar()
         {
-            TablaXML.Clear();
-            //subList.Clear();
-            data_erroneos = 0;
-            if (_productos != null) _productos.Clear();
-            //_productos.Clear();
-            DataProducto.ItemsSource = null;
-            int cont = 0, con1 = 0, con2 = 0, con3 = 0, con4 = 0, con9 = 0, conFina = 0;
-            #region Modificacion lectura CDATA
-            XDocument message = XDocument.Load(ruta);
-            XCData cdata = message.DescendantNodes().OfType<XCData>().Where(m => m.Parent.Name == cbc + "Description").ToList()[0];
-            string cDataContent = cdata.Value;
-            XmlDocument xDoc = new XmlDocument();
-            cDataContent = message.Root.Descendants(cbc + "Description").First().Value;
-            xDoc.LoadXml(cDataContent);
-            string eme = xDoc.ToString();
-
-            XElement xelement = XElement.Load(new XmlNodeReader(xDoc));
-            #endregion
-
-            var unique = from el in xelement.Elements(cac + "InvoiceLine") select el;
-            var sub = from el in xelement.Elements(cac + "LegalMonetaryTotal").Elements(cbc + "LineExtensionAmount") select el;
-            var codigo = from el in xelement.Elements(cac + "InvoiceLine").Elements(cac + "Item").Elements(cac + "StandardItemIdentification").Elements(cbc + "ID") select el;
-            var cantidad = from el in xelement.Elements(cac + "InvoiceLine").Elements(cbc + "InvoicedQuantity") select el;
-            var description = from el in xelement.Elements(cac + "InvoiceLine").Elements(cac + "Item").Elements(cbc + "Description") select el;
-            var valUnit = from el in xelement.Elements(cac + "InvoiceLine").Elements(cac + "Price").Elements(cbc + "PriceAmount") select el;
-            var IVA = from el in xelement.Elements(cac + "TaxTotal").Elements(cac + "TaxSubtotal").Elements(cac + "TaxCategory").Elements(cbc + "Percent") select el;
-            var TotIVA = from el in xelement.Elements(cac + "TaxTotal").Elements(cbc + "TaxAmount") select el;
-            var valTot = from el in xelement.Elements(cac + "InvoiceLine").Elements(cbc + "LineExtensionAmount") select el;
-            var totalPago = xelement.Descendants(cbc + "PayableAmount");
-
-            var numFac = xelement.Descendants(cbc + "ID").FirstOrDefault();
-            var fechFac = xelement.Descendants(cbc + "IssueDate").FirstOrDefault();
-
-
-            foreach (var el in unique)
+            try
             {
-                cont += 1;
+
+                TablaXML.Clear();
+                //subList.Clear();
+                data_erroneos = 0;
+                if (_productos != null) _productos.Clear();
+                //_productos.Clear();
+                DataProducto.ItemsSource = null;
+                int cont = 0, con1 = 0, con2 = 0, con3 = 0, con4 = 0, con9 = 0, conFina = 0;
+                #region Modificacion lectura CDATA
+                XDocument message = XDocument.Load(ruta);
+                XCData cdata = message.DescendantNodes().OfType<XCData>().Where(m => m.Parent.Name == cbc + "Description").ToList()[0];
+                string cDataContent = cdata.Value;
+                XmlDocument xDoc = new XmlDocument();
+                cDataContent = message.Root.Descendants(cbc + "Description").First().Value;
+                xDoc.LoadXml(cDataContent);
+                string eme = xDoc.ToString();
+
+                XElement xelement = XElement.Load(new XmlNodeReader(xDoc));
+                #endregion
+
+                var unique = from el in xelement.Elements(cac + "InvoiceLine") select el;
+                var sub = from el in xelement.Elements(cac + "LegalMonetaryTotal").Elements(cbc + "LineExtensionAmount") select el;
+                var codigo = from el in xelement.Elements(cac + "InvoiceLine").Elements(cac + "Item").Elements(cac + "StandardItemIdentification").Elements(cbc + "ID") select el;
+                var cantidad = from el in xelement.Elements(cac + "InvoiceLine").Elements(cbc + "InvoicedQuantity") select el;
+                var description = from el in xelement.Elements(cac + "InvoiceLine").Elements(cac + "Item").Elements(cbc + "Description") select el;
+                var valUnit = from el in xelement.Elements(cac + "InvoiceLine").Elements(cac + "Price").Elements(cbc + "PriceAmount") select el;
+                var IVA = from el in xelement.Elements(cac + "TaxTotal").Elements(cac + "TaxSubtotal").Elements(cac + "TaxCategory").Elements(cbc + "Percent") select el;
+                var TotIVA = from el in xelement.Elements(cac + "TaxTotal").Elements(cbc + "TaxAmount") select el;
+                var valTot = from el in xelement.Elements(cac + "InvoiceLine").Elements(cbc + "LineExtensionAmount") select el;
+                var totalPago = xelement.Descendants(cbc + "PayableAmount");
+
+                var numFac = xelement.Descendants(cbc + "ID").FirstOrDefault();
+                var fechFac = xelement.Descendants(cbc + "IssueDate").FirstOrDefault();
+
+
+                foreach (var el in unique)
+                {
+                    cont += 1;
+                }
+                object[] sharpArray = new object[cont];
+                object[] codigoArray = new object[cont];
+                object[] cantidadArrray = new object[cont];
+                object[] descripcionArray = new object[cont];
+                object[] valunitArray = new object[cont];
+                object[] totArray = new object[cont];
+                FacTXT.Text = numFac.Value;
+
+                //DateTime dateValue = Convert.ToDateTime(fechFac.Value);
+                //FechaXML = dateValue;
+                TX_FecXML.Text = fechFac.Value;
+
+                _productos = new ObservableCollection<Productos>();
+                foreach (var item in codigo)
+                {
+                    codigoArray[con1] = item.Value;
+                    //lalo.Add(textos[1]);
+                    //sharpArray[con1] = textos[0];
+                    con1 += 1;
+                }
+                foreach (var item in cantidad)
+                {
+                    string def = QuitarZero(item.Value);
+                    cantidadArrray[con2] = def;
+                    con2 += 1;
+                }
+                foreach (var item in description)
+                {
+                    descripcionArray[con3] = item.Value;
+                    con3 += 1;
+                }
+                foreach (var item in valUnit)
+                {
+                    string def = QuitarZero(item.Value);
+                    valunitArray[con4] = def;
+                    con4 += 1;
+                }
+                foreach (var item in IVA)
+                {
+                    string def = QuitarZero(item.Value);
+                    iva = def;
+                }
+                foreach (var item in valTot)
+                {
+                    string def = QuitarZero(item.Value);
+                    totArray[con9] = def;
+                    con9 += 1;
+                }
+                int tutIVA = 0, tutal;
+
+                foreach (var item in unique)
+                {
+                    tutIVA = ((Convert.ToInt32(totArray[conFina]) * Convert.ToInt32(iva)) / 100);
+                    tutal = (tutIVA + Convert.ToInt32(totArray[conFina]));
+                    //TablaXML.Rows.Add(codigoArray[conFina], cantidadArrray[conFina], descripcionArray[conFina], valunitArray[conFina], "IVA", iva, "Descuento", totArray[conFina]);
+
+                    //MessageBox.Show("ref:"+);
+                    string refe = codigoArray[conFina].ToString().Trim();
+                    //MessageBox.Show("ref:"+refe);                
+
+                    //if (string.IsNullOrEmpty(referencia.Item1)) data_erroneos++;
+
+
+                    _productos.Add(
+                        new Productos(
+                            Convert.ToString(codigoArray[conFina]),
+                            Convert.ToString(descripcionArray[conFina]),
+                            Convert.ToString(cantidadArrray[conFina]),
+                            Convert.ToString(valunitArray[conFina]),
+                            Convert.ToString(iva),
+                            Convert.ToString(totArray[conFina]),
+                            Convert.ToString(tutIVA),
+                            Convert.ToString(tutal),
+                            "C"
+                            )
+                        );
+
+                    conFina += 1;//En el xml no se encuentran datos del descuento por producto, solo el total de el descuento al final de la factura en pdf                
+                }
+                foreach (var item in sub)
+                {
+                    subList.Add(item.Value);
+                }
+                foreach (var item in TotIVA)
+                {
+                    subList.Add(item.Value);
+                }
+                foreach (var item in totalPago)
+                {
+                    TxtTotal.Text = (item.Value);
+                }
+
+
+                DataProducto.ItemsSource = null;
+
+                DataProducto.ItemsSource = Produ;
+
+                TotalReg.Text = Convert.ToString(DataProducto.View.Records.Count());
+
+                //            TotalFall.Text = data_erroneos.ToString();
+
+                string sTotal = Convert.ToString(subList[0]);
+                double STotal = Convert.ToDouble(sTotal);
+                Sotal.Text = (sTotal);
+                TIVA.Text = Convert.ToString(subList[1]);
+                txtIva.Text = "Iva " + iva + "% : ";
             }
-            object[] sharpArray = new object[cont];
-            object[] codigoArray = new object[cont];
-            object[] cantidadArrray = new object[cont];
-            object[] descripcionArray = new object[cont];
-            object[] valunitArray = new object[cont];
-            object[] totArray = new object[cont];
-            FacTXT.Text = numFac.Value;
-
-            //DateTime dateValue = Convert.ToDateTime(fechFac.Value);
-            //FechaXML = dateValue;
-            TX_FecXML.Text = fechFac.Value;
-
-            _productos = new ObservableCollection<Productos>();
-            foreach (var item in codigo)
+            catch (Exception)
             {
-                codigoArray[con1] = item.Value;
-                //lalo.Add(textos[1]);
-                //sharpArray[con1] = textos[0];
-                con1 += 1;
+                MessageBox.Show("el formato importado no es estandar", "alerta", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
-            foreach (var item in cantidad)
-            {
-                string def = QuitarZero(item.Value);
-                cantidadArrray[con2] = def;
-                con2 += 1;
-            }
-            foreach (var item in description)
-            {
-                descripcionArray[con3] = item.Value;
-                con3 += 1;
-            }
-            foreach (var item in valUnit)
-            {
-                string def = QuitarZero(item.Value);
-                valunitArray[con4] = def;
-                con4 += 1;
-            }
-            foreach (var item in IVA)
-            {
-                string def = QuitarZero(item.Value);
-                iva = def;
-            }
-            foreach (var item in valTot)
-            {
-                string def = QuitarZero(item.Value);
-                totArray[con9] = def;
-                con9 += 1;
-            }
-            int tutIVA = 0, tutal;
-            
-            foreach (var item in unique)
-            {
-                tutIVA = ((Convert.ToInt32(totArray[conFina]) * Convert.ToInt32(iva)) / 100);
-                tutal = (tutIVA + Convert.ToInt32(totArray[conFina]));
-                //TablaXML.Rows.Add(codigoArray[conFina], cantidadArrray[conFina], descripcionArray[conFina], valunitArray[conFina], "IVA", iva, "Descuento", totArray[conFina]);
-
-                //MessageBox.Show("ref:"+);
-                string refe = codigoArray[conFina].ToString().Trim();
-                //MessageBox.Show("ref:"+refe);                
-
-                //if (string.IsNullOrEmpty(referencia.Item1)) data_erroneos++;
-
-
-                _productos.Add(
-                    new Productos(
-                        Convert.ToString(codigoArray[conFina]),
-                        Convert.ToString(descripcionArray[conFina]),
-                        Convert.ToString(cantidadArrray[conFina]),
-                        Convert.ToString(valunitArray[conFina]),
-                        Convert.ToString(iva),
-                        Convert.ToString(totArray[conFina]),
-                        Convert.ToString(tutIVA),
-                        Convert.ToString(tutal),
-                        "C"
-                        )
-                    );
-
-                conFina += 1;//En el xml no se encuentran datos del descuento por producto, solo el total de el descuento al final de la factura en pdf                
-            }
-            foreach (var item in sub)
-            {
-                subList.Add(item.Value);
-            }
-            foreach (var item in TotIVA)
-            {
-                subList.Add(item.Value);
-            }
-            foreach (var item in totalPago)
-            {
-                TxtTotal.Text = (item.Value);
-            }
-
-
-            DataProducto.ItemsSource = null;
-
-            DataProducto.ItemsSource = Produ;
-
-            TotalReg.Text = Convert.ToString(DataProducto.View.Records.Count());
-
-            //            TotalFall.Text = data_erroneos.ToString();
-
-            string sTotal = Convert.ToString(subList[0]);
-            double STotal = Convert.ToDouble(sTotal);
-            Sotal.Text = (sTotal);
-            TIVA.Text = Convert.ToString(subList[1]);
-            txtIva.Text = "Iva " + iva + "% : "; ;
 
         }
 
@@ -374,7 +383,7 @@ namespace SiasoftAppExt
                     //}
                     Llenar();
                     int erroneosFucn = RecordItemsIvalidos();
-                    TotalFall.Text = erroneosFucn.ToString();
+
                     errores = erroneosFucn;
                 }
                 else
@@ -460,6 +469,8 @@ namespace SiasoftAppExt
             try
             {
 
+                #region validaciones
+
                 if (DataProducto.ItemsSource == null)
                 {
                     MessageBox.Show("no hay nada para importar");
@@ -471,6 +482,19 @@ namespace SiasoftAppExt
                     MessageBox.Show("seleccione la bodega");
                     return;
                 }
+
+                MessageBox.Show("a1");
+
+                foreach (var item in _productos)
+                {
+                    MessageBox.Show("::" + item.IsValid() );                    
+                }
+
+                MessageBox.Show("a2");
+
+                return;
+
+                #endregion                
 
                 foreach (var data in _productos)
                 {
@@ -559,85 +583,6 @@ namespace SiasoftAppExt
         }
 
 
-        private void DataProducto_CurrentCellValueChanged(object sender, CurrentCellValueChangedEventArgs e)
-        {
-
-            //MessageBox.Show("sii");
-
-        }
-
-
-
-
-
-        private void TextBox1_KeyPress(object sender, KeyEventArgs e)
-        {
-            //textBox2.AppendText($"KeyUp code: {e.KeyCode}, value: {e.KeyValue}, modifiers: {e.Modifiers}" + "\r\n");
-        }
-
-
-        private void DataProducto_CurrentCellValidating(object sender, CurrentCellValidatingEventArgs e)
-        {
-
-            try
-            {
-                //if ((Keyboard.IsKeyDown(Key.F8)) || (Keyboard.IsKeyDown(Key.F6)))
-                //{
-                //    int idr = 0; string code = ""; string nom = "";
-                //    dynamic winb = SiaWin.WindowBuscar("inmae_ref", "cod_ref", "nom_ref", "cod_ref", "idrow", "Maestra dereferencia", SiaWin.Func.DatosEmp(idemp), false, " estado=1", idEmp: idemp);
-                //    winb.ShowInTaskbar = false;
-                //    winb.Owner = Application.Current.MainWindow;
-                //    winb.Height = 300;
-                //    winb.Width = 400;
-                //    winb.ShowDialog();
-                //    idr = winb.IdRowReturn;
-                //    code = winb.Codigo;
-                //    nom = winb.Nombre;
-                //    winb = null;
-
-
-                //    //Productos productos = new Productos(Convert.ToString(code), Convert.ToString(nom), "", "", "", "");
-
-                //    //_productos.Add(new Productos(Convert.ToString(code), Convert.ToString(nom),"","","",""));
-                //    //var uiElement = e.OriginalSource as UIElement;
-                //    //uiElement.MoveFocus(new TraversalRequest(FocusNavigationDirection.Down));
-
-
-                //    //Productos row = (DataRowView)DataProducto.SelectedItems[0];
-                //    //row["cod_ref"] = code;
-
-                //    //Productos pr = new Productos(code, code, code, code, code, code);
-                //    //pr.Referencia = "ejmeplo";
-                //    //DataProducto.UpdateDataRow(e.RowColumnIndex.RowIndex);
-
-                //    //if (idr > 0)
-                //    //{
-                //    //    TB_CodigoZonaSuc.Text = code;
-                //    //    TB_ZonaSuc.Text = nom;
-                //    //    var uiElement = e.OriginalSource as UIElement;
-                //    //    uiElement.MoveFocus(new TraversalRequest(FocusNavigationDirection.Down));
-                //    //}
-                //}
-                //else
-                //{
-                //    MessageBox.Show("no llego");
-                //}
-            }
-            catch (Exception w)
-            {
-                //MessageBox.Show("error!!:" + w);
-            }
-        }
-
-        //public Boolean GrillaRed(ObservableCollection<Productos> p)
-        //{
-        //    Boolean bandera = true;
-        //    foreach (var item in p)
-        //    {
-        //        if (!string.IsNullOrEmpty(item.Error)) bandera = false;
-        //    }
-        //    return bandera;
-        //}
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
@@ -649,11 +594,8 @@ namespace SiasoftAppExt
         {
             try
             {
-                //if (string.IsNullOrEmpty(_productos[DataProducto.SelectedIndex].Referencia))
-                //{
 
-                //DataProducto.View.Refresh();
-                if (e.Key == Key.F8 || e.Key == Key.Enter || e.Key == Key.Delete || e.Key == Key.Back)
+                if (e.Key == Key.F8 || e.Key == Key.Enter || e.Key == Key.Back)
                 {
                     int idr = 0; string code = ""; string nom = "";
                     dynamic winb = SiaWin.WindowBuscar("inmae_ref", "cod_ref", "nom_ref", "cod_ref", "idrow", "Maestra de referencia", SiaWin.Func.DatosEmp(idemp), false, " estado=1", idEmp: idemp);
@@ -669,12 +611,10 @@ namespace SiasoftAppExt
 
                     if (!string.IsNullOrEmpty(code))
                     {
-                        _productos[DataProducto.SelectedIndex].Referencia = code.Trim();
-                        _productos[DataProducto.SelectedIndex].Nombre = nom.Trim();
+                        var data = ((SfDataGrid)sender).SelectedItem as Productos;
+                        data.Referencia = code.Trim();
+                        data.Nombre = nom.Trim();
                         DataProducto.View.Refresh();
-                        errores--;
-                        TotalFall.Text = errores.ToString();
-
 
                     }
 
@@ -702,12 +642,6 @@ namespace SiasoftAppExt
                     string nom_ref = flag.Item2.Rows[0]["nom_ref"].ToString().Trim();
                     string cod_tiva = flag.Item2.Rows[0]["cod_tiva"].ToString().Trim();
 
-                    string error = reflector.GetValue(rowData, "Error").ToString();
-                    if (!string.IsNullOrEmpty(error))
-                    {
-                        errores--;
-                        TotalFall.Text = errores.ToString();
-                    }
 
                     reflector.SetValue(rowData, "Nombre", nom_ref);
                     reflector.SetValue(rowData, "Cod_tiva", cod_tiva);
@@ -798,8 +732,15 @@ namespace SiasoftAppExt
 
     }
 
-    public class Productos : IDataErrorInfo
+    public class Productos : IDataErrorInfo, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged([CallerMemberName] string property = null)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
+
 
         public Boolean existencia;
         private string referencia;
@@ -807,49 +748,49 @@ namespace SiasoftAppExt
         public string Referencia
         {
             get { return referencia; }
-            set { referencia = value; }
+            set { referencia = value; OnPropertyChanged(); }
         }
         private string nombre;
 
         public string Nombre
         {
             get { return nombre; }
-            set { nombre = value; }
+            set { nombre = value; OnPropertyChanged(); }
         }
         private string cantidad;
 
         public string Cantidad
         {
             get { return cantidad; }
-            set { cantidad = value; }
+            set { cantidad = value; OnPropertyChanged(); }
         }
         private string valUnit;
 
         public string ValUnit
         {
             get { return valUnit; }
-            set { valUnit = value; }
+            set { valUnit = value; OnPropertyChanged(); }
         }
         private string iva;
 
         public string IVA
         {
             get { return iva; }
-            set { iva = value; }
+            set { iva = value; OnPropertyChanged(); }
         }
         private string subTotal;
 
         public string SubTotal
         {
             get { return subTotal; }
-            set { subTotal = value; }
+            set { subTotal = value; OnPropertyChanged(); }
         }
         private string valIVA;
 
         public string ValIVA
         {
             get { return valIVA; }
-            set { valIVA = value; }
+            set { valIVA = value; OnPropertyChanged(); }
         }
 
         private string cod_tiva;
@@ -857,14 +798,14 @@ namespace SiasoftAppExt
         public string Cod_tiva
         {
             get { return cod_tiva; }
-            set { cod_tiva = value; }
+            set { cod_tiva = value; OnPropertyChanged(); }
         }
 
         private string total;
         public string Total
         {
             get { return total; }
-            set { total = value; }
+            set { total = value; OnPropertyChanged(); }
         }
         private string codRef;
 
@@ -877,12 +818,19 @@ namespace SiasoftAppExt
         public string CodReferencia
         {
             get { return codRef; }
-            set { codRef = value; }
+            set { codRef = value; OnPropertyChanged(); }
         }
 
         [Display(AutoGenerateField = false)]
         public string Error { get; set; }
 
+        public bool IsValid()
+        {
+            var context = new ValidationContext(this, null, null);
+            var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+            Validator.TryValidateObject(this, context, results, true);
+            return results.Count > 0 ? true : false;
+        }
 
         public string this[string columnName]
         {

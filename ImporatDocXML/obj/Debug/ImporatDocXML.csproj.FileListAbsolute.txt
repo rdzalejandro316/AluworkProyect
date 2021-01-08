@@ -107,3 +107,17 @@ C:\SiasoftGS\SiasoftGSV2019\Library\project\ImporatDocXML\obj\Debug\ImporatDocXM
 C:\SiasoftGS\SiasoftGSV2019\Library\project\ImporatDocXML\obj\Debug\ImporatDocXML.pdb
 C:\SiasoftGS\SiasoftGSV2019\Library\ImporatDocXML.dll
 C:\SiasoftGS\SiasoftGSV2019\Library\ImporatDocXML.pdb
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\ImporatDocXML\obj\Debug\ImporatDocXML.csprojAssemblyReference.cache
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\ImporatDocXML\obj\Debug\ImporatDocXML.g.cs
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\ImporatDocXML\obj\Debug\ImporatDocXML_MarkupCompile.cache
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\ImporatDocXML\obj\Debug\ImporatDocXML_MarkupCompile.lref
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\ImporatDocXML\obj\Debug\ImporatDocXML.baml
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\ImporatDocXML\obj\Debug\ImporatDocXML.g.resources
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\ImporatDocXML\obj\Debug\ImporatDocXML.Properties.Resources.resources
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\ImporatDocXML\obj\Debug\ImporatDocXML.csproj.GenerateResource.cache
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\ImporatDocXML\obj\Debug\ImporatDocXML.csproj.CoreCompileInputs.cache
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\ImporatDocXML\obj\Debug\ImporatDocXML.csproj.CopyComplete
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\ImporatDocXML\obj\Debug\ImporatDocXML.dll
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\ImporatDocXML\obj\Debug\ImporatDocXML.pdb
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\ImporatDocXML.dll
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\ImporatDocXML.pdb

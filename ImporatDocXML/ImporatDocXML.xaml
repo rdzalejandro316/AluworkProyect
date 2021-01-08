@@ -190,7 +190,7 @@
                 </DataGrid>
             </ScrollViewer>-->
             <Grid>
-                <SiaSf:SfDataGrid x:Name="DataProducto" SelectionUnit="Cell" SelectionMode="Extended"  AllowResizingColumns="True"  EnableDataVirtualization="True" AllowFiltering="True" Margin="5" HeaderStyle="{StaticResource headerStyle}" FontFamily="10" GridValidationMode="InEdit" PreviewKeyDown="DataProducto_PreviewKeyDown" ColumnSizer="Auto"  CurrentCellValueChanged="DataProducto_CurrentCellValueChanged"   CurrentCellEndEdit="DataProducto_CurrentCellEndEdit"  NavigationMode="Cell">
+                <SiaSf:SfDataGrid x:Name="DataProducto" SelectionUnit="Cell" SelectionMode="Extended"  AllowResizingColumns="True"  EnableDataVirtualization="True" AllowFiltering="True" Margin="5" HeaderStyle="{StaticResource headerStyle}" FontFamily="10" GridValidationMode="InEdit" PreviewKeyDown="DataProducto_PreviewKeyDown" ColumnSizer="Auto"   CurrentCellEndEdit="DataProducto_CurrentCellEndEdit"  NavigationMode="Cell">
                     <SiaSf:SfDataGrid.Columns>
                         <SiaSf:GridTextColumn HeaderText="Referencia" MappingName="Referencia" AllowEditing="True"/>
                         <SiaSf:GridTextColumn HeaderText="Nombre" MappingName="Nombre"/>
@@ -268,8 +268,6 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Total registros: " Grid.Column="0" Foreground="White" Margin="5" VerticalAlignment="Center" FontSize="15"/>
                     <TextBlock Name="TotalReg" Text="0" Foreground="White" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Left" Grid.Column="1"/>
-                    <TextBlock Text="Total fallidos: " Grid.Column="0" Margin="10 0 0 0" VerticalAlignment="Center" FontSize="15" Foreground="Red" />
-                    <TextBlock Name="TotalFall" Text="0" Foreground="Red" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Left" Grid.Column="1"/>
                 </StackPanel>
             </Grid>
 

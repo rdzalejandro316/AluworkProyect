@@ -1,0 +1,16 @@
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PDFview\obj\Debug\PDFview.csprojAssemblyReference.cache
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PDFview\obj\Debug\PDFview.g.cs
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PDFview\obj\Debug\PDFview_MarkupCompile.cache
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PDFview\obj\Debug\PDFview_MarkupCompile.lref
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PDFview\obj\Debug\PDFview.baml
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PDFview\obj\Debug\PDFview.g.resources
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PDFview\obj\Debug\PDFview.Properties.Resources.resources
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PDFview\obj\Debug\PDFview.csproj.GenerateResource.cache
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PDFview\obj\Debug\PDFview.csproj.CoreCompileInputs.cache
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PDFview\obj\Debug\PDFview.dll
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PDFview\obj\Debug\PDFview.pdb
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\PDFview.dll
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\PDFview.pdb
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PDFview\obj\Debug\PDFview.csproj.CopyComplete
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PDFview\obj\Debug\ListArchive.g.cs
+C:\Users\aleja\Desktop\Business\Aluwork\Siasoft\Library\project\PDFview\obj\Debug\ListArchive.baml
